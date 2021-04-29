@@ -26,7 +26,7 @@ class OrderDetailController extends Controller
 
         abort_if($order === null, redirect()->route('shop::home'));
 
-        $this->setup(Page::ACCOUNT_ORDER)->hideBreadcrumbs();
+        $this->setup(PAGE_ACCOUNT_ORDER)->hideBreadcrumbs();
 
         return $this->view('order.detail', [
             'order' => $order,

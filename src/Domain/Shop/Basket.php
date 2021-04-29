@@ -48,11 +48,11 @@ class Basket
     public function total(): int
     {
         return $this->baskets->sum(function (BasketModel $basket): int {
-            if (! $basket->stock) {
+            if (! $basket->product) {
                 return 0;
             }
 
-            return $basket->stock->price() * $basket->count;
+            return $basket->product->price() * $basket->count;
         });
     }
 }

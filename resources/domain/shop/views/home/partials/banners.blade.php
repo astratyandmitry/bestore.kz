@@ -1,10 +1,10 @@
-@php /** @var \Domain\Shop\Models\Banner[]|\Illuminate\Database\Eloquent\Collection $slides */ @endphp
+@php /** @var \Domain\Shop\Models\Banner[]|\Illuminate\Database\Eloquent\Collection $banners */ @endphp
 
-@if ($slides->isNotEmpty())
+@if ($banners->isNotEmpty())
     <div class="slider">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                @foreach($slides as $slide)
+                @foreach($banners as $banner)
                     <div class="swiper-slide slide">
                         <div class="slide__image" style="background-image: url({{ $slide->image }})"></div>
                         <div class="slide__shadow"></div>

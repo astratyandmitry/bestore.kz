@@ -23,7 +23,7 @@ class OrdersRepository
      */
     public function current()
     {
-        return Order::query()->where('status_id', OrderStatus::CREATED)->paginate(12);
+        return Order::query()->where('status_id', ORDER_STATUS_CREATED)->paginate(12);
     }
 
     /**
@@ -31,7 +31,7 @@ class OrdersRepository
      */
     public function history()
     {
-        return Order::query()->where('status_id', '!=', OrderStatus::CREATED)->paginate(12);
+        return Order::query()->where('status_id', '!=', ORDER_STATUS_CREATED)->paginate(12);
     }
 
     /**
@@ -58,11 +58,10 @@ class OrdersRepository
 
     /**
      * @param \Domain\Shop\Requests\OrderRequest $request
-     * @param \Domain\Shop\Models\City $city
      * @param \Domain\Shop\Basket $basket
      * @return \Domain\Shop\Models\Order
      */
-    public function create(OrderRequest $request, City $city, Basket $basket): Order
+    public function create(OrderRequest $request, Basket $basket): Order
     {
         $order = new Order;
         $order->client_name = $request->name;
@@ -70,10 +69,9 @@ class OrdersRepository
         $order->client_email = $request->email;
         $order->delivery_address = $request->address;
         $order->comment = $request->comment;
-        $order->delivery_price = $basket->total() < $city->free_delivery_min_price ? $city->delivery_price : 0;
-        $order->city_id = $city->id;
+        $order->delivery_price = 1000;
         $order->total = $basket->total();
-        $order->status_id = OrderStatus::CREATED;
+        $order->status_id = ORDER_STATUS_CREATED;
 
         if ($user_id = auth(SHOP_GUARD)->id()) {
             $order->user_id = $user_id;
@@ -97,11 +95,9 @@ class OrdersRepository
     {
         return $order->items()->create([
             'product_id' => $basket->product_id,
-            'packing_id' => $basket->packing_id,
-            'taste_id' => $basket->taste_id,
             'count' => $basket->count,
-            'price' => $basket->stock->price(),
-            'total' => $basket->count * $basket->stock->price(),
+            'price' => $basket->product->price(),
+            'total' => $basket->count * $basket->product->price(),
         ]);
     }
 

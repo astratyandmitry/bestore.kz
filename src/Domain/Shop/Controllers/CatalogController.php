@@ -17,35 +17,35 @@ class CatalogController extends Controller
 {
     /**
      * @param string $parentHru
-     //* @param string|null $childHru
+     * @param string|null $childHru
      * @param \Domain\Shop\Requests\CatalogRequest $request
      * @param \Domain\Shop\Repositories\CategoriesRepository $categoryRepository
      * @return \Illuminate\View\View
      */
     public function __invoke(
         string $parentHru,
-        //?string $childHru = null,
+        ?string $childHru = null,
         CatalogRequest $request,
         CategoriesRepository $categoryRepository
     ): View {
         $parentCategory = $categoryRepository->findByHru($parentHru);
         $childCategory = null;
 
-        $this->layout->forCity()
+        $this->layout
             ->setTitle($parentCategory->title)
             ->setMeta($parentCategory)
             ->addCatalogBreadcrumb()
             ->addBreadcrumb($parentCategory->name, $parentCategory->url());
 
-        //if ($childHru !== null) {
-        //    $childCategory = $categoryRepository->findByHru($childHru);
-        //
-        //    abort_unless(optional($childCategory->parent)->is($parentCategory), 404);
-        //
-        //    $this->layout
-        //        ->setTitle($childCategory->title)
-        //        ->addBreadcrumb($childCategory->name, $childCategory->url());
-        //}
+        if ($childHru !== null) {
+            $childCategory = $categoryRepository->findByHru($childHru);
+
+            abort_unless(optional($childCategory->parent)->is($parentCategory), 404);
+
+            $this->layout
+                ->setTitle($childCategory->title)
+                ->addBreadcrumb($childCategory->name, $childCategory->url());
+        }
 
         return $this->view('product.index', [
             'catalog' => app('catalog')->init($request, $childCategory ?? $parentCategory),

@@ -24,7 +24,7 @@ class BasketController extends Controller
      */
     public function index(OrdersRepository $repository): View
     {
-        $this->setup(Page::BASKET);
+        $this->setup(PAGE_BASKET);
 
         return $this->view('basket.index', [
             'baskets' => app('basket')->getItems()->toArray(),

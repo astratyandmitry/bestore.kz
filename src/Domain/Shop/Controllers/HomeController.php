@@ -2,12 +2,10 @@
 
 namespace Domain\Shop\Controllers;
 
-use Domain\Shop\Repositories\AmbassadorsRepository;
-use Domain\Shop\Repositories\CatalogRepository;
-use Domain\Shop\Repositories\CategoriesRepository;
-use Domain\Shop\Repositories\BannersRepository;
 use Illuminate\View\View;
-use Domain\Shop\Models\Page;
+use Domain\Shop\Repositories\BannersRepository;
+use Domain\Shop\Repositories\ProductsRepository;
+use Domain\Shop\Repositories\CategoriesRepository;
 
 /**
  * @version 1.0.1
@@ -17,28 +15,25 @@ use Domain\Shop\Models\Page;
 class HomeController extends Controller
 {
     /**
-     * @param \Domain\Shop\Repositories\CategoriesRepository $categoryRepository
-     * @param \Domain\Shop\Repositories\CatalogRepository $catalogRepository
-     * @param \Domain\Shop\Repositories\BannersRepository $slidesRepository
-     * @param \Domain\Shop\Repositories\AmbassadorsRepository $ambassadorsRepository
+     * @param \Domain\Shop\Repositories\ProductsRepository $productsRepository
+     * @param \Domain\Shop\Repositories\CategoriesRepository $categoriesRepository
+     * @param \Domain\Shop\Repositories\BannersRepository $bannersRepository
      * @return \Illuminate\View\View
      */
     public function __invoke(
-        CategoriesRepository $categoryRepository,
-        CatalogRepository $catalogRepository,
-        BannersRepository $slidesRepository,
-        AmbassadorsRepository $ambassadorsRepository
+        ProductsRepository $productsRepository,
+        CategoriesRepository $categoriesRepository,
+        BannersRepository $bannersRepository
     ): View {
-        $this->setup(Page::HOME);
+        $this->setup(PAGE_HOME);
 
         $this->layout->setTitle()->hideTitle()->hideBreadcrumbs();
 
         return $this->view('home.index', [
-            'categories' => $categoryRepository->parents(),
-            'popularProducts' => $catalogRepository->popular(),
-            'latestProducts' => $catalogRepository->latest(),
-            'banners' => $slidesRepository->all(),
-            'ambassadors' => $ambassadorsRepository->all(),
+            'popularProducts' => $productsRepository->popular(),
+            'latestProducts' => $productsRepository->latest(),
+            'banners' => $bannersRepository->all(),
+            'categories' => $categoriesRepository->parents(),
         ]);
     }
 }

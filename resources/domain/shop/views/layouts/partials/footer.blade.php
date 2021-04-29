@@ -31,11 +31,6 @@
                                 Доставка и оплата
                             </a>
                         </li>
-                        <li class="section__item">
-                            <a href="{{ route('shop::stores') }}" class="section__link">
-                                Адреса магазинов
-                            </a>
-                        </li>
                     </ul>
                 </div>
 
@@ -70,8 +65,8 @@
                                     Телефон
                                 </div>
                                 <div class="contact__value">
-                                    <a href="tel:8{{ str_replace(['+7', '(', ')'], '', $layout->getCity()->phone) }}">
-                                        {{ phone($layout->getCity()->phone) }}
+                                    <a href="tel:8{{ str_replace(['+7', '(', ')'], '', config('shop.contact.email')) }}">
+                                        {{ config('shop.contact.email') }}
                                     </a>
                                 </div>
                             </div>
@@ -82,8 +77,8 @@
                                     E-mail
                                 </div>
                                 <div class="contact__value">
-                                    <a href="mailto:{{ config('geneticlab.contact.email') }}">
-                                        {{ config('geneticlab.contact.email') }}
+                                    <a href="mailto:{{ config('shop.contact.email') }}">
+                                        {{ config('shop.contact.email') }}
                                     </a>
                                 </div>
                             </div>

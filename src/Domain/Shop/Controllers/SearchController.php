@@ -27,11 +27,11 @@ class SearchController extends Controller
     ) {
         if ($request->wantsJson()) {
             return response()->json([
-                'products' => $productsRepository->find($request),
+                'products' => $productsRepository->catalog($request),
             ]);
         }
 
-        $this->setup(Page::SEARCH)
+        $this->setup(PAGE_SEARCH)
             ->setBreadcrumbs([])
             ->addCatalogBreadcrumb()
             ->addBreadcrumb('Поиск');

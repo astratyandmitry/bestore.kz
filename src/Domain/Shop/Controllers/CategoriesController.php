@@ -21,7 +21,7 @@ class CategoriesController extends Controller
      */
     public function __invoke(CatalogRequest $request, CategoriesRepository $categoryRepository): View
     {
-        $this->setup(Page::CATALOG);
+        $this->setup(PAGE_CATALOG);
 
         return $this->view('categories.index', [
             'categories' => $categoryRepository->parents(),

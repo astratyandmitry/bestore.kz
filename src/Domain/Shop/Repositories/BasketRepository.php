@@ -47,7 +47,6 @@ class BasketRepository
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
             ->where('count', '>', 0)
-            ->whereHas('stock')
             ->select(DB::raw("concat(product_id, '.', packing_id, '.', taste_id) as k, count"))
             ->pluck('count', 'k')->toArray();
     }
@@ -58,10 +57,8 @@ class BasketRepository
     public function all(): Collection
     {
         return Basket::query()
-            ->with(['stock', 'stock.product', 'stock.taste', 'stock.packing'])
             ->where($this->owner_column, $this->owner_value)
             ->where('count', '>', 0)
-            ->whereHas('stock')
             ->get();
     }
 
@@ -87,20 +84,6 @@ class BasketRepository
             ->where($this->owner_column, $this->owner_value)
             ->where('id', $id)
             ->delete();
-    }
-
-    /**
-     * @param \Domain\Shop\Models\ProductStock $stock
-     * @return \Domain\Shop\Models\Basket
-     */
-    public function findByStock(ProductStock $stock): Basket
-    {
-        return Basket::query()->firstOrCreate([
-            $this->owner_column => $this->owner_value,
-            'product_id' => $stock->product_id,
-            'packing_id' => $stock->packing_id,
-            'taste_id' => $stock->taste_id,
-        ]);
     }
 
     /**

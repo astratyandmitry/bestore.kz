@@ -5,24 +5,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController')->name('home');
 Route::get('/page/{page}', 'PageController')->name('page');
 
-Route::get('/stores', 'StoresController')->name('stores');
-Route::get('/aim/{hru}', 'AimSectionController')->name('aim_section');
-
 Route::get('/search', 'SearchController')->name('search');
 Route::get('/catalog', 'CategoriesController')->name('categories');
 Route::get('/catalog/product/{hru}', 'ProductController')->name('product');
-//Route::get('/catalog/{parentHru}/{childHru?}', 'CatalogController')->name('catalog');
+Route::get('/catalog/{parentHru}/{childHru?}', 'CatalogController')->name('catalog');
 Route::get('/catalog/{parentHru}', 'CatalogController')->name('catalog');
 
-Route::get('/order-{id}', 'OrderDetailController')->name('order');
+Route::get('/order-{uuid}', 'OrderDetailController')->name('order');
 Route::get('/basket', 'BasketController@index')->name('basket');
 Route::post('/basket', 'BasketController@store')->name('basket.store');
 Route::post('/basket/increase', 'BasketController@increase')->name('basket.increase');
 Route::post('/basket/decrease', 'BasketController@decrease')->name('basket.decrease');
 Route::delete('/basket/{id}', 'BasketController@destroy')->name('basket.destroy');
 Route::post('/order', 'OrderCheckoutController')->name('checkout');
-
-Route::get('/change-city/{hru}', 'ChangeCityController')->name('change-city');
 
 Route::prefix('account')->as('account.')->namespace('Account')->middleware('shop.signed')->group(function (): void {
     Route::redirect('/', '/account/orders/current')->name('redirect');

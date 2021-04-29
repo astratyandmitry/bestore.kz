@@ -32,17 +32,9 @@ Route::middleware('cms.signed')->group(function (): void {
     // Resources
     Route::resources([
         'products' => 'ProductsController',
-        'ambassadors' => 'AmbassadorsController',
-        'stores' => 'StoresController',
         'pages' => 'PagesController',
         'categories' => 'CategoriesController',
-        'aims' => 'AimsController',
-        'aim_sections' => 'AimSectionsController',
         'brands' => 'BrandsController',
-        'badges' => 'BadgesController',
-        'packing' => 'PackingController',
-        'tastes' => 'TastesController',
-        'cities' => 'CitiesController',
         'managers' => 'ManagersController',
         'banners' => 'BannersController',
     ]);

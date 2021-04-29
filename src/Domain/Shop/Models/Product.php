@@ -4,11 +4,10 @@ namespace Domain\Shop\Models;
 
 use Domain\Shop\Models\Interfaces\HasUrl;
 use Domain\Shop\Models\Traits\HasActiveState;
+use Domain\Shop\Requests\CatalogRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 /**
  * @property integer $category_id
@@ -28,6 +27,8 @@ use Illuminate\Support\Facades\Session;
  *
  * @property \Domain\Shop\Models\Category $category
  * @property \Domain\Shop\Models\Brand $brand
+ *
+ * @method static Builder filter(?CatalogRequest $request = null)
  */
 class Product extends Model implements HasUrl
 {
@@ -85,6 +86,58 @@ class Product extends Model implements HasUrl
     public function getRouteKeyName(): string
     {
         return 'hru';
+    }
+
+    /**B
+     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @param \Domain\Shop\Requests\CatalogRequest|null $request
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function scopeCatalog(Builder $builder, ?CatalogRequest $request = null): Builder
+    {
+        if (is_null($request)) {
+            $request = request();
+        }
+
+        $builder->when($request->sort, function (Builder $builder) use ($request): Builder {
+            list($column, $type) = explode('.', $request->sort, 2);
+
+            $realColumns = [
+                'date' => 'created_at',
+                'views' => 'count_views',
+                'price' => 'price',
+            ];
+
+            $builder->orderBy($realColumns[$column], $type);
+
+            return $builder;
+        });
+
+        $builder->when($request->category_id, function (Builder $builder) use ($request): Builder {
+            return $builder->where('category_id', explode(',', $request->category_id));
+        });
+
+        $builder->when($request->brand, function (Builder $builder) use ($request): Builder {
+            return $builder->whereIn('brand_id', explode(',', $request->brand));
+        });
+
+        $builder->when($request->price_from, function (Builder $builder) use ($request): Builder {
+            return $builder->where('price', '>=', (int) $request->price_from);
+        });
+
+        $builder->when($request->price_to, function (Builder $builder) use ($request): Builder {
+            return $builder->where('price', '<=', (int) $request->price_to);
+        });
+
+        $builder->when($request->discount, function (Builder $builder): Builder {
+            return $builder->where('price_sale', '>', 0);
+        });
+
+        $builder->when($request->query('term'), function (Builder $builder): Builder {
+            return $builder->where('name', 'LIKE', '%'.request()->get('term').'%');
+        });
+
+        return $builder;
     }
 
     /**

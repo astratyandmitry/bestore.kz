@@ -3,9 +3,8 @@
 namespace Domain\Shop\Repositories;
 
 use Domain\Shop\Models\Product;
-use Domain\Shop\Models\ProductStock;
+use Domain\Shop\Requests\CatalogRequest;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Session;
 
 /**
  * @version 1.0.1
@@ -21,5 +20,30 @@ class ProductsRepository
     public function findByHru(string $hru): Product
     {
         return Product::query()->where('hru', $hru)->firstOrFail();
+    }
+
+    /**
+     * @param \Domain\Shop\Requests\CatalogRequest $request
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function catalog(CatalogRequest $request)
+    {
+        return Product::query()->catalog($request)->paginate(24);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function popular(): Collection
+    {
+        return Product::query()->orderByDesc('count_views')->limit(4)->get();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function latest(): Collection
+    {
+        return Product::query()->orderByDesc('created_at')->limit(4)->get();
     }
 }

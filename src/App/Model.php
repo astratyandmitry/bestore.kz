@@ -31,7 +31,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
      *
      * @return string
      */
-    protected function asJson(array $value): string
+    protected function asJson($value): string
     {
         return json_encode($value, JSON_UNESCAPED_UNICODE);
     }

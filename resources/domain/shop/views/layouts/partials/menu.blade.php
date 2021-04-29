@@ -6,23 +6,6 @@
             <ul class="list">
                 <li class="list__item list__item--dropdown">
                     <a href="javascript:void(0)" class="list__link">
-                        Ваша цель
-                    </a>
-
-                    <div class="dropdown">
-                        <ul class="dropdown__list">
-                            @foreach($layout->getAims() as $_aim)
-                                <li class="dropdown__item">
-                                    <a href="{{ $_aim->url() }}" class="dropdown__link">
-                                        {{ $_aim->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </li>
-                <li class="list__item list__item--dropdown">
-                    <a href="javascript:void(0)" class="list__link">
                         Спортивное питание
                     </a>
 
@@ -63,11 +46,6 @@
                 <li class="list__item">
                     <a href="{{ route('shop::page', 'about') }}" class="list__link">
                         О компании
-                    </a>
-                </li>
-                <li class="list__item">
-                    <a href="{{ route('shop::stores') }}" class="list__link">
-                        Магазины
                     </a>
                 </li>
             </ul>

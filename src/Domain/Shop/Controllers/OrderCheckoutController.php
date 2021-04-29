@@ -27,12 +27,12 @@ class OrderCheckoutController extends Controller
         OrdersRepository $ordersRepository,
         BasketRepository $basketRepository
     ): RedirectResponse {
-        $order = $ordersRepository->create($request, $this->layout->getCity(), app('basket'));
+        $order = $ordersRepository->create($request, app('basket'));
 
         $basketRepository->clear();
 
         Mail::to($request->email)->send(new OrderMail($order));
-        Mail::to(config('geneticlab.contact.email'))->send(new OrderMail($order));
+        Mail::to(config('shop.contact.email'))->send(new OrderMail($order));
 
         return redirect()->to(
             auth(SHOP_GUARD)->guest() ? $order->detailUrl() : $order->url()
