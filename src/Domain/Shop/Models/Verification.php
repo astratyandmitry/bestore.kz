@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\RedirectResponse;
 
 /**
- * @property integer $type_id
+ * @property string $type_key
  * @property integer $user_id
  * @property string $code
  * @property \Carbon\Carbon $expired_at
@@ -28,7 +28,6 @@ class Verification extends Model
      * @var array
      */
     protected $casts = [
-        'type_id' => 'integer',
         'user_id' => 'integer',
     ];
 
@@ -67,7 +66,7 @@ class Verification extends Model
      */
     public function type(): BelongsTo
     {
-        return $this->belongsTo(VerificationType::class);
+        return $this->belongsTo(VerificationType::class, 'type_key', 'key');
     }
 
     /**

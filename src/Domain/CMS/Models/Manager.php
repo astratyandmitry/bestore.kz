@@ -2,11 +2,10 @@
 
 namespace Domain\CMS\Models;
 
-use Domain\Shop\Models\City;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property integer $role_id
+ * @property integer $role_key
  * @property string $email
  * @property string $password
  *
@@ -41,6 +40,6 @@ class Manager extends Model implements
      */
     public function role(): BelongsTo
     {
-        return $this->belongsTo(ManagerRole::class, 'role_id');
+        return $this->belongsTo(ManagerRole::class, 'role_key', 'key');
     }
 }

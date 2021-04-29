@@ -15,12 +15,14 @@ class CreateBannersTable extends Migration
     {
         Schema::create('banners', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('position_id')->constrained('banner_positions');
+            $table->string('position_key', 40)->index();
             $table->string('title', 200);
             $table->string('image', 500);
             $table->integer('sort')->default(0)->index();
             $table->boolean('active')->default(false)->index();
             $table->timestamps();
+
+            $table->foreign('position_key')->references('key')->on('banner_positions');
         });
     }
 

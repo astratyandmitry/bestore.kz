@@ -11,17 +11,17 @@ class ManagerSeeder extends Seeder
      */
     protected $data = [
         [
-            'role_id' => ManagerRole::ADMIN,
+            'role_key' => MANAGER_ROLE_ADMIN,
             'email' => 'astratyandmitry@gmail.com',
             'password' => 'aveego',
         ],
         [
-            'role_id' => ManagerRole::ADMIN,
+            'role_key' => MANAGER_ROLE_ADMIN,
             'email' => 'admin@ura-shop.kz',
             'password' => 'admin',
         ],
         [
-            'role_id' => ManagerRole::MANAGER,
+            'role_key' => MANAGER_ROLE_MANAGER,
             'email' => 'manager@ura-shop.kz',
             'password' => 'manager',
         ],

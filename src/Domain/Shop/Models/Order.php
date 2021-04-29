@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid;
 
 /**
  * @property string $uuid
- * @property integer $status_id
+ * @property string $status_key
  * @property integer|null $user_id
  * @property string $client_name
  * @property string $client_phone
@@ -40,7 +40,6 @@ class Order extends Model
      * @var array
      */
     protected $casts = [
-        'status_id' => 'integer',
         'user_id' => 'integer',
         'delivery_price' => 'integer',
     ];
@@ -62,7 +61,7 @@ class Order extends Model
      */
     public function status(): BelongsTo
     {
-        return $this->belongsTo(OrderStatus::class);
+        return $this->belongsTo(OrderStatus::class, 'status_key', 'key');
     }
 
     /**

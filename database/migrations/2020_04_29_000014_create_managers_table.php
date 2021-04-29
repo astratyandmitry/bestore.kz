@@ -15,11 +15,13 @@ class CreateManagersTable extends Migration
     {
         Schema::create('managers', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('role_id')->constrained('manager_roles');
+            $table->string('role_key', 40)->index();
             $table->string('email', 80)->unique()->index();
             $table->string('password', 500);
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('role_key')->references('key')->on('manager_roles');
         });
     }
 

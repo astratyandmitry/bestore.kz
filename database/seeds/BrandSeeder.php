@@ -1,16 +1,37 @@
 <?php
 
+use Domain\Shop\Models\Brand;
 use Illuminate\Database\Seeder;
 
 class BrandSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
+     * @var array
+     */
+    protected $data = [
+        [
+            'hru' => 'nike',
+            'name' => 'Nike',
+        ],
+        [
+            'hru' => 'apple',
+            'name' => 'Apple',
+        ],
+        [
+            'hru' => 'genetic-lab',
+            'name' => 'GeneticLab',
+        ],
+    ];
+
+    /**
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        //
+        Brand::query()->truncate();
+
+        foreach($this->data as $data) {
+            Brand::query()->create($data);
+        }
     }
 }

@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table): void {
             $table->id();
             $table->uuid('uuid')->index();
-            $table->foreignId('status_id')->constrained('order_statuses');
+            $table->string('status_key', 40)->index();
             $table->foreignId('user_id')->constrained('users')->nullable();
             $table->string('client_name', 80);
             $table->string('client_phone', 14);
@@ -26,6 +26,8 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('total');
             $table->string('comment', 1000)->nullable();
             $table->timestamps();
+
+            $table->foreign('status_key')->references('key')->on('order_statuses');
         });
     }
 

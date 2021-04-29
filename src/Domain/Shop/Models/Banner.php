@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property integer $position_id
+ * @property string $position_key
  * @property string $title
- * @property string $about
  * @property string $image
  *
  * @property \Domain\Shop\Models\BannerPosition $position
@@ -28,7 +27,6 @@ class Banner extends Model
      * @var array
      */
     protected $casts = [
-        'position_id' => 'integer',
         'active' => 'boolean',
     ];
 
@@ -53,6 +51,6 @@ class Banner extends Model
      */
     public function position(): BelongsTo
     {
-        return $this->belongsTo(BannerPosition::class);
+        return $this->belongsTo(BannerPosition::class, 'position_key', 'key');
     }
 }

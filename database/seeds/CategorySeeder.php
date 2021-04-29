@@ -1,16 +1,51 @@
 <?php
 
+use Domain\Shop\Models\Category;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
+     * @var array
+     */
+    protected $data = [
+        [
+            'parent_id' => null,
+            'hru' => 'parent-single',
+            'name' => 'Основная',
+            'title' => 'Основная категория',
+        ],
+        [
+            'parent_id' => null,
+            'hru' => 'parent-child',
+            'name' => 'С дочерними',
+            'title' => 'Категория с дочерними',
+        ],
+        [
+            'parent_id' => 2,
+            'hru' => 'child-1',
+            'name' => 'Дочерняя один',
+            'title' => 'Дочерняя один категория',
+        ],
+        [
+            'parent_id' => 2,
+            'hru' => 'child-2',
+            'name' => 'Вторая дочерняя',
+            'title' => 'Вторая дочерняя категория',
+        ],
+    ];
+
+    /**
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        //
+        Category::query()->truncate();
+
+        foreach ($this->data as $data) {
+            $data['image'] = "/images/categories/{$data['hru']}.jpeg";
+
+            Category::query()->create($data);
+        }
     }
 }

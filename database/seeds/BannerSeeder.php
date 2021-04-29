@@ -1,16 +1,47 @@
 <?php
 
+use Domain\Shop\Models\Banner;
 use Illuminate\Database\Seeder;
 
 class BannerSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
+     * @var array
+     */
+    protected $data = [
+        [
+            'position_key' => BANNER_POS_HOME_MAIN,
+            'title' => 'Первый баннер',
+        ],
+        [
+            'position_key' => BANNER_POS_HOME_MAIN,
+            'title' => 'Второй баннер',
+        ],
+        [
+            'position_key' => BANNER_POS_HOME_MAIN,
+            'title' => 'Третий баннер',
+        ],
+        [
+            'position_key' => BANNER_POS_PRODUCTS_SPLIT,
+            'title' => 'Разделяющий первый',
+        ],
+        [
+            'position_key' => BANNER_POS_PRODUCTS_SPLIT,
+            'title' => 'Разделяющий второй',
+        ],
+    ];
+
+    /**
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        //
+        Banner::query()->truncate();
+
+        foreach($this->data as $index => $data) {
+            $data['image'] = "/images/banners/{$index}.jpeg";
+
+            Banner::query()->create($data);
+        }
     }
 }

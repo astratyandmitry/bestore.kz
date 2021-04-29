@@ -15,11 +15,13 @@ class CreateVerificationsTable extends Migration
     {
         Schema::create('verifications', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('type_id')->constrained('verification_types');
+            $table->string('type_key', 40)->index();
             $table->foreignId('user_id')->constrained('users');
             $table->string('code', 12)->index();
             $table->timestamp('expired_at');
             $table->timestamps();
+
+            $table->foreign('type_key')->references('key')->on('verification_types');
         });
     }
 

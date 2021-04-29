@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call(VerificationTypeSeeder::class);
         $this->call(PageSystemSeeder::class);
         $this->call(BannerPositionSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(BrandSeeder::class);
+        $this->call(BannerSeeder::class);
+        $this->call(UserSeeder::class);
 
         // Manager
         $this->call(ManagerRoleSeeder::class);
