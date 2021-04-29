@@ -15,7 +15,7 @@ class ManagerRequest extends Request
             ->addUniqueRule('email', Manager::getTableName())
             ->addRules([
                 'email' => 'required|email',
-                'role_id' => 'required|exists:manager_roles,id',
+                'role_key' => 'required|exists:manager_roles,key',
             ])
             ->addRulesWhen($this->isMethod('PATCH'), [
                 'new_password' => 'sometimes',

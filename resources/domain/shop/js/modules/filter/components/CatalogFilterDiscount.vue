@@ -12,26 +12,26 @@
 </template>
 
 <script>
-  export default {
-    name: 'CatalogFilterDiscount',
-    props: {
-      checked: {
-        type: Boolean,
-        required: true,
-      },
+export default {
+  name: 'CatalogFilterDiscount',
+  props: {
+    checked: {
+      type: Boolean,
+      required: true,
     },
-    created () {
-      this.input = this.checked
+  },
+  created () {
+    this.input = this.checked
+  },
+  data () {
+    return {
+      input: false
+    }
+  },
+  watch: {
+    input (value) {
+      window.eventBus.$emit('input.discount', value)
     },
-    data () {
-      return {
-        input: false
-      }
-    },
-    watch: {
-      input(value) {
-        window.eventBus.$emit('input.discount', value)
-      },
-    },
-  }
+  },
+}
 </script>

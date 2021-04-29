@@ -27,33 +27,33 @@
 </template>
 
 <script>
-  export default {
-    name: 'CatalogFilterSorting',
-    props: {
-      url: {
-        type: String,
-        required: true,
-      },
-      options: {
-        type: Object,
-        required: true,
-      },
-      value: {
-        type: String,
-        required: true,
-      },
+export default {
+  name: 'CatalogFilterSorting',
+  props: {
+    url: {
+      type: String,
+      required: true,
     },
-    computed: {
-      label () {
-        return this.options[this.value]
-      },
+    options: {
+      type: Object,
+      required: true,
     },
-    methods: {
-      changeSorting (sorting) {
-        let symbol = this.url.includes('?') ? '&' : '?'
+    value: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
+    label () {
+      return this.options[this.value]
+    },
+  },
+  methods: {
+    changeSorting (sorting) {
+      let symbol = this.url.includes('?') ? '&' : '?'
 
-        window.location.href = `${this.url}${symbol}sort=${sorting}`
-      }
+      window.location.href = `${this.url}${symbol}sort=${sorting}`
     }
   }
+}
 </script>

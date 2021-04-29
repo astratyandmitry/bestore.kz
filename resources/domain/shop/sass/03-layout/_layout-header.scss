@@ -39,7 +39,7 @@
     }
 
     @include mobile() {
-        display: block;
+      display: block;
     }
   }
 
@@ -103,7 +103,7 @@
       text-transform: uppercase;
 
       @include mobile() {
-          font-size: 14px;
+        font-size: 14px;
       }
     }
 
@@ -114,7 +114,7 @@
       @include skewLeft();
 
       @include mobile() {
-          @include skewReset();
+        @include skewReset();
       }
 
       .search__icon {

@@ -2,7 +2,7 @@
   <div class="city" :class="{ 'city--active': active }">
     <div class="city__info">
       <div class="city__name">
-        {{ city.name}}
+        {{ city.name }}
       </div>
 
       <div class="city__here" v-if="active">
@@ -22,24 +22,24 @@
 </template>
 
 <script>
-  import ShopLocationStore from './ShopLocationStore'
+import ShopLocationStore from './ShopLocationStore'
 
-  export default {
-    name: 'ShopLocationCity',
-    components: { ShopLocationStore },
-    props: {
-      city: Object,
-      required: true,
+export default {
+  name: 'ShopLocationCity',
+  components: { ShopLocationStore },
+  props: {
+    city: Object,
+    required: true,
+  },
+  computed: {
+    active () {
+      return this.$parent.currentCity.id === this.city.id
     },
-    computed: {
-      active () {
-        return this.$parent.currentCity.id === this.city.id
-      },
-    },
-    created () {
-      if (this.active && !this.$parent.currentStore) {
-        window.eventBus.$emit('change-store', this.city.stores[0])
-      }
-    },
-  }
+  },
+  created () {
+    if (this.active && !this.$parent.currentStore) {
+      window.eventBus.$emit('change-store', this.city.stores[0])
+    }
+  },
+}
 </script>

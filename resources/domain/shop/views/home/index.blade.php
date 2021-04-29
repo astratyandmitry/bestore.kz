@@ -5,19 +5,19 @@
 @extends('shop::layouts.master')
 
 @section('content')
-    <div class="home">
-        @include('shop::home.partials.banners')
+  <div class="home">
+    @include('shop::home.partials.banners')
 
-        @include('shop::home.partials.categories')
+    @include('shop::home.partials.categories')
 
-        @include('shop::home.partials.products', [
-            'title' => 'Популярные товары',
-            'products' => $popularProducts,
-        ])
+    @include('shop::home.partials.products', [
+        'title' => 'Популярные товары',
+        'products' => $popularProducts,
+    ])
 
-        @include('shop::home.partials.products', [
-            'title' => 'Новые товары',
-            'products' => $latestProducts,
-        ])
-    </div>
+    @include('shop::home.partials.products', [
+        'title' => 'Новые товары',
+        'products' => $latestProducts,
+    ])
+  </div>
 @endsection

@@ -59,87 +59,87 @@
 </template>
 
 <script>
-  import axios from 'axios'
+import axios from 'axios'
 
-  export default {
-    name: 'BasketItem',
-    props: {
-      item: {
-        type: Object,
-        required: true,
-      },
+export default {
+  name: 'BasketItem',
+  props: {
+    item: {
+      type: Object,
+      required: true,
     },
-    data () {
-      return {
-        count: 1,
+  },
+  data () {
+    return {
+      count: 1,
+    }
+  },
+  created () {
+    this.count = this.item.count
+  },
+  computed: {
+    price () {
+      return this.item.stock.price_sale ? this.item.stock.price_sale : this.item.stock.price
+    },
+    total () {
+      return this.price * this.count
+    },
+    totalPrev () {
+      return this.item.stock.price * this.count
+    },
+    reachMin () {
+      return this.count === 1
+    },
+    reachMax () {
+      return this.count === this.item.stock.quantity
+    }
+  },
+  methods: {
+    decrease () {
+      if (this.reachMin) {
+        return
       }
+
+      this.handleRequest('/basket/decrease')
     },
-    created () {
-      this.count = this.item.count
-    },
-    computed: {
-      price () {
-        return this.item.stock.price_sale ? this.item.stock.price_sale : this.item.stock.price
-      },
-      total () {
-        return this.price * this.count
-      },
-      totalPrev () {
-        return this.item.stock.price * this.count
-      },
-      reachMin () {
-        return this.count === 1
-      },
-      reachMax () {
-        return this.count === this.item.stock.quantity
+    increase () {
+      if (this.reachMax) {
+        return
       }
+
+      this.handleRequest('/basket/increase')
     },
-    methods: {
-      decrease () {
-        if (this.reachMin) {
-          return
-        }
+    handleRequest (endpoint) {
+      window.eventBus.$emit('basket.loading')
 
-        this.handleRequest('/basket/decrease')
-      },
-      increase () {
-        if (this.reachMax) {
-          return
-        }
+      const data = {
+        product_id: this.item.stock.product.id,
+        packing_id: this.item.stock.packing.id,
+        taste_id: this.item.stock.taste.id,
+      }
 
-        this.handleRequest('/basket/increase')
-      },
-      handleRequest (endpoint) {
-        window.eventBus.$emit('basket.loading')
+      axios.post(endpoint, data)
+        .then(({ data }) => this.handleResponse(data))
+        .catch(() => this.handleResponse({}))
+    },
+    handleResponse (obj) {
+      if (obj.count) {
+        this.count = obj.count
+      }
 
-        const data = {
-          product_id: this.item.stock.product.id,
-          packing_id: this.item.stock.packing.id,
-          taste_id: this.item.stock.taste.id,
-        }
-
-        axios.post(endpoint, data)
-          .then(({ data }) => this.handleResponse(data))
-          .catch(() => this.handleResponse({}))
-      },
-      handleResponse (obj) {
-        if (obj.count) {
-          this.count = obj.count
-        }
-
-        window.eventBus.$emit('basket.update', {
-          id: this.item.id,
-          total: this.total,
-        })
-      },
-      remove () {
-        axios.delete(`/basket/${this.item.id}`)
-          .then(() => {
-            window.eventBus.$emit('basket.remove', {
-              id: this.item.id,
-            })
+      window.eventBus.$emit('basket.update', {
+        id: this.item.id,
+        total: this.total,
+      })
+    },
+    remove () {
+      axios.delete(`/basket/${this.item.id}`)
+        .then(() => {
+          window.eventBus.$emit('basket.remove', {
+            id: this.item.id,
           })
-      },
+        })
     },
-  }
+  },
+}
 </script>

@@ -11,45 +11,45 @@
 </template>
 
 <script>
-  import ShopLocationCity from './ShopLocationCity'
+import ShopLocationCity from './ShopLocationCity'
 
-  export default {
-    name: 'ShopLocations',
-    components: { ShopLocationCity },
-    props: {
-      currentCity: {
-        type: Object,
-        required: true,
-      },
-      cities: {
-        type: Array,
-        required: true,
-      },
+export default {
+  name: 'ShopLocations',
+  components: { ShopLocationCity },
+  props: {
+    currentCity: {
+      type: Object,
+      required: true,
     },
-    created () {
-      window.eventBus.$on('change-store', this.changeStore)
+    cities: {
+      type: Array,
+      required: true,
     },
-    data () {
-      return {
-        currentStore: null,
+  },
+  created () {
+    window.eventBus.$on('change-store', this.changeStore)
+  },
+  data () {
+    return {
+      currentStore: null,
+    }
+  },
+  computed: {
+    yandexMapEmbedUrl () {
+      if (!this.currentStore) {
+        return ''
       }
-    },
-    computed: {
-      yandexMapEmbedUrl () {
-        if (!this.currentStore) {
-          return ''
-        }
 
-        return this.currentStore.map_embed
-          .replace('yandex.', 'api-maps.yandex.')
-          .replace('/maps/', '/frame/v1/')
-          .replace('.kz', '.ru')
-      }
+      return this.currentStore.map_embed
+        .replace('yandex.', 'api-maps.yandex.')
+        .replace('/maps/', '/frame/v1/')
+        .replace('.kz', '.ru')
+    }
+  },
+  methods: {
+    changeStore (store) {
+      this.currentStore = store
     },
-    methods: {
-      changeStore (store) {
-        this.currentStore = store
-      },
-    },
-  }
+  },
+}
 </script>

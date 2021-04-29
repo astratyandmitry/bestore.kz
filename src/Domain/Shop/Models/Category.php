@@ -96,8 +96,12 @@ class Category extends Model implements HasUrl
         $options = [];
 
         foreach ($parentCategories as $parentCategory) {
-            foreach ($parentCategory->children as $child) {
-                $options[$parentCategory->name][$child->id] = $child->name;
+            if ($parentCategory->children->isEmpty()) {
+                $options[$parentCategory->id] = $parentCategory->name;
+            } else {
+                foreach ($parentCategory->children as $child) {
+                    $options[$parentCategory->name][$child->id] = $child->name;
+                }
             }
         }
 

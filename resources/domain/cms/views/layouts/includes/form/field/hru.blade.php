@@ -7,13 +7,13 @@
 ])
 
 @isset($model)
-    @include('cms::layouts.includes.form.field.hidden', [
-        'attribute' => 'hru',
-    ])
+  @include('cms::layouts.includes.form.field.hidden', [
+      'attribute' => 'hru',
+  ])
 @endisset
 
 @push('scripts')
-    @include('cms::layouts.includes.script.hru', [
-        'source' => isset($source) ? $source : 'name',
-    ])
+  @include('cms::layouts.includes.script.hru', [
+      'source' => isset($source) ? $source : 'name',
+  ])
 @endpush

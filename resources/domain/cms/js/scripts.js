@@ -1,5 +1,5 @@
 global.$ = global.jQuery = require('jquery')
-window.Sortable = require('sortablejs').Sortable;
+window.Sortable = require('sortablejs').Sortable
 window.autosize = require('autosize')
 window.select2 = require('select2')
 

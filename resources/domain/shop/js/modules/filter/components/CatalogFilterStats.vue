@@ -12,13 +12,13 @@
 </template>
 
 <script>
-  export default {
-    name: 'CatalogFilterStats',
-    props: {
-      total: {
-        type: Number,
-        required: true,
-      }
+export default {
+  name: 'CatalogFilterStats',
+  props: {
+    total: {
+      type: Number,
+      required: true,
     }
   }
+}
 </script>

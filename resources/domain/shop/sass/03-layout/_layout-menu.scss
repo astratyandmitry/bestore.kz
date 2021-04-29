@@ -65,7 +65,7 @@
           background: lighten($color-dark, 10%);
 
           @include mobile() {
-              background: transparent;
+            background: transparent;
           }
         }
       }

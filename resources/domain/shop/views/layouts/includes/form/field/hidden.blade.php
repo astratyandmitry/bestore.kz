@@ -3,6 +3,6 @@
 @php /** @var array $value */ @endphp
 
 <input
-    type="hidden" name="{{ $attribute }}" id="{{ $attribute }}"
-    value="{{ old($attribute, (isset($entity)) ? $entity->{$attribute} : @$value) }}"
+  type="hidden" name="{{ $attribute }}" id="{{ $attribute }}"
+  value="{{ old($attribute, (isset($entity)) ? $entity->{$attribute} : @$value) }}"
 />

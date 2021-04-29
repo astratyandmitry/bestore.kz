@@ -2,6 +2,7 @@
 
 namespace Domain\CMS\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -41,5 +42,19 @@ class Manager extends Model implements
     public function role(): BelongsTo
     {
         return $this->belongsTo(ManagerRole::class, 'role_key', 'key');
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @param bool $applyOrder
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function scopeFilter(Builder $builder, bool $applyOrder = true): Builder
+    {
+        $builder->when(request('role_key'), function (Builder $builder): Builder {
+            return $builder->where('role_key', request('role_key'));
+        });
+
+        return parent::scopeFilter($builder, $applyOrder);
     }
 }

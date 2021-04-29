@@ -29,54 +29,54 @@
 </template>
 
 <script>
-  export default {
-    name: 'CatalogFilterDropdown',
-    props: {
-      eng: {
-        type: String,
-        required: true,
-      },
-      label: {
-        type: String,
-        required: true,
-      },
-      value: {
-        type: Array,
-        required: true,
-      },
-      options: {
-        type: Array,
-        required: true,
-      },
+export default {
+  name: 'CatalogFilterDropdown',
+  props: {
+    eng: {
+      type: String,
+      required: true,
     },
-    created () {
-      this.input = this.value
+    label: {
+      type: String,
+      required: true,
     },
-    data () {
-      return {
-        input: []
+    value: {
+      type: Array,
+      required: true,
+    },
+    options: {
+      type: Array,
+      required: true,
+    },
+  },
+  created () {
+    this.input = this.value
+  },
+  data () {
+    return {
+      input: []
+    }
+  },
+  methods: {
+    checked (value) {
+      return this.input.includes(value.toString())
+    },
+    toggle (value) {
+      value = value.toString()
+
+      let index = this.input.indexOf(value)
+
+      if (index === -1) {
+        this.input.push(value)
+      } else {
+        this.input.splice(index, 1)
       }
     },
-    methods: {
-      checked (value) {
-        return this.input.includes(value.toString())
-      },
-      toggle (value) {
-        value = value.toString()
-
-        let index = this.input.indexOf(value)
-
-        if (index === -1) {
-          this.input.push(value)
-        } else {
-          this.input.splice(index, 1)
-        }
-      },
+  },
+  watch: {
+    input (value) {
+      window.eventBus.$emit(`input.${this.key}`, value)
     },
-    watch: {
-      input (value) {
-        window.eventBus.$emit(`input.${this.key}`, value)
-      },
-    }
   }
+}
 </script>

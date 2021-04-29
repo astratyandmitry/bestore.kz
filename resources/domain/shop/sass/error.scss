@@ -33,7 +33,7 @@
       position: absolute;
 
       @include mobile() {
-          font-size: 200px;
+        font-size: 200px;
       }
     }
 
@@ -45,7 +45,7 @@
       text-transform: uppercase;
 
       @include mobile() {
-          font-size: 40px;
+        font-size: 40px;
       }
     }
   }

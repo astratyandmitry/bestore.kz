@@ -10,29 +10,29 @@
 @php /** @var array $options */ @endphp
 
 <div class="form-field @if ($errors->has($attribute)) form-field--error @endif">
-    @if (isset($label))
-        <label for="{{ $attribute }}">
-            {{ $label }}
+  @if (isset($label))
+    <label for="{{ $attribute }}">
+      {{ $label }}
 
-            @if (isset($required) && $required == true)
-                <strong>*</strong>
-            @endif
+      @if (isset($required) && $required == true)
+        <strong>*</strong>
+      @endif
 
-            @if (isset($helper))
-                <span class="form-help">
+      @if (isset($helper))
+        <span class="form-help">
                     {!! $helper !!}
                 </span>
-            @endif
-        </label>
-    @endif
+      @endif
+    </label>
+  @endif
 
-    <textarea class="form-input"
-              name="{{ $attribute }}" id="{{ $attribute }}" rows="{{ $rows ?? 3 }}"
-              @if (isset($placeholder)) placeholder="{{ $placeholder }}" @endif
-              @if (isset($required) && $required) required @endif
-              @if (isset($disabled) && $disabled) disabled @endif
-              @if (isset($autofocus) && $autofocus) autofocus @endif
+  <textarea class="form-input"
+            name="{{ $attribute }}" id="{{ $attribute }}" rows="{{ $rows ?? 3 }}"
+            @if (isset($placeholder)) placeholder="{{ $placeholder }}" @endif
+            @if (isset($required) && $required) required @endif
+            @if (isset($disabled) && $disabled) disabled @endif
+            @if (isset($autofocus) && $autofocus) autofocus @endif
     >{{ old($attribute, (isset($entity)) ? $entity->{$attribute} : @$value) }}</textarea>
 
-    @include('shop::layouts.includes.form.error')
+  @include('shop::layouts.includes.form.error')
 </div>

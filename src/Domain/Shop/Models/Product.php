@@ -38,7 +38,7 @@ class Product extends Model implements HasUrl
     /**
      * @var array
      */
-    protected $guarded = [['packing', 'tastes', 'remains']];
+    protected $guarded = [];
 
     /**
      * @var array

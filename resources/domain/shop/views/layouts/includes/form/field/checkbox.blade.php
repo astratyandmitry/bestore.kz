@@ -5,20 +5,20 @@
 @php /** @var mixed $required */ @endphp
 
 <div class="form-field form-field--checkbox @if ($errors->has($attribute)) form-field--error @endif">
-    <input type="hidden" name="{{ $attribute }}" value="0">
+  <input type="hidden" name="{{ $attribute }}" value="0">
 
-    <div class="form-field__value">
-        <input class="form-input"
-               id="{{ $attribute }}" name="{{ $attribute }}" type="checkbox" value="1"
-               @if(old($attribute, @$entity->{$attribute}) == 1) checked @endif
-               @if (isset($disabled) && $disabled) disabled @endif
-               @if (isset($required) && $required) required @endif
-        >
+  <div class="form-field__value">
+    <input class="form-input"
+           id="{{ $attribute }}" name="{{ $attribute }}" type="checkbox" value="1"
+           @if(old($attribute, @$entity->{$attribute}) == 1) checked @endif
+           @if (isset($disabled) && $disabled) disabled @endif
+           @if (isset($required) && $required) required @endif
+    >
 
-        <label for="{{ $attribute }}" class="form-label">
-            {{ $label }}
-        </label>
-    </div>
+    <label for="{{ $attribute }}" class="form-label">
+      {{ $label }}
+    </label>
+  </div>
 
-    @include('shop::layouts.includes.form.error')
+  @include('shop::layouts.includes.form.error')
 </div>

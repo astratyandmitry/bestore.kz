@@ -42,8 +42,10 @@ class CategorySeeder extends Seeder
     {
         Category::query()->truncate();
 
-        foreach ($this->data as $data) {
+        foreach ($this->data as $index => $data) {
             $data['image'] = "/images/categories/{$data['hru']}.jpeg";
+            $data['active'] = true;
+            $data['sort'] = $index;
 
             Category::query()->create($data);
         }

@@ -20,25 +20,25 @@
 </template>
 
 <script>
-  export default {
-    name: 'CatalogFilterActions',
-    props: {
-      applyButtonVisible: {
-        type: Boolean,
-        default: false,
-      },
-      resetUrl: {
-        type: String,
-        required: true
-      },
+export default {
+  name: 'CatalogFilterActions',
+  props: {
+    applyButtonVisible: {
+      type: Boolean,
+      default: false,
     },
-    methods: {
-      resetFilter () {
-        window.location.href = this.resetUrl
-      },
-      applyFilter () {
-        window.eventBus.$emit('apply-filter')
-      },
+    resetUrl: {
+      type: String,
+      required: true
     },
-  }
+  },
+  methods: {
+    resetFilter () {
+      window.location.href = this.resetUrl
+    },
+    applyFilter () {
+      window.eventBus.$emit('apply-filter')
+    },
+  },
+}
 </script>

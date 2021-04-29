@@ -2,5 +2,5 @@
 @php /** @var string $title */ @endphp
 
 <h1 class="title">
-    {!! isset($title) ? $title : $layout->title !!}
+  {!! isset($title) ? $title : $layout->title !!}
 </h1>

@@ -33,7 +33,7 @@ class ManagersController extends Controller
      */
     public function __construct()
     {
-        $this->with('roles', ManagerRole::query()->pluck('name', 'id')->toArray());
+        $this->with('roles', ManagerRole::query()->pluck('name', 'key')->toArray());
     }
 
     /**

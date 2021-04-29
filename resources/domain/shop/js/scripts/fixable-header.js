@@ -1,5 +1,5 @@
 let app = document.querySelector('.app')
-let nav = document.querySelector('.nav');
+let nav = document.querySelector('.nav')
 let scroll = window.scrollY
 
 function fixable () {

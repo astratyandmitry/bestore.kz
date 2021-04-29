@@ -29,7 +29,10 @@ class CategoriesController extends Controller
      */
     public function __construct()
     {
-        $this->with('parents', Category::query()->whereNull('parent_id')->pluck('name', 'id')->toArray());
+        $parentCategories = Category::query()->whereNull('parent_id')->pluck('name', 'id')->toArray();
+        $parentCategories['head'] = '— Только родительские';
+
+        $this->with('parents', $parentCategories);
     }
 
     /**
@@ -51,7 +54,7 @@ class CategoriesController extends Controller
      */
     public function index(): View
     {
-        $this->sortable = !is_null(request('parent_id'));
+        $this->sortable = ! is_null(request('parent_id'));
 
         return $this->view([
             'models' => Category::filter()->paginate($this->paginationSize()),

@@ -20,16 +20,11 @@ class ProductRequest extends Request
                 'hru' => 'required|max:80|alpha_dash',
                 'name' => 'required|max:120',
                 'image' => 'required',
-                'about' => 'nullable',
-                'composition' => 'nullable',
-                'recommendation' => 'nullable',
+                'price' => 'required|integer|min:1',
+                'price_sale' => 'nullable|integer',
+                'quantity' => 'required|integer|min:0',
+                'about' => 'required',
                 'active' => 'boolean',
-                'packing' => 'nullable',
-                'tastes' => 'nullable',
-                'remains' => 'nullable',
-            ])
-            ->addRulesWhen(! is_null($this->get('badge_id')), [
-                'badge_id' => 'required|exists:badges,id',
             ]);
     }
 }

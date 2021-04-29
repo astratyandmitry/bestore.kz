@@ -2,10 +2,10 @@
 
 namespace Domain\CMS\Controllers;
 
-use Domain\Shop\Models\BannerPosition;
 use Illuminate\View\View;
 use Domain\Shop\Models\Banner;
 use Illuminate\Http\RedirectResponse;
+use Domain\Shop\Models\BannerPosition;
 use Domain\CMS\Requests\BannerRequest as Request;
 
 /**
@@ -35,7 +35,7 @@ class BannersController extends Controller
      */
     public function __construct()
     {
-        $this->with('positions', BannerPosition::query()->pluck('name', 'id')->toArray());
+        $this->with('positions', BannerPosition::query()->pluck('name', 'key')->toArray());
     }
 
     /**
@@ -81,7 +81,7 @@ class BannersController extends Controller
         /** @var \Domain\Shop\Models\Banner $model */
         $model = Banner::query()->create($request->validated());
 
-        return $this->redirectSuccess('show', ['slide' => $model->id]);
+        return $this->redirectSuccess('show', ['banner' => $model->id]);
     }
 
     /**
@@ -111,7 +111,7 @@ class BannersController extends Controller
         $model = Banner::query()->findOrFail($id);
         $model->update($request->validated());
 
-        return $this->redirectSuccess('show', ['slide' => $model->id]);
+        return $this->redirectSuccess('show', ['banner' => $model->id]);
     }
 
     /**

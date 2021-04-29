@@ -31,7 +31,7 @@ class ProductsController extends Controller
      */
     public function __construct()
     {
-        $this->with('categories', Category::options());
+        $this->with('categories', Category::groupedOptions());
         $this->with('brands', Brand::query()->pluck('name', 'id')->toArray());
     }
 

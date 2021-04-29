@@ -49,73 +49,73 @@
 </template>
 
 <script>
-  import BasketItem from './BasketItem'
+import BasketItem from './BasketItem'
 
-  export default {
-    name: 'Basket',
-    components: { BasketItem },
-    props: {
-      data: {
-        type: Array,
-        default: [],
-      },
-      deliveryPrice: {
-        type: Number,
-        required: true,
-      },
+export default {
+  name: 'Basket',
+  components: { BasketItem },
+  props: {
+    data: {
+      type: Array,
+      default: [],
     },
-    data () {
-      return {
-        items: [],
-        amount: 0,
-        loading: false,
+    deliveryPrice: {
+      type: Number,
+      required: true,
+    },
+  },
+  data () {
+    return {
+      items: [],
+      amount: 0,
+      loading: false,
+    }
+  },
+  created () {
+    this.items = this.data
+
+    window.eventBus.$on('basket.update', this.updateItem)
+    window.eventBus.$on('basket.remove', this.removeItem)
+    window.eventBus.$on('basket.loading', this.startLoading)
+  },
+  computed: {
+    total () {
+      return this.amount + this.deliveryPrice
+    },
+  },
+  methods: {
+    updateItem ({ id, total }) {
+      let item = this.items.find((item) => item.id === id)
+      let _index = this.items.indexOf(item)
+
+      if (_index >= 0) {
+        this.items[_index].total = total
       }
-    },
-    created () {
-      this.items = this.data
 
-      window.eventBus.$on('basket.update', this.updateItem)
-      window.eventBus.$on('basket.remove', this.removeItem)
-      window.eventBus.$on('basket.loading', this.startLoading)
+      this.loading = false
     },
-    computed: {
-      total () {
-        return this.amount + this.deliveryPrice
-      },
-    },
-    methods: {
-      updateItem ({ id, total }) {
-        let item = this.items.find((item) => item.id === id)
-        let _index = this.items.indexOf(item)
+    removeItem ({ id }) {
+      this.items = this.items.filter((item) => item.id !== id)
 
-        if (_index >= 0) {
-          this.items[_index].total = total
+      this.loading = false
+    },
+    startLoading () {
+      this.loading = true
+    },
+  },
+  watch: {
+    items: {
+      deep: true,
+      handler () {
+        this.amount = this.items.reduce(function (total, item) {
+          return total + (item.total ? item.total : 0)
+        }, 0)
+
+        if (this.amount <= 0) {
+          window.location.href = '/catalog'
         }
-
-        this.loading = false
-      },
-      removeItem ({ id }) {
-        this.items = this.items.filter((item) => item.id !== id)
-
-        this.loading = false
-      },
-      startLoading () {
-        this.loading = true
       },
     },
-    watch: {
-      items: {
-        deep: true,
-        handler () {
-          this.amount = this.items.reduce(function (total, item) {
-            return total + (item.total ? item.total : 0)
-          }, 0)
-
-          if (this.amount <= 0) {
-            window.location.href = '/catalog'
-          }
-        },
-      },
-    },
-  }
+  },
+}
 </script>

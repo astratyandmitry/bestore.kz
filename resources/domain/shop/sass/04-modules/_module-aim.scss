@@ -21,7 +21,7 @@
       @include radius(2px);
 
       @include mobile_tablet-portrait() {
-          padding: 2rem;
+        padding: 2rem;
       }
 
       .aim__title {
@@ -34,7 +34,7 @@
         color: $color-dark;
 
         @include mobile() {
-            font-size: 20px;
+          font-size: 20px;
         }
       }
 

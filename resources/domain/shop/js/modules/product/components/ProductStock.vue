@@ -21,57 +21,57 @@
 </template>
 
 <script>
-  export default {
-    name: 'ProductStock',
-    props: {
-      packings: {
-        type: Array,
-        required: true,
-      },
+export default {
+  name: 'ProductStock',
+  props: {
+    packings: {
+      type: Array,
+      required: true,
     },
-    created () {
-      this.packingId = this.packings[0].id
+  },
+  created () {
+    this.packingId = this.packings[0].id
+  },
+  data () {
+    return {
+      packingId: '',
+      tasteId: '',
+    }
+  },
+  computed: {
+    packing () {
+      return this.packings.find((s) => s.id === parseInt(this.packingId))
     },
-    data () {
-      return {
-        packingId: '',
-        tasteId: '',
+    taste () {
+      return this.packing.tastes?.find((t) => t.id === parseInt(this.tasteId))
+    },
+  },
+  watch: {
+    packingId () {
+      if (!this.taste) {
+        this.tasteId = this.packing.tastes[0].id
       }
-    },
-    computed: {
-      packing () {
-        return this.packings.find((s) => s.id === parseInt(this.packingId))
-      },
-      taste () {
-        return this.packing.tastes?.find((t) => t.id === parseInt(this.tasteId))
-      },
-    },
-    watch: {
-      packingId () {
-        if (!this.taste) {
-          this.tasteId = this.packing.tastes[0].id
-        }
 
-        this.fireEvent()
-      },
-      tasteId () {
-        this.fireEvent()
-      },
+      this.fireEvent()
     },
-    methods: {
-      fireEvent () {
-        window.eventBus.$emit('config-updated', {
-          price: this.packing.price,
-          price_sale: this.packing.price_sale,
-          quantity: this.taste.quantity,
-          basket: this.taste.basket,
-          stock: {
-            product_id: this.$parent.productId,
-            packing_id: this.packingId,
-            taste_id: this.tasteId,
-          }
-        })
-      }
+    tasteId () {
+      this.fireEvent()
+    },
+  },
+  methods: {
+    fireEvent () {
+      window.eventBus.$emit('config-updated', {
+        price: this.packing.price,
+        price_sale: this.packing.price_sale,
+        quantity: this.taste.quantity,
+        basket: this.taste.basket,
+        stock: {
+          product_id: this.$parent.productId,
+          packing_id: this.packingId,
+          taste_id: this.tasteId,
+        }
+      })
     }
   }
+}
 </script>

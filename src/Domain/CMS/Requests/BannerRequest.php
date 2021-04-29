@@ -11,8 +11,8 @@ class BannerRequest extends Request
     {
         $this->rulesBuilder
             ->addRules([
+                'position_key' => 'required|exists:banner_positions,key',
                 'title' => 'required|max:500',
-                'about' => 'nullable|max:1000',
                 'image' => 'required',
                 'active' => 'boolean',
             ]);

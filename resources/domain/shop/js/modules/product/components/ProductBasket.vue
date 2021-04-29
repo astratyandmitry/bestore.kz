@@ -43,90 +43,90 @@
 </template>
 
 <script>
-  import axios from 'axios'
+import axios from 'axios'
 
-  export default {
-    name: 'ProductBasket',
-    created () {
-      window.eventBus.$on('config-updated', (config) => {
-        this.stock = config.stock
-        this.price = config.price
-        this.price_sale = config.price_sale
-        this.max = config.quantity
+export default {
+  name: 'ProductBasket',
+  created () {
+    window.eventBus.$on('config-updated', (config) => {
+      this.stock = config.stock
+      this.price = config.price
+      this.price_sale = config.price_sale
+      this.max = config.quantity
 
-        if (!this.added.hasOwnProperty(this.stockKey)) {
-          this.$set(this.added, this.stockKey, config.basket)
-        }
-
-        if (this.count > this.max) {
-          this.count = this.max
-        }
-      })
-    },
-    data () {
-      return {
-        price: 0,
-        price_sale: 0,
-        count: 1,
-        max: 1,
-        added: {},
-        stock: null,
+      if (!this.added.hasOwnProperty(this.stockKey)) {
+        this.$set(this.added, this.stockKey, config.basket)
       }
-    },
-    computed: {
-      reachMin () {
-        return this.count === 1
-      },
-      reachMax () {
-        return this.count >= this.max
-      },
-      stockKey () {
-        if (!this.stock) {
-          return
-        }
 
-        return `${this.stock.product_id}.${this.stock.packing_id}.${this.stock.taste_id}`
-      },
-      inBasket () {
-        return this.added.hasOwnProperty(this.stockKey) && this.added[this.stockKey] > 0
+      if (this.count > this.max) {
+        this.count = this.max
       }
+    })
+  },
+  data () {
+    return {
+      price: 0,
+      price_sale: 0,
+      count: 1,
+      max: 1,
+      added: {},
+      stock: null,
+    }
+  },
+  computed: {
+    reachMin () {
+      return this.count === 1
     },
-    methods: {
-      decrease () {
-        if (this.reachMin) {
-          return
-        }
-
-        if (this.inBasket) {
-          return this.request('/basket/decrease')
-        }
-
-        return this.count--
-      },
-      increase () {
-        if (this.reachMax) {
-          return
-        }
-
-        if (this.inBasket) {
-          return this.request('/basket/increase')
-        }
-
-        return this.count++
-      },
-      request (endpoint) {
-        axios.post(endpoint, this.stock)
-          .then(({ data }) => {
-            this.$set(this.added, this.stockKey, this.count = data.count)
-          })
-      },
-      handle () {
-        if (this.inBasket) {
-          return window.location.href = '/basket'
-        }
-
-        this.request(`/basket?quantity=${this.count}`)
+    reachMax () {
+      return this.count >= this.max
+    },
+    stockKey () {
+      if (!this.stock) {
+        return
       }
+
+      return `${this.stock.product_id}.${this.stock.packing_id}.${this.stock.taste_id}`
+    },
+    inBasket () {
+      return this.added.hasOwnProperty(this.stockKey) && this.added[this.stockKey] > 0
+    }
+  },
+  methods: {
+    decrease () {
+      if (this.reachMin) {
+        return
+      }
+
+      if (this.inBasket) {
+        return this.request('/basket/decrease')
+      }
+
+      return this.count--
+    },
+    increase () {
+      if (this.reachMax) {
+        return
+      }
+
+      if (this.inBasket) {
+        return this.request('/basket/increase')
+      }
+
+      return this.count++
+    },
+    request (endpoint) {
+      axios.post(endpoint, this.stock)
+        .then(({ data }) => {
+          this.$set(this.added, this.stockKey, this.count = data.count)
+        })
+    },
+    handle () {
+      if (this.inBasket) {
+        return window.location.href = '/basket'
+      }
+
+      this.request(`/basket?quantity=${this.count}`)
     }
   }
+}
 </script>

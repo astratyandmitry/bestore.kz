@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import ProductConfig from './components/ProductConfig'
 
 window.eventBus = new Vue({})

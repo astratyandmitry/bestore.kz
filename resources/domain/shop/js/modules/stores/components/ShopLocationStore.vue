@@ -21,23 +21,23 @@
 </template>
 
 <script>
-  export default {
-    name: 'ShopLocationStore',
-    props: {
-      store: {
-        type: Object,
-        required: true,
-      },
+export default {
+  name: 'ShopLocationStore',
+  props: {
+    store: {
+      type: Object,
+      required: true,
     },
-    computed: {
-      active () {
-        return this.$parent.$parent.currentStore?.id === this.store.id
-      },
+  },
+  computed: {
+    active () {
+      return this.$parent.$parent.currentStore?.id === this.store.id
     },
-    methods: {
-      changeStore () {
-        window.eventBus.$emit('change-store', this.store)
-      },
+  },
+  methods: {
+    changeStore () {
+      window.eventBus.$emit('change-store', this.store)
     },
-  }
+  },
+}
 </script>

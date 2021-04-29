@@ -4,7 +4,7 @@
     align-items: flex-start;
 
     @include mobile-tablet() {
-        display: block;
+      display: block;
     }
   }
 
@@ -16,7 +16,7 @@
     @include radius(2px);
 
     @include mobile() {
-        font-size: 14px;
+      font-size: 14px;
     }
 
     @include mobile-tablet() {

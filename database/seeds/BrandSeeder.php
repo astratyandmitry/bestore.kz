@@ -30,7 +30,10 @@ class BrandSeeder extends Seeder
     {
         Brand::query()->truncate();
 
-        foreach($this->data as $data) {
+        foreach($this->data as $index => $data) {
+            $data['active'] = true;
+            $data['sort'] = $index;
+
             Brand::query()->create($data);
         }
     }

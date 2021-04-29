@@ -16,3 +16,6 @@ indent_size = 2
 
 [*.{js,scss,css,vue,js}]
 indent_size = 2
+
+[*.{scss,js,blade.php,vue,css,ts}]
+indent_size = 2

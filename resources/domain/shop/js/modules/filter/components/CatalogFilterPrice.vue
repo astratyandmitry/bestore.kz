@@ -37,43 +37,43 @@
 </template>
 
 <script>
-  export default {
-    name: 'CatalogFilterPrice',
-    props: {
-      min: {
-        type: Number,
-        required: true,
-      },
-      max: {
-        type: Number,
-        required: true,
-      },
-      from: {
-        type: Number,
-        required: true,
-      },
-      to: {
-        type: Number,
-        required: true,
-      },
+export default {
+  name: 'CatalogFilterPrice',
+  props: {
+    min: {
+      type: Number,
+      required: true,
     },
-    created () {
-      this.inputFrom = this.from
-      this.inputTo = this.to
+    max: {
+      type: Number,
+      required: true,
     },
-    data () {
-      return {
-        inputFrom: 0,
-        inputTo: 0,
-      }
+    from: {
+      type: Number,
+      required: true,
     },
-    watch: {
-      inputFrom(value) {
-        window.eventBus.$emit('input.price-from', value)
-      },
-      inputTo(value) {
-        window.eventBus.$emit('input.price-to', value)
-      },
+    to: {
+      type: Number,
+      required: true,
     },
-  }
+  },
+  created () {
+    this.inputFrom = this.from
+    this.inputTo = this.to
+  },
+  data () {
+    return {
+      inputFrom: 0,
+      inputTo: 0,
+    }
+  },
+  watch: {
+    inputFrom (value) {
+      window.eventBus.$emit('input.price-from', value)
+    },
+    inputTo (value) {
+      window.eventBus.$emit('input.price-to', value)
+    },
+  },
+}
 </script>
