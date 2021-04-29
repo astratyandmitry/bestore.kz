@@ -17,7 +17,7 @@ class PagesController extends Controller
     /**
      * @var string
      */
-    protected $section = self::SECTION_MAIN;
+    protected $section = SECTION_MAIN;
 
     /**
      * @var string

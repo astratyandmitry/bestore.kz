@@ -7,7 +7,7 @@
                 <section class="content">
                     <div class="brand">
                         <div class="logotype">
-                            Gernetic<span>Lab</span>
+                            URA<span>Shop</span>
                         </div>
                     </div>
 

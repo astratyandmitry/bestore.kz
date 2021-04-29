@@ -17,12 +17,6 @@ class Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    const SECTION_MAIN = 'main';
-
-    const SECTION_DICTIONARY = 'dictionary';
-
-    const SECTION_SYSTEM = 'system';
-
     /**
      * @var string
      */

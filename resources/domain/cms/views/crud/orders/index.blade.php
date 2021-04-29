@@ -14,9 +14,6 @@
                     <th nowrap>
                         @lang('cms.field.client')
                     </th>
-                    <th nowrap width="200">
-                        @lang('cms.field.city_id')
-                    </th>
                     <th nowrap width="160">
                         @lang('cms.field.status_id')
                     </th>
@@ -36,13 +33,6 @@
                         @include('cms::layouts.includes.form.filter.input', [
                            'placeholder' => 'ФИО, телефон или e-mail',
                            'attribute' => 'client',
-                       ])
-                    </th>
-                    <th class="field">
-                        @include('cms::layouts.includes.form.filter.dropdown', [
-                           'placeholder' => __('cms.all'),
-                           'attribute' => 'city_id',
-                           'options' => $data['cities'],
                        ])
                     </th>
                     <th class="field">
@@ -78,13 +68,6 @@
 
                                 <div class="text--detail">
                                     {{ $model->client_phone }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="text--label">
-                                    <a href="?city_id={{ $model->city_id }}">
-                                        {{ $model->city->name }}
-                                    </a>
                                 </div>
                             </td>
                             <td>

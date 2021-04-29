@@ -26,7 +26,6 @@ class UploadsController extends Controller
             'path' => 'nullable',
         ]);
 
-        /** @var \Domain\CMS\Models\Upload $upload */
         $upload = Upload::fromRequestFile($request->file('upload'), $request->get('path', 'attachments'));
 
         return response()->json([

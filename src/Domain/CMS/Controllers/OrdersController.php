@@ -2,7 +2,6 @@
 
 namespace Domain\CMS\Controllers;
 
-use Domain\Shop\Models\City;
 use Illuminate\View\View;
 use Domain\Shop\Models\Order;
 use Domain\Shop\Models\OrderStatus;
@@ -19,7 +18,7 @@ class OrdersController extends Controller
     /**
      * @var string
      */
-    protected $section = self::SECTION_MAIN;
+    protected $section = SECTION_MAIN;
 
     /**
      * @var string
@@ -36,7 +35,6 @@ class OrdersController extends Controller
      */
     public function __construct()
     {
-        $this->with('cities', City::query()->oldest('name')->pluck('name', 'id')->toArray());
         $this->with('statuses', OrderStatus::query()->oldest()->pluck('name', 'id')->toArray());
     }
 
@@ -71,8 +69,8 @@ class OrdersController extends Controller
     public function complete(int $id): RedirectResponse
     {
         /** @var \Domain\Shop\Models\Order $model */
-        $model = Order::query()->where(['id' => $id, 'status_id' => OrderStatus::CREATED])->firstOrFail();
-        $model->changeStatus(OrderStatus::COMPLETED);
+        $model = Order::query()->where(['id' => $id, 'status_id' => ORDER_STATUS_CREATED])->firstOrFail();
+        $model->changeStatus(ORDER_STATUS_COMPLETED);
 
         return $this->redirectSuccess('show', ['order' => $id]);
     }
@@ -84,8 +82,8 @@ class OrdersController extends Controller
     public function cancel(int $id): RedirectResponse
     {
         /** @var \Domain\Shop\Models\Order $model */
-        $model = Order::query()->where(['id' => $id, 'status_id' => OrderStatus::CREATED])->firstOrFail();
-        $model->changeStatus(OrderStatus::CANCELED);
+        $model = Order::query()->where(['id' => $id, 'status_id' => ORDER_STATUS_CREATED])->firstOrFail();
+        $model->changeStatus(ORDER_STATUS_CANCELED);
 
         return $this->redirectDanger('show', ['order' => $id]);
     }

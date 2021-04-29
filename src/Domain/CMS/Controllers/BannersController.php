@@ -2,6 +2,7 @@
 
 namespace Domain\CMS\Controllers;
 
+use Domain\Shop\Models\BannerPosition;
 use Illuminate\View\View;
 use Domain\Shop\Models\Banner;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +18,7 @@ class BannersController extends Controller
     /**
      * @var string
      */
-    protected $section = self::SECTION_MAIN;
+    protected $section = SECTION_MAIN;
 
     /**
      * @var string
@@ -28,6 +29,14 @@ class BannersController extends Controller
      * @var bool
      */
     protected $sortable = true;
+
+    /**
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->with('positions', BannerPosition::query()->pluck('name', 'id')->toArray());
+    }
 
     /**
      * @param int $id

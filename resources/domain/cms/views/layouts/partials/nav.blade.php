@@ -24,22 +24,9 @@
                         @lang('cms.model.banners')
                     </a>
                 </li>
-                <li {{ isActive($model == 'stores') }}>
-                    <a href="{{ route('cms::stores.index') }}">
-                        @lang('cms.model.stores')
-                    </a>
-                </li>
                 <li {{ isActive($model == 'pages') }}>
                     <a href="{{ route('cms::pages.index') }}">
                         @lang('cms.model.pages')
-                    </a>
-                </li>
-                <li class="is-divider">
-                    <span>&middot;</span>
-                </li>
-                <li {{ isActive($model == 'ambassadors') }}>
-                    <a href="{{ route('cms::ambassadors.index') }}">
-                        @lang('cms.model.ambassadors')
                     </a>
                 </li>
             </ul>
@@ -51,45 +38,9 @@
                         @lang('cms.model.categories')
                     </a>
                 </li>
-                <li {{ isActive($model == 'aims') }}>
-                    <a href="{{ route('cms::aims.index') }}">
-                        @lang('cms.model.aims')
-                    </a>
-                </li>
-                <li {{ isActive($model == 'aim_sections') }}>
-                    <a href="{{ route('cms::aim_sections.index') }}">
-                        @lang('cms.model.aim_sections')
-                    </a>
-                </li>
-                <li class="is-divider">
-                    <span>&middot;</span>
-                </li>
                 <li {{ isActive($model == 'brands') }}>
                     <a href="{{ route('cms::brands.index') }}">
                         @lang('cms.model.brands')
-                    </a>
-                </li>
-                <li {{ isActive($model == 'badges') }}>
-                    <a href="{{ route('cms::badges.index') }}">
-                        @lang('cms.model.badges')
-                    </a>
-                </li>
-                <li {{ isActive($model == 'packing') }}>
-                    <a href="{{ route('cms::packing.index') }}">
-                        @lang('cms.model.packing')
-                    </a>
-                </li>
-                <li {{ isActive($model == 'tastes') }}>
-                    <a href="{{ route('cms::tastes.index') }}">
-                        @lang('cms.model.tastes')
-                    </a>
-                </li>
-                <li class="is-divider">
-                    <span>&middot;</span>
-                </li>
-                <li {{ isActive($model == 'cities') }}>
-                    <a href="{{ route('cms::cities.index') }}">
-                        @lang('cms.model.cities')
                     </a>
                 </li>
             </ul>

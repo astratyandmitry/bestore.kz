@@ -4,7 +4,7 @@
     <div class="container">
         <div class="brand">
             <div class="logotype">
-                Genetic<span>Lab</span>
+                URA<span>Shop</span>
             </div>
         </div>
 

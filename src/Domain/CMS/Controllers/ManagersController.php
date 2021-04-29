@@ -21,7 +21,7 @@ class ManagersController extends Controller
     /**
      * @var string
      */
-    protected $section = self::SECTION_SYSTEM;
+    protected $section = SECTION_SYSTEM;
 
     /**
      * @var string

@@ -33,7 +33,6 @@ class CRUDController extends Controller
         return response()->json(['status' => $request->all()]);
     }
 
-
     /**
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response

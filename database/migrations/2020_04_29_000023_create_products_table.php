@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 120)->unique();
             $table->string('image', 500);
             $table->text('about')->nullable();
+            $table->unsignedInteger('quantity')->default(0)->index();
             $table->unsignedInteger('price')->index();
             $table->unsignedInteger('price_sale')->index()->nullable();
             $table->string('meta_description', 1000)->nullable();

@@ -17,7 +17,7 @@ class BrandsController extends Controller
     /**
      * @var string
      */
-    protected $section = self::SECTION_DICTIONARY;
+    protected $section = SECTION_DICTIONARY;
 
     /**
      * @var string
