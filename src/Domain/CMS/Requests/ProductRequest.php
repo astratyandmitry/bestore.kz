@@ -24,6 +24,7 @@ class ProductRequest extends Request
                 'price_sale' => 'nullable|integer',
                 'quantity' => 'required|integer|min:0',
                 'about' => 'required',
+                'badges' => 'nullable',
                 'active' => 'boolean',
             ]);
     }

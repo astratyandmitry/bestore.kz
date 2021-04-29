@@ -31,6 +31,14 @@
   </div>
 
   <div class="section">
+    @include('cms::layouts.includes.form.field.input', [
+      'label' => 'Ярлыки',
+      'helper' => '— разделять через запятую',
+      'attribute' => 'badges',
+  ])
+  </div>
+
+  <div class="section">
     <div class="form-grid form-grid--3">
       @include('cms::layouts.includes.form.field.input', [
           'label' => __('cms.field.price'),
