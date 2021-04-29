@@ -78,12 +78,11 @@
         <section class="block block--offset block--transparent">
           <div class="table is-card">
             <table>
-              @php $model->load(['items', 'items.stock']) @endphp
+              @php $model->load(['items', 'items.product']) @endphp
               @foreach($model->items as $item)
                 <tr>
                   <td>
-                    {{ $item->stock->product->name }} <br>
-                    {{ $item->stock->packing->name }}, {{ $item->stock->taste->name }}
+                    {{ $item->product->name }}
                   </td>
                   <td width="60" style="text-align: right">
                     {{ $item->count }} шт.

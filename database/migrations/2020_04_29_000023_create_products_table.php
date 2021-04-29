@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('hru', 80)->unique()->index();
             $table->string('name', 120)->unique();
             $table->string('image', 500);
+            $table->double('rating', 10, 2)->default(0.0);
             $table->text('about')->nullable();
             $table->unsignedInteger('quantity')->default(0)->index();
             $table->unsignedInteger('price')->index();

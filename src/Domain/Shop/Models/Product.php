@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $name
  * @property string $image
  * @property string|null $about
+ * @property double $rating
  * @property integer $quantity
  * @property integer $price
  * @property integer|null $price_sale
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property \Domain\Shop\Models\Category $category
  * @property \Domain\Shop\Models\Brand $brand
+ * @property \Domain\Shop\Models\Review[]|\Illuminate\Database\Eloquent\Collection $reviews
  *
  * @method static Builder filter(?CatalogRequest $request = null)
  */
@@ -74,6 +76,14 @@ class Product extends Model implements HasUrl
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function related(): HasMany
     {
         return $this->hasMany(Product::class, 'category_id', 'category_id')
@@ -90,6 +100,7 @@ class Product extends Model implements HasUrl
     }
 
     /**B
+     *
      * @param \Illuminate\Database\Eloquent\Builder $builder
      * @param \Domain\Shop\Requests\CatalogRequest|null $request
      * @return \Illuminate\Database\Eloquent\Builder
@@ -101,7 +112,7 @@ class Product extends Model implements HasUrl
         }
 
         $builder->when($request->sort, function (Builder $builder) use ($request): Builder {
-            list($column, $type) = explode('.', $request->sort, 2);
+            [$column, $type] = explode('.', $request->sort, 2);
 
             $realColumns = [
                 'date' => 'created_at',

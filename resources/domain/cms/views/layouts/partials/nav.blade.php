@@ -11,6 +11,11 @@
             @lang('cms.model.orders')
           </a>
         </li>
+        <li {{ isActive($model == 'reviews') }}>
+          <a href="{{ route('cms::reviews.index') }}">
+            @lang('cms.model.reviews')
+          </a>
+        </li>
         <li {{ isActive($model == 'products') }}>
           <a href="{{ route('cms::products.index') }}">
             @lang('cms.model.products')

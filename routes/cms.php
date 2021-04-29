@@ -29,6 +29,9 @@ Route::middleware('cms.signed')->group(function (): void {
     Route::post('/orders/{id}/complete', 'OrdersController@complete')->name('orders.complete');
     Route::post('/orders/{id}/cancel', 'OrdersController@cancel')->name('orders.cancel');
 
+    // Reviews
+    Route::resource('reviews', 'ReviewsController')->only(['index', 'show', 'destroy']);
+
     // Resources
     Route::resources([
         'products' => 'ProductsController',
