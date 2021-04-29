@@ -22,34 +22,6 @@ class Page extends Model implements HasUrl
 {
     use HasActiveState;
 
-    const HOME = 'home';
-
-    const STORES = 'stores';
-
-    const CATALOG = 'catalog';
-
-    const SEARCH = 'search';
-
-    const BASKET = 'basket';
-
-    const AUTH_LOGIN = 'auth.login';
-
-    const AUTH_REGISTER = 'auth.register';
-
-    const AUTH_PASSWORD_RESET = 'auth.password.reset';
-
-    const AUTH_PASSWORD_RECOVERY = 'auth.password.recovery';
-
-    const ACCOUNT_ORDERS_CURRENT = 'account.orders.current';
-
-    const ACCOUNT_ORDERS_HISTORY = 'account.orders.history';
-
-    const ACCOUNT_ORDER = 'account.order';
-
-    const ACCOUNT_SETTINGS_PERSONAL = 'account.settings.personal';
-
-    const ACCOUNT_SETTINGS_SECURITY = 'account.settings.security';
-
     /**
      * @var array
      */
@@ -83,16 +55,16 @@ class Page extends Model implements HasUrl
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $builder
-     * @param bool $applyFilter
+     * @param bool $applyOrder
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function scopeFilter(Builder $builder, bool $applyFilter = true): Builder
+    public static function scopeFilter(Builder $builder, bool $applyOrder = true): Builder
     {
         $builder->when(request('info'), function (Builder $builder): Builder {
             return $builder
-                ->where('name', 'LIKE', '%'.request('info').'%')
-                ->orWhere('title', 'LIKE', '%'.request('info').'%')
-                ->orWhere('hru', 'LIKE', '%'.request('info').'%');
+                ->where('name', 'LIKE', '%'.request()->get('info').'%')
+                ->orWhere('title', 'LIKE', '%'.request()->get('info').'%')
+                ->orWhere('hru', 'LIKE', '%'.request()->get('info').'%');
         });
 
         return parent::scopeFilter($builder);

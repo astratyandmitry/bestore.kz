@@ -99,7 +99,6 @@ class OrdersRepository
             'product_id' => $basket->product_id,
             'packing_id' => $basket->packing_id,
             'taste_id' => $basket->taste_id,
-            'city_id' => $basket->city_id,
             'count' => $basket->count,
             'price' => $basket->stock->price(),
             'total' => $basket->count * $basket->stock->price(),

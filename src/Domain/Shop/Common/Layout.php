@@ -2,12 +2,9 @@
 
 namespace Domain\Shop\Common;
 
-use Domain\Shop\Models\City;
 use Domain\Shop\Models\Model;
 use Domain\Shop\Models\Category;
-use Domain\Shop\Models\AimSection;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Session;
 
 /**
  * @version 1.0.1
@@ -52,11 +49,6 @@ class Layout
     public $breadcrumbs = [];
 
     /**
-     * @var bool
-     */
-    protected $forCity = false;
-
-    /**
      * @return void
      */
     public function __construct()
@@ -69,8 +61,6 @@ class Layout
      */
     private function setupData(): void
     {
-        $this->data['cities'] = City::query()->get();
-        $this->data['aims'] = AimSection::query()->get();
         $this->data['categories'] = Category::query()->whereNull('parent_id')->with('children')->get();
     }
 
@@ -81,10 +71,6 @@ class Layout
     public function setTitle(?string $title = null): Layout
     {
         $this->title = $title;
-
-        if ($this->forCity === true) {
-            $this->title .= ' в '.$this->getCity()->name.' купить';
-        }
 
         return $this;
     }
@@ -102,30 +88,6 @@ class Layout
         }
 
         return $this;
-    }
-
-    /**
-     * @return \Domain\Shop\Models\City
-     */
-    public function getCity(): City
-    {
-        return $this->getCities()->where('id', Session::get('shop.city_id'))->first();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection|\Domain\Shop\Models\City[]
-     */
-    public function getCities(): Collection
-    {
-        return $this->data['cities'];
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection|\Domain\Shop\Models\AimSection[]
-     */
-    public function getAims(): Collection
-    {
-        return $this->data['aims'];
     }
 
     /**
@@ -195,15 +157,5 @@ class Layout
     public function hasBreadcrumbs(): bool
     {
         return count($this->breadcrumbs) > 0;
-    }
-
-    /**
-     * @return \Domain\Shop\Common\Layout
-     */
-    public function forCity(): Layout
-    {
-        $this->forCity = true;
-
-        return $this;
     }
 }

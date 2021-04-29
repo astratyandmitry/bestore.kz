@@ -3,6 +3,7 @@
 namespace Domain\CMS\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectIfUnauthenticated
@@ -12,7 +13,7 @@ class RedirectIfUnauthenticated
      * @param \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if (Auth::guard('cms')->guest()) {
             return redirect()->route('cms::login');

@@ -8,7 +8,5 @@ namespace Domain\Shop\Models;
  */
 class VerificationType extends Model
 {
-    const ACTIVATION = 1;
-
-    const PASSWORD_RECOVERY = 2;
+    //
 }

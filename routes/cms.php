@@ -44,6 +44,6 @@ Route::middleware('cms.signed')->group(function (): void {
         'tastes' => 'TastesController',
         'cities' => 'CitiesController',
         'managers' => 'ManagersController',
-        'slides' => 'SlidesController',
+        'banners' => 'BannersController',
     ]);
 });

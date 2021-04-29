@@ -5,17 +5,19 @@ namespace Domain\Shop\Models;
 use Domain\Shop\Models\Traits\HasActiveState;
 use Domain\Shop\Models\Traits\HasSorting;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property string $hru
- * @property string $name
- * @property string|null $logotype
- * @property string|null $meta_description
- * @property string|null $meta_keywords
+ * @property integer $position_id
+ * @property string $title
+ * @property string $about
+ * @property string $image
+ *
+ * @property \Domain\Shop\Models\BannerPosition $position
  */
-class Brand extends Model
+class Banner extends Model
 {
-    use HasSorting, HasActiveState;
+    use HasActiveState, HasSorting;
 
     /**
      * @var array
@@ -25,23 +27,10 @@ class Brand extends Model
     /**
      * @var array
      */
-    protected $hidden = [
-        'logotype',
-        'meta_description',
-        'meta_keywords',
-        'sort',
-        'active',
-        'created_at',
-        'updated_at',
+    protected $casts = [
+        'position_id' => 'integer',
+        'active' => 'boolean',
     ];
-
-    /**
-     * @return string
-     */
-    public function getRouteKeyName(): string
-    {
-        return 'hru';
-    }
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $builder
@@ -53,9 +42,17 @@ class Brand extends Model
         $builder->when(request('info'), function (Builder $builder): Builder {
             return $builder
                 ->where('name', 'LIKE', '%'.request()->get('info').'%')
-                ->orWhere('hru', 'LIKE', '%'.request()->get('info').'%');
+                ->orWhere('about', 'LIKE', '%'.request()->get('info').'%');
         });
 
         return parent::scopeFilter($builder, false);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function position(): BelongsTo
+    {
+        return $this->belongsTo(BannerPosition::class);
     }
 }

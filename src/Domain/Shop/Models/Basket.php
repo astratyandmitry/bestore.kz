@@ -8,14 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property integer|null $user_id
  * @property string|null $session_key
- * @property integer $city_id
  * @property integer $product_id
- * @property integer $packing_id
- * @property integer $taste_id
  * @property integer $count
  * @property integer $total
  *
- * @property \Domain\Shop\Models\ProductStock $stock
+ * @property \Domain\Shop\Models\Product $product
  */
 class Basket extends Model
 {
@@ -33,10 +30,7 @@ class Basket extends Model
      */
     protected $casts = [
         'user_id' => 'integer',
-        'city_id' => 'integer',
         'product_id' => 'integer',
-        'packing_id' => 'integer',
-        'taste_id' => 'integer',
         'count' => 'integer',
     ];
 
@@ -46,10 +40,7 @@ class Basket extends Model
     protected $hidden = [
         'user_id',
         'session_key',
-        'city_id',
         'product_id',
-        'taste_id',
-        'packing_id',
         'created_at',
         'updated_at',
     ];
@@ -65,16 +56,14 @@ class Basket extends Model
      */
     public function getTotalAttribute(): int
     {
-        return $this->stock->price() * $this->count;
+        return $this->product->price() * $this->count;
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function stock(): BelongsTo
+    public function product(): BelongsTo
     {
-        $relationColumns = ['city_id', 'product_id', 'packing_id', 'taste_id'];
-
-        return $this->belongsTo(ProductStock::class, $relationColumns, $relationColumns);
+        return $this->belongsTo(Product::class);
     }
 }

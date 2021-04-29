@@ -8,16 +8,12 @@ namespace Domain\CMS\Models;
  */
 class ManagerRole extends Model
 {
-    const ADMIN = 1;
-
-    const MANAGER = 2;
-
     /**
      * @return bool
      */
     public function admin(): bool
     {
-        return $this->id === self::ADMIN;
+        return $this->id === MANAGER_ROLE_ADMIN;
     }
 
     /**
@@ -25,6 +21,6 @@ class ManagerRole extends Model
      */
     public function manager(): bool
     {
-        return $this->id === self::MANAGER;
+        return $this->id === MANAGER_ROLE_MANAGER;
     }
 }

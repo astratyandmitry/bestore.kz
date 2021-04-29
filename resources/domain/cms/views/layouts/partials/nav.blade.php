@@ -19,9 +19,9 @@
                 <li class="is-divider">
                     <span>&middot;</span>
                 </li>
-                <li {{ isActive($model == 'slides') }}>
-                    <a href="{{ route('cms::slides.index') }}">
-                        @lang('cms.model.slides')
+                <li {{ isActive($model == 'banners') }}>
+                    <a href="{{ route('cms::banners.index') }}">
+                        @lang('cms.model.banners')
                     </a>
                 </li>
                 <li {{ isActive($model == 'stores') }}>

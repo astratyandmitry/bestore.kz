@@ -5,7 +5,7 @@ namespace Domain\Shop\Controllers;
 use Domain\Shop\Repositories\AmbassadorsRepository;
 use Domain\Shop\Repositories\CatalogRepository;
 use Domain\Shop\Repositories\CategoriesRepository;
-use Domain\Shop\Repositories\SlidesRepository;
+use Domain\Shop\Repositories\BannersRepository;
 use Illuminate\View\View;
 use Domain\Shop\Models\Page;
 
@@ -19,14 +19,14 @@ class HomeController extends Controller
     /**
      * @param \Domain\Shop\Repositories\CategoriesRepository $categoryRepository
      * @param \Domain\Shop\Repositories\CatalogRepository $catalogRepository
-     * @param \Domain\Shop\Repositories\SlidesRepository $slidesRepository
+     * @param \Domain\Shop\Repositories\BannersRepository $slidesRepository
      * @param \Domain\Shop\Repositories\AmbassadorsRepository $ambassadorsRepository
      * @return \Illuminate\View\View
      */
     public function __invoke(
         CategoriesRepository $categoryRepository,
         CatalogRepository $catalogRepository,
-        SlidesRepository $slidesRepository,
+        BannersRepository $slidesRepository,
         AmbassadorsRepository $ambassadorsRepository
     ): View {
         $this->setup(Page::HOME);
@@ -37,7 +37,7 @@ class HomeController extends Controller
             'categories' => $categoryRepository->parents(),
             'popularProducts' => $catalogRepository->popular(),
             'latestProducts' => $catalogRepository->latest(),
-            'slides' => $slidesRepository->all(),
+            'banners' => $slidesRepository->all(),
             'ambassadors' => $ambassadorsRepository->all(),
         ]);
     }

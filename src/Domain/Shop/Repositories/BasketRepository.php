@@ -46,7 +46,6 @@ class BasketRepository
     {
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
-            ->where('city_id', Session::get('shop.city_id'))
             ->where('count', '>', 0)
             ->whereHas('stock')
             ->select(DB::raw("concat(product_id, '.', packing_id, '.', taste_id) as k, count"))
@@ -61,7 +60,6 @@ class BasketRepository
         return Basket::query()
             ->with(['stock', 'stock.product', 'stock.taste', 'stock.packing'])
             ->where($this->owner_column, $this->owner_value)
-            ->where('city_id', Session::get('shop.city_id'))
             ->where('count', '>', 0)
             ->whereHas('stock')
             ->get();
@@ -75,7 +73,6 @@ class BasketRepository
     {
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
-            ->where('city_id', Session::get('shop.city_id'))
             ->where('id', $id)
             ->firstOrFail();
     }
@@ -88,7 +85,6 @@ class BasketRepository
     {
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
-            ->where('city_id', Session::get('shop.city_id'))
             ->where('id', $id)
             ->delete();
     }
@@ -101,7 +97,6 @@ class BasketRepository
     {
         return Basket::query()->firstOrCreate([
             $this->owner_column => $this->owner_value,
-            'city_id' => Session::get('shop.city_id'),
             'product_id' => $stock->product_id,
             'packing_id' => $stock->packing_id,
             'taste_id' => $stock->taste_id,
@@ -117,7 +112,6 @@ class BasketRepository
     {
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
-            ->where('city_id', Session::get('shop.city_id'))
             ->where('id', $id)
             ->update(['count' => $count]);
     }
@@ -129,7 +123,6 @@ class BasketRepository
     {
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
-            ->where('city_id', Session::get('shop.city_id'))
             ->delete();
     }
 
@@ -141,7 +134,6 @@ class BasketRepository
     {
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
-            ->where('city_id', Session::get('shop.city_id'))
             ->update([
                 'session_key' => null,
                 'user_id' => $user_id,

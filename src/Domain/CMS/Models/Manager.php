@@ -7,12 +7,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property integer $role_id
- * @property integer|null $city_id
  * @property string $email
  * @property string $password
  *
  * @property \Domain\CMS\Models\ManagerRole $role
- * @property \Domain\Shop\Models\City $city
  */
 class Manager extends Model implements
     \Illuminate\Contracts\Auth\Authenticatable,
@@ -36,7 +34,6 @@ class Manager extends Model implements
      */
     protected $casts = [
         'role_id' => 'integer',
-        'city_id' => 'integer',
     ];
 
     /**
@@ -45,13 +42,5 @@ class Manager extends Model implements
     public function role(): BelongsTo
     {
         return $this->belongsTo(ManagerRole::class, 'role_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function city(): BelongsTo
-    {
-        return $this->belongsTo(City::class);
     }
 }

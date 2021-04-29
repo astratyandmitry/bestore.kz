@@ -39,11 +39,6 @@ class ProductsController extends Controller
         $this->with('categories', Category::options());
         $this->with('brands', Brand::query()->pluck('name', 'id')->toArray());
         $this->with('badges', Badge::query()->pluck('name', 'id')->toArray());
-        $this->with('config', [
-            'packing' => Packing::query()->oldest('name')->get(['name', 'id'])->toArray(),
-            'tastes' => Taste::query()->oldest('name')->get(['name', 'id'])->toArray(),
-            'cities' => City::query()->oldest('name')->get(['name', 'id'])->toArray(),
-        ]);
     }
 
     /**

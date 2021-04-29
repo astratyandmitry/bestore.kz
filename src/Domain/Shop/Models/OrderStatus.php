@@ -9,25 +9,19 @@ namespace Domain\Shop\Models;
  */
 class OrderStatus extends Model
 {
-    const CREATED = 1;
-
-    const COMPLETED = 2;
-
-    const CANCELED = 3;
-
     /**
      * @return string
      */
     public function getCssColorAttribute(): string
     {
-        switch ($this->id) {
-            case self::CREATED:
+        switch ($this->key) {
+            case ORDER_STATUS_CREATED:
                 return 'info';
                 break;
-            case self::COMPLETED:
+            case ORDER_STATUS_COMPLETED:
                 return 'success';
                 break;
-            case self::CANCELED:
+            case ORDER_STATUS_CANCELED:
                 return 'danger';
                 break;
             default:

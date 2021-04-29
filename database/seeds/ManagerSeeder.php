@@ -12,26 +12,17 @@ class ManagerSeeder extends Seeder
     protected $data = [
         [
             'role_id' => ManagerRole::ADMIN,
-            'city_id' => null,
             'email' => 'astratyandmitry@gmail.com',
             'password' => 'aveego',
         ],
         [
             'role_id' => ManagerRole::ADMIN,
-            'city_id' => null,
-            'email' => 'admin@geneticlab.com',
+            'email' => 'admin@ura-shop.kz',
             'password' => 'admin',
         ],
         [
-            'role_id' => ManagerRole::ADMIN,
-            'city_id' => 1,
-            'email' => 'manager.almaty@geneticlab.com',
-            'password' => 'manager',
-        ],
-        [
-            'role_id' => ManagerRole::ADMIN,
-            'city_id' => 2,
-            'email' => 'manager.nur-sultan@geneticlab.com',
+            'role_id' => ManagerRole::MANAGER,
+            'email' => 'manager@ura-shop.kz',
             'password' => 'manager',
         ],
     ];

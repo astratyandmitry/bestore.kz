@@ -1,4 +1,4 @@
-@php /** @var \Domain\Shop\Models\Slide[]|\Illuminate\Database\Eloquent\Collection $slides */ @endphp
+@php /** @var \Domain\Shop\Models\Banner[]|\Illuminate\Database\Eloquent\Collection $slides */ @endphp
 
 @if ($slides->isNotEmpty())
     <div class="slider">

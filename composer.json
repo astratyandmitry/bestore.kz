@@ -48,8 +48,9 @@
     },
     "autoload-dev": {
         "files": [
-            "src/Domain/CMS/helpers.php",
-            "src/Domain/Shop/helpers.php",
+            "src/Domain/CMS/functions.php",
+            "src/Domain/CMS/constraints.php",
+            "src/Domain/Shop/functions.php",
             "src/Domain/Shop/constraints.php"
         ],
         "psr-4": {

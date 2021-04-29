@@ -10,7 +10,6 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property string $uuid
  * @property integer $status_id
- * @property integer $city_id
  * @property integer|null $user_id
  * @property string $client_name
  * @property string $client_phone
@@ -21,7 +20,6 @@ use Ramsey\Uuid\Uuid;
  * @property string|null $comment
  *
  * @property \Domain\Shop\Models\OrderStatus $status
- * @property \Domain\Shop\Models\City $city
  * @property \Domain\Shop\Models\User $user
  * @property \Domain\Shop\Models\OrderItem[] $items
  */
@@ -43,7 +41,6 @@ class Order extends Model
      */
     protected $casts = [
         'status_id' => 'integer',
-        'city_id' => 'integer',
         'user_id' => 'integer',
         'delivery_price' => 'integer',
     ];
@@ -71,14 +68,6 @@ class Order extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function city(): BelongsTo
-    {
-        return $this->belongsTo(City::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -94,16 +83,16 @@ class Order extends Model
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder $builder
-     * @param bool $applyFilter
+     * @param bool $applyOrder
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function scopeFilter(Builder $builder, bool $applyFilter = true): Builder
+    public static function scopeFilter(Builder $builder, bool $applyOrder = true): Builder
     {
         $builder->when(request('client'), function (Builder $builder): Builder {
             return $builder
-                ->where('client_name', 'LIKE', '%'.request('client').'%')
-                ->orWhere('client_phone', 'LIKE', '%'.request('client').'%')
-                ->orWhere('client_email', 'LIKE', '%'.request('client').'%');
+                ->where('client_name', 'LIKE', '%'.request()->get('client').'%')
+                ->orWhere('client_phone', 'LIKE', '%'.request()->get('client').'%')
+                ->orWhere('client_email', 'LIKE', '%'.request()->get('client').'%');
         });
 
         $builder->when(request('city_id'), function (Builder $builder): Builder {
@@ -132,7 +121,7 @@ class Order extends Model
      */
     public function current(): bool
     {
-        return $this->status_id === OrderStatus::CREATED;
+        return $this->status_id === ORDER_STATUS_CREATED;
     }
 
     /**

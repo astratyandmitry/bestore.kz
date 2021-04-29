@@ -15,11 +15,6 @@ class PageSystemSeeder extends Seeder
             'hru' => 'home',
         ],
         [
-            'name' => 'Магазины',
-            'title' => 'Наши магазины',
-            'hru' => 'stores',
-        ],
-        [
             'name' => 'Каталог',
             'title' => 'Каталог товаров',
             'hru' => 'catalog',
@@ -91,7 +86,7 @@ class PageSystemSeeder extends Seeder
         foreach ($this->data as $data) {
             $data['active'] = true;
             $data['system'] = true;
-            $data['content'] = 'empty';
+            $data['content'] = null;
 
             Page::query()->create($data);
         }
