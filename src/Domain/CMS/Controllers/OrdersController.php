@@ -1,0 +1,92 @@
+<?php
+
+namespace Domain\CMS\Controllers;
+
+use Domain\Shop\Models\City;
+use Illuminate\View\View;
+use Domain\Shop\Models\Order;
+use Domain\Shop\Models\OrderStatus;
+use Illuminate\Http\RedirectResponse;
+use Domain\CMS\Requests\OrderRequest as Request;
+
+/**
+ * @version   1.0.1
+ * @author    Astratyan Dmitry <astratyandmitry@gmail.com>
+ * @copyright 2018, ArmenianBros. <i@armenianbros.com>
+ */
+class OrdersController extends Controller
+{
+    /**
+     * @var string
+     */
+    protected $section = self::SECTION_MAIN;
+
+    /**
+     * @var string
+     */
+    protected $model = 'orders';
+
+    /**
+     * @var bool
+     */
+    protected $addable = false;
+
+    /**
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->with('cities', City::query()->oldest('name')->pluck('name', 'id')->toArray());
+        $this->with('statuses', OrderStatus::query()->oldest()->pluck('name', 'id')->toArray());
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function show(int $id): View
+    {
+        $model = Order::query()->findOrFail($id);
+
+        return $this->view([
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function index(): View
+    {
+        return $this->view([
+            'models' => Order::filter()->paginate($this->paginationSize()),
+        ]);
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function complete(int $id): RedirectResponse
+    {
+        /** @var \Domain\Shop\Models\Order $model */
+        $model = Order::query()->where(['id' => $id, 'status_id' => OrderStatus::CREATED])->firstOrFail();
+        $model->changeStatus(OrderStatus::COMPLETED);
+
+        return $this->redirectSuccess('show', ['order' => $id]);
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function cancel(int $id): RedirectResponse
+    {
+        /** @var \Domain\Shop\Models\Order $model */
+        $model = Order::query()->where(['id' => $id, 'status_id' => OrderStatus::CREATED])->firstOrFail();
+        $model->changeStatus(OrderStatus::CANCELED);
+
+        return $this->redirectDanger('show', ['order' => $id]);
+    }
+}

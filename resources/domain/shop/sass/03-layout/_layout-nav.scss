@@ -1,0 +1,114 @@
+.nav {
+  background: $color-white;
+  border-bottom: 1px solid whitesmoke;
+  padding: .5rem 0;
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @include mobile() {
+    .section--menu {
+      display: none;
+    }
+  }
+
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+
+    .list__item {
+      display: inline-block;
+      margin-right: 1.250rem;
+      position: relative;
+
+      @include mobile() {
+        margin-right: 1rem;
+      }
+
+      &.list__item--dropdown:hover {
+        .dropdown {
+          display: block;
+        }
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      .list__link {
+        color: $color-gray;
+        border-bottom: none;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+
+        @include mobile() {
+          font-size: 13px;
+        }
+
+        &.list__link--icon {
+          .list__icon {
+            margin-right: 4px;
+            width: 16px;
+            height: 16px;
+
+            @include mobile() {
+              width: 13px;
+              height: 13px;
+            }
+
+            &.list__icon--dropdown {
+              margin-right: 0;
+              margin-left: 4px;
+            }
+          }
+        }
+
+        &.list__link--primary {
+          font-weight: 600;
+          color: $color-dark;
+        }
+
+        &:hover {
+          color: $color-secondary;
+        }
+      }
+    }
+  }
+
+  .dropdown {
+    padding-top: .5rem;
+    position: absolute;
+    display: none;
+    z-index: 9999;
+
+    .dropdown__list {
+      list-style: none;
+      background: $color-white;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .08), 0 16px 32px rgba(0, 0, 0, .12);
+      padding: .750rem;
+      margin: 0;
+      @include radius-bottom();
+
+      .dropdown__item {
+        margin-bottom: .250rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .dropdown__link {
+          font-size: 14px;
+          border-bottom: none;
+          white-space: nowrap;;
+        }
+      }
+    }
+  }
+}

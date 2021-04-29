@@ -1,0 +1,24 @@
+@php /** @var \Domain\Shop\Models\Order $order */ @endphp
+
+@component('mail::message')
+# Подтверждение заказа №{{ $order->id }}
+
+Данное письмо является подтверждением вашего заказа оформленного на сайте {{ env('APP_NAME') }}
+
+@component('mail::table')
+| Товар                       |  Кол-во                             | Сумма                               |
+|:--------------------------- | -----------------------------------:| -----------------------------------:|
+@foreach($order->items as $item)
+| {{ $item->title()}}      | {{ $item->count }} шт.     | {{ price($item->total) }} ₸   |
+@endforeach
+|  | Итого | **{{ price($order->total) }} ₸** |
+@endcomponent
+
+@component('mail::button', ['url' => $order->detailUrl()])
+    Детали заказа
+@endcomponent
+
+@slot('subcopy')
+    Стоимость доставки по городу {{ $order->city->name }} {{ price($order->delivery_price) }} ₸
+@endslot
+@endcomponent

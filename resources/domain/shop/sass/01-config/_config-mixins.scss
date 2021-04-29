@@ -1,0 +1,206 @@
+// Interactive
+@mixin rotate($deg) {
+  -webkit-transform: rotate($deg);
+  -moz-transform: rotate($deg);
+  -ms-transform: rotate($deg);
+  -o-transform: rotate($deg);
+  transform: rotate($deg);
+}
+
+@mixin skewRight($skew: -9deg) {
+  transform: skew($skew);
+  transform-origin: bottom;
+}
+
+@mixin skewReset() {
+  transform: skew(0);
+  transform-origin: bottom;
+}
+
+@mixin skewLeft($skew: 9deg) {
+  transform: skew($skew);
+  transform-origin: bottom;
+}
+
+@mixin transition($speed: 120ms) {
+  -webkit-transition: all $speed linear;
+  -moz-transition: all $speed linear;
+  -o-transition: all $speed linear;
+  -ms-transition: all $speed linear;
+  transition: all $speed linear;
+}
+
+@mixin transitionSlow() {
+  -webkit-transition: all 400ms linear;
+  -moz-transition: all 400ms linear;
+  -o-transition: all 400ms linear;
+  -ms-transition: all 400ms linear;
+  transition: all 400ms linear;
+}
+
+@mixin nonSelect() {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: 0;
+}
+
+// Visual
+
+@mixin radius($radius: 4px) {
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin radius-top($radius: 4px) {
+  -webkit-border-top-left-radius: $radius;
+  -webkit-border-top-right-radius: $radius;
+  -moz-border-radius-topleft: $radius;
+  -moz-border-radius-topright: $radius;
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+@mixin radius-bottom($radius: 4px) {
+  -webkit-border-bottom-right-radius: $radius;
+  -webkit-border-bottom-left-radius: $radius;
+  -moz-border-radius-bottomright: $radius;
+  -moz-border-radius-bottomleft: $radius;
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+
+@mixin radius-top-left($radius: 4px) {
+  -webkit-border-top-left-radius: $radius;
+  -moz-border-radius-topleft: $radius;
+  border-top-left-radius: $radius;
+}
+
+@mixin radius-top-right($radius: 4px) {
+  -webkit-border-top-right-radius: $radius;
+  -moz-border-radius-topright: $radius;
+  border-top-right-radius: $radius;
+}
+
+@mixin radius-bottom-left($radius: 4px) {
+  -webkit-border-bottom-left-radius: $radius;
+  -moz-border-radius-bottomleft: $radius;
+  border-bottom-left-radius: $radius;
+}
+
+@mixin radius-bottom-right($radius: 4px) {
+  -webkit-border-bottom-right-radius: $radius;
+  -moz-border-radius-bottomright: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+// Adaptive
+
+@mixin not-mobile {
+  @media (min-width: 767px) {
+    @content;
+  }
+
+  @media (max-width: 900px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+
+  @media (max-width: 900px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin mobile_tablet-portrait {
+  @media (max-width: 767px), (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    @content
+  }
+
+  @media (max-width: 900px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin mobile-tablet {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin tablet-portrait {
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    @content
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 481px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+@mixin insetBox {
+  background: $color-dark;
+  background: -moz-radial-gradient(circle, rgba(43, 43, 46, 1) 0%, rgba(29, 29, 31, 1) 100%);
+  background: -webkit-radial-gradient(circle, rgba(43, 43, 46, 1) 0%, rgba(29, 29, 31, 1) 100%);
+  background: radial-gradient(circle, rgba(43, 43, 46, 1) 0%, rgba(29, 29, 31, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2b2b2e", endColorstr="#1d1d1f", GradientType=1);
+  padding: 16px 0;
+  position: relative;
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    z-index: 55;
+    right: 0;
+    left: 0;
+    top: 0;
+
+    box-shadow: 0 8px 8px darken($color-dark, 2%);
+    background: $color-white;
+    height: 16px;
+
+    @include radius-bottom(16px);
+
+    @include mobile() {
+      @include radius-bottom(8px);
+    }
+  }
+
+  &::after {
+    content: "";
+
+    position: absolute;
+    z-index: 55;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    box-shadow: 0 -8px 8px darken($color-dark, 5%);
+    background: $color-white;
+    height: 16px;
+
+    @include radius-top(16px);
+
+    @include mobile() {
+      @include radius-top(8px);
+    }
+  }
+}
+

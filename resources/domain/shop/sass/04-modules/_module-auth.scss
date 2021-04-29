@@ -1,0 +1,69 @@
+.auth {
+  padding: 3rem 0;
+
+  @include mobile() {
+      padding: 0;
+  }
+
+  .auth__form {
+    background: $color-white;
+    padding: 3rem;
+
+    @include mobile() {
+        padding: 2rem;
+    }
+  }
+
+  .form-field {
+    text-align: center;
+
+    a {
+      color: $color-gray-dark;
+      border-bottom-color: #c0c0c0;
+      font-size: 14px;
+      font-weight: 500;
+
+      @include mobile() {
+          font-size: 13px;
+      }
+
+      &:hover {
+        color: $color-secondary;
+        border-bottom-color: transparent;
+      }
+    }
+  }
+
+  .auth__title {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 36px;
+    margin: 0 0 3rem 0;
+    font-style: italic;
+
+    @include mobile() {
+        font-size: 28px;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .auth__action {
+    margin-top: 1.5rem;
+    text-align: center;
+
+    a {
+      color: $color-secondary;
+      border-bottom-color: lighten($color-secondary, 40%);
+      font-weight: 500;
+
+      @include mobile() {
+          font-size: 14px;
+      }
+
+      &:hover {
+        color: $color-dark;
+        border-bottom-color: transparent;
+      }
+    }
+  }
+}

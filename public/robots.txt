@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /shop/*
+Disallow: /cms/*
+Disallow: /auth/*
+Disallow: /change-city/*

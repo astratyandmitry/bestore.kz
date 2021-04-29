@@ -1,0 +1,261 @@
+.items-table {
+  background: $color-white;
+  flex-grow: 1;
+
+  @include mobile() {
+    display: block;
+  }
+
+  .items-table__icon {
+    width: 24px;
+    height: 24px;
+    color: $color-gray;
+    @include transition();
+
+    @include mobile() {
+      position: absolute;
+      right: 1.5rem;
+      bottom: 1.5rem;
+    }
+
+    &:hover {
+      color: $color-secondary;
+      cursor: pointer;
+    }
+  }
+
+  tr {
+    @include mobile() {
+      border-bottom: 1px solid #f0f0f0;
+      display: block;
+      padding: 1.5rem;
+      position: relative;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    td, th {
+      padding: 1.5rem;
+      border-bottom: 1px solid #f0f0f0;
+
+      @include mobile() {
+        display: block;
+        border-bottom: none;
+        padding: 0 !important;
+      }
+    }
+  }
+
+  tbody {
+    width: 100%;
+
+    td {
+      padding: 1rem 1.5rem;
+      background: $color-white;
+
+      @include mobile() {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  thead {
+    width: 100%;
+
+    th {
+      background: #f0f0f0;
+      color: $color-gray-dark;
+      font-family: $font-display;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+    }
+
+    @include mobile() {
+      display: none;
+    }
+  }
+
+  tfoot {
+    width: 100%;
+
+    tr {
+      @include mobile() {
+        background: #f0f0f0;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        th:nth-child(3) {
+          display: none;
+        }
+      }
+
+      th {
+        border-bottom-color: #e0e0e0;
+        font-weight: 500;
+        padding: 1rem 1.5rem;
+
+        span {
+          color: $color-gray-dark;
+        }
+      }
+    }
+
+    tr:last-child {
+      @include mobile() {
+        background: $color-dark;
+      }
+
+      th {
+        background: $color-dark;
+        color: $color-white;
+        border-bottom: none;
+
+        span {
+          color: rgba(255, 255, 255, .80);
+        }
+      }
+    }
+  }
+
+  .count {
+    .count__config {
+      display: flex;
+      align-items: center;
+
+      .count__value {
+        margin: 0 4px;
+      }
+    }
+
+    .count__button {
+      background: $color-white;
+      font-family: $font-display;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 20px;
+      border: 2px solid $color-dark;
+      display: inline-block;
+      padding: 6px 12px;
+      line-height: 1;
+      text-align: center;
+      @include skewRight();
+      @include nonSelect();
+      @include transition();
+
+      &:hover {
+        cursor: pointer;
+        background: $color-dark;
+        color: $color-white;
+      }
+
+      &:disabled {
+        background: whitesmoke;
+        border-color: whitesmoke;
+        color: $color-gray-dark;
+        cursor: not-allowed;
+      }
+    }
+
+    .count__value {
+      font-family: $font-display;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 20px;
+      border: 2px solid $color-dark;
+      display: inline-block;
+      padding: 6px 12px;
+      line-height: 1;
+      width: 48px;
+      text-align: center;
+      @include skewRight();
+      @include nonSelect();
+    }
+
+    .count__label {
+      font-size: 14px;
+      color: $color-gray-dark;
+      margin-top: .5rem;
+    }
+  }
+
+  .price {
+    text-align: right;
+    margin-top: 1rem;
+
+    @include mobile() {
+      text-align: left;
+    }
+
+    .price__value {
+      font-family: $font-display;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      font-size: 20px;
+    }
+
+    .price__prev {
+      font-size: 14px;
+      color: $color-gray-dark;
+      margin-top: .5rem;
+      text-decoration: line-through;
+
+      @include mobile() {
+        margin-top: 0;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .product {
+    display: flex;
+    width: auto;
+    align-items: center;
+    border-bottom: none;
+
+    @include mobile() {
+      margin-bottom: 1.5rem;
+    }
+
+    .product__media {
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      text-align: center;
+      margin-right: 1.5rem;
+
+      .product__image {
+        display: inline-block;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    .product__content {
+      .product__name {
+        font-family: $font-display;
+        font-weight: 900;
+        font-style: italic;
+        text-transform: uppercase;
+        font-size: 20px;
+        line-height: 1;
+
+        @include mobile() {
+          font-weight: 700;
+          font-size: 18px;
+        }
+      }
+
+      .product__detail {
+        font-weight: 500;
+        color: $color-gray;
+        font-size: 14px;
+        margin-top: .5rem;
+      }
+    }
+  }
+}

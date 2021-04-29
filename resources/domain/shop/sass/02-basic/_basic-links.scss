@@ -1,0 +1,40 @@
+a {
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+  color: $color-dark;
+  outline: 0;
+  @include transition();
+
+  &:hover,
+  &:focus {
+    border-bottom-color: transparent;;
+    color: $color-secondary;
+  }
+}
+
+u {
+  text-decoration: none;
+}
+
+.link-w-icon {
+  font-family: $font-display;
+  font-weight: 500;
+  color: $color-secondary;
+  font-size: 14px;
+  border-bottom: none;
+
+  i {
+    font-size: 12px;
+    margin-right: 6px;
+    margin-left: 6px;
+    opacity: .80;
+    @include transition();
+  }
+
+  &:hover {
+    i {
+      margin-left: 12px;
+      margin-right: 0;
+    }
+  }
+}

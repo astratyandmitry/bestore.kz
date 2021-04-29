@@ -1,0 +1,182 @@
+body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  background: whitesmoke;
+
+  &.fixed {
+    overflow: hidden;
+  }
+}
+
+button {
+  outline: none;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+figure {
+  margin: 0 !important;
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+input {
+  outline: none;
+}
+
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+
+main {
+  padding: 3rem 0;
+
+  @include mobile() {
+    padding: 2rem 0;
+  }
+}
+
+.container {
+  max-width: $width;
+  padding: 0 1rem;
+  margin: 0 auto;
+
+  &.container--md {
+    max-width: $width-md;
+  }
+
+  &.container--sm {
+    max-width: $width-sm;
+  }
+}
+
+.app {
+  &.app--header-fixed {
+    padding-top: 150px;
+
+    @include mobile() {
+      padding-top: 64px;
+    }
+
+    @include tablet() {
+      padding-top: 142px;
+    }
+
+    .fixable {
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+.empty {
+  background: $color-dark;
+  padding: 3rem;
+  flex-grow: 1;
+
+  @include mobile-tablet() {
+    padding: 2rem;
+  }
+
+  .empty__title {
+    font-family: $font-display;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    color: $color-white;
+
+    @include mobile() {
+      font-size: 20px;
+    }
+  }
+
+  .empty__message {
+    color: $color-white;
+
+    @include mobile() {
+      font-size: 14px;
+    }
+  }
+
+  .empty__action {
+    a {
+      margin-top: 2rem;
+      background: $color-secondary;
+      padding: 1rem 2rem;
+
+      @include mobile() {
+        margin-top: 1.5rem;
+        padding: .750rem 1rem;
+        font-size: 14px;
+      }
+
+      &:hover {
+        background: $color-white;
+        color: $color-secondary;
+      }
+    }
+  }
+}
+
+.loader {
+  background: rgba(0, 0, 0, .32);
+  position: fixed;
+  display: none;
+  visibility: hidden;
+  z-index: 20;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  @include transition();
+
+  &.loader--active {
+    display: block;
+    visibility: visible;
+  }
+}
+
+.loadable {
+  position: relative;
+  z-index: 10;
+  flex-grow: 1;
+
+  .loadable__loader {
+    background: rgba(0, 0, 0, .32);
+    position: absolute;
+    display: none;
+    visibility: hidden;
+    z-index: 20;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    @include transition();
+
+    &.loadable__loader--active {
+      display: block;
+      visibility: visible;
+    }
+  }
+}

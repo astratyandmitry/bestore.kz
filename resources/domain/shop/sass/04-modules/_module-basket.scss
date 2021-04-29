@@ -1,0 +1,25 @@
+.basket {
+  .checkout {
+    width: 320px;
+    margin-left: 3rem;
+
+    .heading {
+      display: none;
+
+      @include mobile() {
+        display: block;
+      }
+    }
+
+    form {
+      background: $color-white;
+      padding: 1.5rem;
+    }
+
+    @include mobile_tablet-portrait() {
+      width: auto;
+      margin-left: 0;
+      margin-top: 3rem;
+    }
+  }
+}
