@@ -6,16 +6,12 @@
       <div class="swiper-wrapper">
         @foreach($banners as $banner)
           <div class="swiper-slide slide">
-            <div class="slide__image" style="background-image: url({{ $slide->image }})"></div>
+            <div class="slide__image" style="background-image: url({{ $banner->image }})"></div>
             <div class="slide__shadow"></div>
             <div class="container">
               <div class="slide__body">
                 <div class="slide__title">
-                  {{ $slide->title }}
-                </div>
-
-                <div class="slide__about">
-                  {{ $slide->about }}
+                  {{ $banner->title }}
                 </div>
               </div>
             </div>
