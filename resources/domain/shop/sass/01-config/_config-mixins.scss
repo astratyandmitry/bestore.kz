@@ -7,21 +7,6 @@
   transform: rotate($deg);
 }
 
-@mixin skewRight($skew: -9deg) {
-  transform: skew($skew);
-  transform-origin: bottom;
-}
-
-@mixin skewReset() {
-  transform: skew(0);
-  transform-origin: bottom;
-}
-
-@mixin skewLeft($skew: 9deg) {
-  transform: skew($skew);
-  transform-origin: bottom;
-}
-
 @mixin transition($speed: 120ms) {
   -webkit-transition: all $speed linear;
   -moz-transition: all $speed linear;
@@ -162,53 +147,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#650091",endColorstr="#c703c8",GradientType=1);
 }
 
-@mixin insetBox {
-  background: $color-dark;
-  background: -moz-radial-gradient(circle, rgba(43, 43, 46, 1) 0%, rgba(29, 29, 31, 1) 100%);
-  background: -webkit-radial-gradient(circle, rgba(43, 43, 46, 1) 0%, rgba(29, 29, 31, 1) 100%);
-  background: radial-gradient(circle, rgba(43, 43, 46, 1) 0%, rgba(29, 29, 31, 1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2b2b2e", endColorstr="#1d1d1f", GradientType=1);
-  padding: 16px 0;
-  position: relative;
-
-  &::before {
-    content: "";
-
-    position: absolute;
-    z-index: 55;
-    right: 0;
-    left: 0;
-    top: 0;
-
-    box-shadow: 0 8px 8px darken($color-dark, 2%);
-    background: $color-white;
-    height: 16px;
-
-    @include radius-bottom(16px);
-
-    @include mobile() {
-      @include radius-bottom(8px);
-    }
-  }
-
-  &::after {
-    content: "";
-
-    position: absolute;
-    z-index: 55;
-    bottom: 0;
-    right: 0;
-    left: 0;
-
-    box-shadow: 0 -8px 8px darken($color-dark, 5%);
-    background: $color-white;
-    height: 16px;
-
-    @include radius-top(16px);
-
-    @include mobile() {
-      @include radius-top(8px);
-    }
-  }
+@mixin boxShadow {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, .02), 0 16px 32px rgba(0, 0, 0, .04);
 }
 

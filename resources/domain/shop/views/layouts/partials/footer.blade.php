@@ -3,25 +3,73 @@
 <footer class="footer">
   <div class="container">
     <div class="footer__grid">
-      @foreach(['О компании', 'Клиентам', 'Прочее'] as $_section)
-        <div class="section">
-          <div class="section__title">
-            {{ $_section }}
-          </div>
-
-          <div class="section__body">
-            <ul class="menu">
-              @for($i = 1; $i <= rand(3,5); $i++)
-                <li class="menu__item">
-                  <a href="#" class="menu__link">
-                    Элемент навигации {{ $i }}
-                  </a>
-                </li>
-              @endfor
-            </ul>
-          </div>
+      <div class="section">
+        <div class="section__title">
+          О нас
         </div>
-      @endforeach
+
+        <div class="section__body">
+          <ul class="menu">
+            <li class="menu__item">
+              <a href="{{ route('shop::page', 'about') }}" class="menu__link">
+                О компании
+              </a>
+            </li>
+            <li class="menu__item">
+              <a href="{{ route('shop::page', 'contacts') }}" class="menu__link">
+                Контакты
+              </a>
+            </li>
+            <li class="menu__item">
+              <a href="{{ route('shop::page', 'stores') }}" class="menu__link">
+                Адреса магазинов
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section__title">
+          О нас
+        </div>
+
+        <div class="section__body">
+          <ul class="menu">
+            <li class="menu__item">
+              <a href="{{ route('shop::page', 'payment') }}" class="menu__link">
+                Оплата товаров
+              </a>
+            </li>
+            <li class="menu__item">
+              <a href="{{ route('shop::page', 'delivery') }}" class="menu__link">
+                Способы доставки
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section__title">
+          О нас
+        </div>
+
+        <div class="section__body">
+          <ul class="menu">
+            <li class="menu__item">
+              <a href="{{ route('shop::page', 'agreement') }}" class="menu__link">
+                Пользовательское соглашение
+              </a>
+            </li>
+            <li class="menu__item">
+              <a href="{{ route('shop::page', 'rules') }}" class="menu__link">
+                Правила пользования сайтом
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
       <div class="section">
         <div class="section__title">

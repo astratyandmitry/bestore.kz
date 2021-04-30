@@ -26,7 +26,7 @@ class PasswordResetController extends Controller
     {
         abort_if($repository->findPasswordRecoveryByCode($code) === null, 403);
 
-        $this->setup(Page::AUTH_PASSWORD_RESET)
+        $this->setup(PAGE_AUTH_PASSWORD_RESET)
             ->hideBreadcrumbs()
             ->hideTitle();
 

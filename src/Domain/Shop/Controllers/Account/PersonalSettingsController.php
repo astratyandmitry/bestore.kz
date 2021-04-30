@@ -22,7 +22,7 @@ class PersonalSettingsController extends Controller
     public function form(): View
     {
         $this->layout->addBreadcrumb('Личный кабинет', route('shop::account.redirect'));
-        $this->setup(Page::ACCOUNT_SETTINGS_PERSONAL);
+        $this->setup(PAGE_ACCOUNT_SETTINGS_PERSONAL);
 
         return $this->view('account.settings.personal', [
             'entity' => auth('shop')->user(),

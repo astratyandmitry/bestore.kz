@@ -24,7 +24,7 @@ class LoginController extends Controller
      */
     public function form(): View
     {
-        $this->setup(Page::AUTH_LOGIN)
+        $this->setup(PAGE_AUTH_LOGIN)
             ->hideBreadcrumbs()
             ->hideTitle();
 
@@ -44,7 +44,7 @@ class LoginController extends Controller
     ): RedirectResponse {
         /** @var \Domain\Shop\Models\User $user */
         if ($user = $usersRepository->findByEmail($request->email)) {
-            if ($user->activated() && Hash::check($request->email, $user->password)) {
+            if ($user->activated() && Hash::check($request->password, $user->password)) {
                 if (Auth::guard(SHOP_GUARD)->attempt($request->validated())) {
                     $basketRepository->migrateFromGuest($user->id);
 

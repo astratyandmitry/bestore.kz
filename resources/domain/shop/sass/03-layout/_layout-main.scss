@@ -45,10 +45,10 @@ input {
 }
 
 main {
-  padding: 6rem 0;
+  padding: 3rem 0;
 
   @include mobile() {
-    padding: 2rem 0;
+    padding: 1.5rem 0;
   }
 }
 
@@ -67,19 +67,20 @@ main {
 }
 
 .empty {
-  background: $color-dark;
+  @include radius();
+  background: #e0e0e0;
   padding: 3rem;
   flex-grow: 1;
 
   @include mobile-tablet() {
-    padding: 2rem;
+    padding: 1.5rem;
   }
 
   .empty__title {
     font-family: $font-default;
     font-size: 24px;
-    margin-bottom: 1rem;
-    color: $color-white;
+    margin-bottom:.5rem;
+    color: $color-dark;
 
     @include mobile() {
       font-size: 20px;
@@ -87,7 +88,7 @@ main {
   }
 
   .empty__message {
-    color: $color-white;
+    color: $color-dark;
 
     @include mobile() {
       font-size: 14px;
@@ -96,9 +97,9 @@ main {
 
   .empty__action {
     a {
-      margin-top: 2rem;
+      margin-top: 1.5rem;
       background: $color-secondary;
-      padding: 1rem 2rem;
+      padding: .750rem 1.5rem;
 
       @include mobile() {
         margin-top: 1.5rem;
@@ -107,8 +108,8 @@ main {
       }
 
       &:hover {
-        background: $color-white;
-        color: $color-secondary;
+        background: $color-primary;
+        color: $color-white;
       }
     }
   }
@@ -153,6 +154,31 @@ main {
     &.loadable__loader--active {
       display: block;
       visibility: visible;
+    }
+  }
+}
+
+.breadcrumbs {
+  font-size: 14px;
+
+  @include mobile() {
+    display: none;
+  }
+
+  .breadcrumbs__divider {
+    color: #c0c0c0;
+  }
+
+  .breadcrumbs__item {
+    font-weight: 500;
+
+    .breadcrumbs__link {
+      color: $color-gray-dark;
+      font-weight: 400;
+
+      &:hover {
+        color: $color-secondary;
+      }
     }
   }
 }

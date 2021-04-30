@@ -1,6 +1,6 @@
 .footer {
+  background: $color-primary;
   padding: 3rem 0;
-  background: $color-purple;
 
   @include mobile() {
     padding: 1.5rem 0;

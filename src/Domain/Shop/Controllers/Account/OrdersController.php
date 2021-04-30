@@ -21,7 +21,7 @@ class OrdersController extends Controller
     public function current(OrdersRepository $repository): View
     {
         $this->layout->addBreadcrumb('Личный кабинет', route('shop::account.redirect'));
-        $this->setup(Page::ACCOUNT_ORDERS_CURRENT);
+        $this->setup(PAGE_ACCOUNT_ORDERS_CURRENT);
 
         return $this->view('account.orders.list', [
             'orders' => $repository->current(),
@@ -35,7 +35,7 @@ class OrdersController extends Controller
     public function history(OrdersRepository $repository): View
     {
         $this->layout->addBreadcrumb('Личный кабинет', route('shop::account.redirect'));
-        $this->setup(Page::ACCOUNT_ORDERS_HISTORY);
+        $this->setup(PAGE_ACCOUNT_ORDERS_HISTORY);
 
         return $this->view('account.orders.list', [
             'orders' => $repository->history(),
@@ -56,7 +56,7 @@ class OrdersController extends Controller
             ->addBreadcrumb('Личный кабинет', route('shop::account.redirect'))
             ->addBreadcrumb('Заказы', route('shop::account.orders.'.($order->current() ? 'current' : 'history')));
 
-        $this->setup(Page::ACCOUNT_ORDER);
+        $this->setup(PAGE_ACCOUNT_ORDER);
 
         return $this->view('account.orders.show', [
             'order' => $order,

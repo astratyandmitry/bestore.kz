@@ -20,7 +20,7 @@
     }
 
     @include mobile-tablet() {
-      padding: 2rem;
+      padding: 1.5rem;
     }
   }
 
@@ -29,7 +29,7 @@
 
     @include mobile-tablet() {
       margin-left: 0;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
 
     .page-nav__list {
@@ -62,7 +62,7 @@
           display: block;
           color: $color-gray-dark;
           white-space: nowrap;
-          @include radius(2px);
+          @include radius();
 
           @include tablet() {
             font-size: 13px;
@@ -74,13 +74,13 @@
 
           &:hover {
             color: $color-secondary;
-            background: $color-white;
+            background: #f0f0f0;
           }
         }
 
         &.page-nav__item--active {
           .page-nav__link {
-            background: $color-dark;
+            background: $color-primary;
             color: $color-white;
             font-weight: 500;
           }

@@ -22,7 +22,7 @@ class SecuritySettingsController extends Controller
     public function form(): View
     {
         $this->layout->addBreadcrumb('Личный кабинет', route('shop::account.redirect'));
-        $this->setup(Page::ACCOUNT_SETTINGS_SECURITY);
+        $this->setup(PAGE_ACCOUNT_SETTINGS_SECURITY);
 
         return $this->view('account.settings.security');
     }

@@ -1,5 +1,5 @@
 .header {
-  background: $color-purple;
+  background: $color-primary;
   padding: 1rem 0;
 
   .header__mobile {
@@ -152,7 +152,7 @@
             }
 
             &:hover {
-              color: $color-pink;
+              color: $color-secondary;
             }
           }
         }

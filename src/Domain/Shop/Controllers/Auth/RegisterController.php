@@ -23,7 +23,7 @@ class RegisterController extends Controller
      */
     public function form(): View
     {
-        $this->setup(Page::AUTH_REGISTER)
+        $this->setup(PAGE_AUTH_REGISTER)
             ->hideBreadcrumbs()
             ->hideTitle();
 

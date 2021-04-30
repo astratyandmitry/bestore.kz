@@ -5,13 +5,13 @@
 
   .title {
     font-family: $font-default;
-    font-size: 48px;
+    font-size: 40px;
     margin: 0 0 3rem 0;
     line-height: 1;
     font-weight: 700;
 
     @include tablet() {
-      font-size: 40px;
+      font-size: 32px;
     }
 
     @include mobile() {

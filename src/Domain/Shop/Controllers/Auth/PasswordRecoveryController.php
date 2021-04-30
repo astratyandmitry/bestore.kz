@@ -23,7 +23,7 @@ class PasswordRecoveryController extends Controller
      */
     public function form(): View
     {
-        $this->setup(Page::AUTH_PASSWORD_RECOVERY)
+        $this->setup(PAGE_AUTH_PASSWORD_RECOVERY)
             ->hideBreadcrumbs()
             ->hideTitle();
 

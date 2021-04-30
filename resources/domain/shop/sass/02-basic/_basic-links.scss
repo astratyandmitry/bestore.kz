@@ -1,14 +1,14 @@
 a {
   text-decoration: none !important;
-  border-bottom: 1px solid rgba(101, 0, 145, .50);
-  color: $color-purple;
+  border-bottom: 1px solid rgba(101, 0, 145, .32);
+  color: $color-primary;
   outline: 0;
   @include transition();
 
   &:hover,
   &:focus {
     border-bottom-color: transparent;;
-    color: $color-pink;
+    color: $color-secondary;
   }
 }
 
