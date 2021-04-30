@@ -6,18 +6,29 @@
 
 @section('content')
   <div class="home">
-    @include('shop::home.partials.banners')
+    <div class="container">
+      <div class="heading">
+        <div class="title">
+          Home page
+        </div>
+      </div>
 
-    @include('shop::home.partials.categories')
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, recusandae.
+      </p>
+    </div>
+    {{--    @include('shop::home.partials.banners')--}}
 
-    @include('shop::home.partials.products', [
-        'title' => 'Популярные товары',
-        'products' => $popularProducts,
-    ])
+    {{--    @include('shop::home.partials.categories')--}}
 
-    @include('shop::home.partials.products', [
-        'title' => 'Новые товары',
-        'products' => $latestProducts,
-    ])
+    {{--    @include('shop::home.partials.products', [--}}
+    {{--        'title' => 'Популярные товары',--}}
+    {{--        'products' => $popularProducts,--}}
+    {{--    ])--}}
+
+    {{--    @include('shop::home.partials.products', [--}}
+    {{--        'title' => 'Новые товары',--}}
+    {{--        'products' => $latestProducts,--}}
+    {{--    ])--}}
   </div>
 @endsection

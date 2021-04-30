@@ -29,10 +29,8 @@
     border: none;
     display: flex;
     align-items: center;
-    font-family: $font-display;
-    font-style: italic;
+    font-family: $font-default;
     font-weight: 900;
-    text-transform: uppercase;
     color: $color-gray;
     cursor: pointer;
     padding: 1rem;
@@ -67,7 +65,6 @@
     background: $color-primary;
     color: $color-white;
     font-style: normal;
-    @include skewRight();
 
     &:hover {
       background: $color-dark;
@@ -199,8 +196,7 @@
           line-height: 1;
           color: $color-gray-dark;
           font-weight: 900;
-          font-family: $font-display;
-          font-style: italic;
+          font-family: $font-default;
         }
       }
     }

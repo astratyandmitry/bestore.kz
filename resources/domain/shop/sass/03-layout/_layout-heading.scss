@@ -4,13 +4,11 @@
   }
 
   .title {
-    font-family: $font-display;
-    font-weight: 900;
+    font-family: $font-default;
     font-size: 48px;
-    font-style: italic;
-    text-transform: uppercase;
     margin: 0 0 3rem 0;
     line-height: 1;
+    font-weight: 700;
 
     @include tablet() {
       font-size: 40px;
@@ -54,10 +52,7 @@
       .breadcrumbs__item {
         display: inline-block;
         font-size: 12px;
-        font-weight: 900;
-        font-style: italic;
-        font-family: $font-display;
-        text-transform: uppercase;
+        font-family: $font-default;
 
         @include mobile() {
           font-size: 11px;

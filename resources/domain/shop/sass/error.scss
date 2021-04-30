@@ -1,6 +1,3 @@
-// Fonts
-@import '00-font/font-bender';
-@import '00-font/font-inter';
 // Configure
 @import '01-config/config-normalize';
 @import '01-config/config-vars';
@@ -26,8 +23,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       opacity: .06;
-      font-style: italic;
-      font-family: $font-display;
+      font-family: $font-default;
       font-weight: 900;
       font-size: 320px;
       position: absolute;
@@ -38,11 +34,9 @@
     }
 
     .error__message {
-      font-style: italic;
-      font-family: $font-display;
+      font-family: $font-default;
       font-weight: 900;
       font-size: 60px;
-      text-transform: uppercase;
 
       @include mobile() {
         font-size: 40px;

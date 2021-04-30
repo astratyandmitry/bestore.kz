@@ -14,7 +14,7 @@
       cursor: pointer;
       display: block;
       border-bottom: none;
-      font-family: $font-display;
+      font-family: $font-default;
       font-weight: 900;
       @include transition();
       @include skewRight();

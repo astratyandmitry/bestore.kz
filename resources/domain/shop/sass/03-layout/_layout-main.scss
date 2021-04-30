@@ -45,7 +45,7 @@ input {
 }
 
 main {
-  padding: 3rem 0;
+  padding: 6rem 0;
 
   @include mobile() {
     padding: 2rem 0;
@@ -66,28 +66,6 @@ main {
   }
 }
 
-.app {
-  &.app--header-fixed {
-    padding-top: 150px;
-
-    @include mobile() {
-      padding-top: 64px;
-    }
-
-    @include tablet() {
-      padding-top: 142px;
-    }
-
-    .fixable {
-      position: fixed;
-      z-index: 100;
-      left: 0;
-      right: 0;
-      top: 0;
-    }
-  }
-}
-
 .empty {
   background: $color-dark;
   padding: 3rem;
@@ -98,12 +76,9 @@ main {
   }
 
   .empty__title {
-    font-family: $font-display;
-    font-style: italic;
-    font-weight: 700;
+    font-family: $font-default;
     font-size: 24px;
     margin-bottom: 1rem;
-    text-transform: uppercase;
     color: $color-white;
 
     @include mobile() {
@@ -172,6 +147,7 @@ main {
     bottom: 0;
     right: 0;
     top: 0;
+    cursor: pointer;
     @include transition();
 
     &.loadable__loader--active {

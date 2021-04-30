@@ -121,11 +121,8 @@
         padding-top: 3rem;
         padding-left: 3rem;
         font-size: 64px;
-        font-weight: 900;
-        font-family: $font-display;
-        font-style: italic;
+        font-family: $font-default;
         color: $color-white;
-        text-transform: uppercase;
         line-height: 1.2;
 
         @include tablet() {
@@ -177,11 +174,9 @@
       box-sizing: border-box;
       position: relative;
       overflow: hidden;
-      @include skewRight(-4.5deg);
 
       @include mobile() {
         overflow: visible;;
-        @include skewReset();
       }
 
       &:nth-child(3n + 2) {
@@ -193,24 +188,15 @@
       }
 
       .ambassador__name {
-        font-family: $font-display;
-        font-weight: 900;
+        font-family: $font-default;
         font-size: 24px;
-        text-transform: uppercase;
-        @include skewLeft(4.5deg);
 
         @include mobile() {
-          font-style: italic;
           font-size: 18px;
         }
       }
 
       .ambassador__link {
-        @include skewLeft(4.5deg);
-        @include mobile() {
-          @include skewReset();
-        }
-
         a {
           font-weight: 500;
           border-bottom: none;
@@ -240,7 +226,6 @@
 
           @include mobile() {
             width: 90%;
-            @include skewRight();
           }
         }
       }

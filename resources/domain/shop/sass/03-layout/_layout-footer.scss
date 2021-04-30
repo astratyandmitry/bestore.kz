@@ -1,156 +1,103 @@
 .footer {
-  .footer__main {
-    background: #fff;
-    padding: 6rem 0;
+  padding: 3rem 0;
+  background: $color-purple;
 
-    @include mobile-tablet() {
-      padding: 3rem 0;
+  @include mobile() {
+    padding: 1.5rem 0;
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 3rem;
+
+    @include tablet() {
+      grid-template-columns: repeat(2, 1fr);
+      grid-row-gap: 3rem;
     }
 
-    .content {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-column-gap: 3rem;
+    @include mobile() {
+      grid-template-columns: 1fr;
+      grid-row-gap: 1.5rem;
+    }
+  }
 
-      @include tablet-portrait() {
-        grid-template-columns: auto auto auto 1fr;
-      }
+  .section {
+    .section__title {
+      font-weight: 600;
+      color: $color-white;
+      margin-bottom: 1.5rem;
 
       @include mobile() {
-        grid-template-columns: 1fr;
-        grid-row-gap: 2rem;
+        margin-bottom: .750rem;
       }
     }
 
-    .section {
-      .section__title {
-        font-family: $font-display;
-        font-weight: 900;
-        font-style: italic;
-        text-transform: uppercase;
-        font-size: 18px;
-        margin-bottom: 2rem;
-        color: $color-gray-light;
+    .contact {
+      margin-bottom: 1.5rem;
 
-        @include mobile() {
-          margin-bottom: 1rem;
-          font-size: 16px;
+      @include mobile() {
+        margin-bottom: .750rem;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .contact__value {
+        color: rgba(255, 255, 255, .80);
+        font-size: 14px;
+
+        a {
+          color: rgba(255, 255, 255, .80);
+
+          &:hover {
+            color: $color-white;
+          }
         }
       }
 
-      .section__list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+      .contact__label {
+        font-weight: 600;
+        font-size: 12px;
+        margin-bottom: 2px;
+        color: rgba(255, 255, 255, .40);
+      }
+    }
 
-        .section__item {
-          margin-bottom: 1rem;
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
 
-          @include mobile() {
-            margin-bottom: .5rem;
-          }
+      .menu__item {
+        margin-bottom: .750rem;
 
-          &:last-child {
-            margin-bottom: 0;
-          }
+        @include mobile() {
+          margin-bottom: .5rem;
+        }
 
-          .section__link {
-            border-bottom: none;
-            font-size: 14px;
+        &:last-child {
+          margin-bottom: 0;
+        }
 
-            @include mobile() {
-              font-size: 13px;
-            }
+        .menu__link {
+          font-size: 14px;
+          color: rgba(255, 255, 255, .80);
+          border-bottom: none;
 
-            &:hover {
-              color: $color-secondary;
-            }
-          }
-
-          .contact {
-            .contact__value {
-              font-size: 14px;
-
-              @include mobile() {
-                font-size: 13px;
-              }
-
-              a {
-                border-bottom: none;
-              }
-            }
-
-            .contact__label {
-              font-size: 12px;
-              text-transform: uppercase;
-              font-weight: 900;
-              font-family: $font-display;
-              color: $color-gray;
-              margin-bottom: 6px;
-            }
+          &:hover {
+            color: $color-white;
           }
         }
       }
     }
   }
 
-  .footer__info {
-    background: #fafafa;
-    padding: 1.5rem 0;
-
-    @include mobile() {
-      padding: 1rem 0;
-    }
-
-    .content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .copyright {
-      font-size: 14px;
-      color: $color-gray;
-
-      @include tablet() {
-        font-size: 13px;
-      }
-
-      @include mobile() {
-        font-size: 12px;
-      }
-    }
-
-    .list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      .list__item {
-        margin-right: 1.5rem;
-
-        &:last-child {
-          margin-right: 0;
-        }
-
-        .list__link {
-          font-size: 14px;
-          color: $color-gray;
-          border-bottom: none;
-
-          @include tablet() {
-            font-size: 13px;
-          }
-
-          @include mobile() {
-            font-size: 12px;
-          }
-
-          &:hover {
-            color: $color-secondary;
-          }
-        }
-      }
-    }
+  .copyright {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, .64);
   }
 }

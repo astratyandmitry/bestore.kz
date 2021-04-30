@@ -44,10 +44,8 @@
 
       .product__name {
         margin-bottom: 0;
-        font-weight: 900;
-        font-family: $font-display;
+        font-family: $font-default;
         font-size: 40px;
-        text-transform: uppercase;
         line-height: 1;
 
         @include mobile() {
@@ -77,16 +75,13 @@
         left: -1rem;
         top: 2rem;
         background: $color-primary;
-        font-family: $font-display;
-        font-weight: 900;
+        font-family: $font-default;
         font-size: 16px;
         display: inline-block;
         position: absolute;
         padding: 8px;
         color: $color-white;
-        text-transform: uppercase;
         z-index: 50;
-        @include skewRight();
       }
 
       .media__image {
@@ -100,7 +95,6 @@
       padding: 1rem 1rem 1rem 2rem;
       display: flex;
       align-items: center;
-      @include skewRight();
 
       @include mobile() {
         display: none;
@@ -108,7 +102,6 @@
 
       .brand__media {
         margin-right: 2rem;
-        @include skewLeft();
 
         @include mobile() {
           margin-right: 1rem;
@@ -124,8 +117,6 @@
       }
 
       .brand__info {
-        @include skewLeft();
-
         .brand__name {
           color: $color-primary;
           font-weight: 500;
@@ -181,26 +172,17 @@
       background: $color-white;
       border: none;
       padding: 1.5rem;
-      font-family: $font-display;
-      font-weight: 900;
+      font-family: $font-default;
       font-size: 18px;
-      text-transform: uppercase;
       text-align: center;
-      @include skewRight();
       @include nonSelect();
-
-      @include mobile() {
-        @include skewReset();
-      }
     }
   }
 
   .price {
     .price__prev {
-      font-weight: 900;
-      font-family: $font-display;
+      font-family: $font-default;
       font-size: 24px;
-      text-transform: uppercase;
       line-height: 1;
       text-decoration: line-through;
       display: inline-block;
@@ -212,10 +194,8 @@
     }
 
     .price__value {
-      font-weight: 900;
-      font-family: $font-display;
+      font-family: $font-default;
       font-size: 48px;
-      text-transform: uppercase;
       color: $color-primary;
       line-height: 1;
       white-space: nowrap;
@@ -252,21 +232,15 @@
       .basket__count__button {
         background: $color-white;
         padding: 1rem;
-        font-family: $font-display;
+        font-family: $font-default;
         font-weight: 900;
         font-size: 18px;
-        text-transform: uppercase;
         text-align: center;
-        @include skewRight();
         @include nonSelect();
 
         @include mobile() {
           font-size: 16px;
 
-        }
-
-        span {
-          @include skewLeft();
         }
       }
 
@@ -292,15 +266,12 @@
       background: $color-secondary;
       color: $color-white;
       padding: 1.5rem;
-      font-family: $font-display;
-      font-weight: 900;
+      font-family: $font-default;
       font-size: 18px;
-      text-transform: uppercase;
       text-align: center;
       width: 100%;
       display: flex;
       justify-content: center;
-      @include skewRight();
       @include transition();
 
       @include mobile() {
@@ -310,7 +281,6 @@
       .basket__button__content {
         display: flex;
         align-items: center;
-        @include skewLeft();
 
         .basket__button__icon {
           width: 24px;
@@ -366,10 +336,8 @@
 
     .detail__title {
       margin: 0;
-      font-weight: 900;
-      font-family: $font-display;
+      font-family: $font-default;
       font-size: 32px;
-      text-transform: uppercase;
       line-height: 1;
 
       @include mobile() {
@@ -448,10 +416,8 @@
 
     .related__title {
       margin: 0 0 2rem 0;
-      font-weight: 900;
-      font-family: $font-display;
+      font-family: $font-default;
       font-size: 32px;
-      text-transform: uppercase;
       line-height: 1;
 
       @include mobile() {

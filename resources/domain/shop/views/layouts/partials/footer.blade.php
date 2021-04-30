@@ -1,109 +1,70 @@
 @php /** @var \Domain\Shop\Common\Layout $layout */ @endphp
 
 <footer class="footer">
-  <div class="footer__main">
-    <div class="container">
-      <div class="content">
+  <div class="container">
+    <div class="footer__grid">
+      @foreach(['О компании', 'Клиентам', 'Прочее'] as $_section)
         <div class="section">
           <div class="section__title">
-            Питание
+            {{ $_section }}
           </div>
 
-          <ul class="section__list">
-            @foreach($layout->getCategories() as $_category)
-              <li class="section__item">
-                <a href="{{ $_category->url() }}" class="section__link">
-                  {{ $_category->name }}
-                </a>
-              </li>
-            @endforeach
-          </ul>
-        </div>
-
-        <div class="section">
-          <div class="section__title">
-            Покупателям
-          </div>
-
-          <ul class="section__list">
-            <li class="section__item">
-              <a href="{{ route('shop::page', 'delivery-and-payment') }}" class="section__link">
-                Доставка и оплата
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <div class="section__title">
-            Компания
-          </div>
-
-          <ul class="section__list">
-            <li class="section__item">
-              <a href="{{ route('shop::page', 'about') }}" class="section__link">
-                О компании
-              </a>
-            </li>
-            <li class="section__item">
-              <a href="{{ route('shop::page', 'franchise') }}" class="section__link">
-                Франшиза
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <div class="section__title">
-            Контакты
-          </div>
-
-          <ul class="section__list">
-            <li class="section__item section__item--contact">
-              <div class="contact">
-                <div class="contact__label">
-                  Телефон
-                </div>
-                <div class="contact__value">
-                  <a href="tel:8{{ str_replace(['+7', '(', ')'], '', config('shop.contact.email')) }}">
-                    {{ config('shop.contact.email') }}
+          <div class="section__body">
+            <ul class="menu">
+              @for($i = 1; $i <= rand(3,5); $i++)
+                <li class="menu__item">
+                  <a href="#" class="menu__link">
+                    Элемент навигации {{ $i }}
                   </a>
-                </div>
-              </div>
-            </li>
-            <li class="section__item section__item--contact">
-              <div class="contact">
-                <div class="contact__label">
-                  E-mail
-                </div>
-                <div class="contact__value">
-                  <a href="mailto:{{ config('shop.contact.email') }}">
-                    {{ config('shop.contact.email') }}
-                  </a>
-                </div>
-              </div>
-            </li>
-          </ul>
+                </li>
+              @endfor
+            </ul>
+          </div>
+        </div>
+      @endforeach
+
+      <div class="section">
+        <div class="section__title">
+          Контакты
+        </div>
+
+        <div class="section__body">
+          <div class="contact">
+            <div class="contact__label">
+              Адрес
+            </div>
+            <div class="contact__value">
+              {{ config('shop.contact.address') }}
+            </div>
+          </div>
+
+          <div class="contact">
+            <div class="contact__label">
+              Телефон
+            </div>
+            <div class="contact__value">
+              <a href="tel:8{{ str_replace(['+7', '(', ')'], '', config('shop.contact.phone')) }}">
+                {{ config('shop.contact.phone') }}
+              </a>
+            </div>
+          </div>
+
+          <div class="contact">
+            <div class="contact__label">
+              E-mail
+            </div>
+            <div class="contact__value">
+              <a href="mailto:{{ config('shop.contact.email') }}">
+                {{ config('shop.contact.email') }}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="footer__info">
-    <div class="container">
-      <div class="content">
-        <div class="copyright">
-          © {{ env('APP_NAME') }} {{ date('Y') }}
-        </div>
-
-        <ul class="list">
-          <li class="list__item">
-            <a href="{{ route('shop::page', 'policy') }}" class="list__link">
-              Политика конфиденциальности
-            </a>
-          </li>
-        </ul>
-      </div>
+    <div class="copyright">
+      © {{ env('APP_NAME') }} {{ date('Y') }} интернет-магазин всего
     </div>
   </div>
 </footer>

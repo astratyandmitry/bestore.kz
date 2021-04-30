@@ -1,69 +1,62 @@
-@include('shop::layouts.partials.nav')
+<header class="header">
+  <div class="container">
+    <div class="header__content">
+      <div class="header__main">
+        <div class="logotype">
+          <a href="{{ route('shop::home') }}" class="logotype__link">URASHOP</a>
+        </div>
 
-<section class="fixable">
-  <header class="header">
-    <div class="container">
-      <div class="content">
-        <div class="header__left">
-          <a href="javascript:void(0)" class="hamburger js-menu">
-            @include('shop::layouts.partials.svg.menu', ['class' => 'hamburger__icon'])
-          </a>
+        <div class="nav">
+          <div class="hamburger">
+            @include('shop::layouts.partials.svg.menu', ['class' => 'hamburger__icon hamburger__icon--closed'])
+          </div>
 
-          <div class="logotype">
-            <a href="{{ route('shop::home') }}" class="logotype__link">
-              <img src="/images/logotype.png?2" srcset="/images/logotype@2x.png?2 2x"
-                   alt="{{ env('APP_NAME') }}"
-                   class="logotype__image">
-            </a>
+          <div class="dropdown">
+            <ul class="menu">
+              @for($i = 1; $i <= 10; $i++)
+                <li class="menu__item">
+                  <a href="#" class="menu__link">
+                    Название категории {{ $i }}
+                  </a>
+                </li>
+              @endfor
+            </ul>
           </div>
         </div>
+      </div>
 
-        <form method="GET" action="{{ route('shop::search') }}" class="search">
-          <input type="text" placeholder="Поиск в каталоге" name="term" class="search__input">
+      <form method="GET" action="{{ route('shop::search') }}" class="search">
+        <button type="submit" class="search__button">
+          @include('shop::layouts.partials.svg.search', ['class' => 'search__icon'])
+        </button>
 
-          <button type="submit" class="search__button">
-            @include('shop::layouts.partials.svg.search', ['class' => 'search__icon'])
-          </button>
-        </form>
+        <input type="text" placeholder="Поиск в каталоге" name="term" class="search__input"
+               value="{{ request()->query('term') }}">
+      </form>
 
-        <a href="{{ route('shop::basket') }}" class="basket">
-                    <span class="basket__circle">
-                        <span class="basket__count">
-                            @php $total = app('basket')->countPositions() @endphp
-                          {{ $total > 99 ? '99+' : $total }}
-                        </span>
-                    </span>
-
-          <span class="basket__content">
-                        <span class="basket__label">
-                            Корзина
-                        </span>
-
-                        @if ($amount = app('basket')->total())
-              <span class="basket__amount">
-                                {{ price($amount) }} ₸
-                            </span>
-            @endif
-                    </span>
+      <div class="actions">
+        <a href="{{ auth('shop')->guest() ? route('shop::auth.login') : route('shop::account.redirect') }}"
+           class="button">
+          @include('shop::layouts.partials.svg.user', ['class' => 'button__icon'])
+          <span class="button__label">Профиль</span>
         </a>
 
-        <div class="icons">
-          <a href="javascript:void(0)" class="icon js-search">
-            @include('shop::layouts.partials.svg.search', ['class' => 'icon__icon'])
-          </a>
-
-          <a href="{{ route('shop::basket') }}" class="icon">
-            @include('shop::layouts.partials.svg.basket', ['class' => 'icon__icon'])
-          </a>
-
-          <a href="{{ auth('shop')->guest() ? route('shop::auth.login') : route('shop::account.redirect') }}"
-             class="icon">
-            @include('shop::layouts.partials.svg.user', ['class' => 'icon__icon'])
-          </a>
-        </div>
+        <a href="{{ route('shop::basket') }}" class="button">
+          @include('shop::layouts.partials.svg.basket', ['class' => 'button__icon'])
+          <span class="button__label">Корзина</span>
+        </a>
       </div>
     </div>
-  </header>
 
-  @include('shop::layouts.partials.menu')
-</section>
+    <div class="header__mobile">
+      <form method="GET" action="{{ route('shop::search') }}" class="search">
+        <button type="submit" class="search__button">
+          @include('shop::layouts.partials.svg.search', ['class' => 'search__icon'])
+        </button>
+
+        <input type="text" placeholder="Поиск в каталоге" name="term" class="search__input"
+               value="{{ request()->query('term') }}">
+      </form>
+    </div>
+  </div>
+</header>

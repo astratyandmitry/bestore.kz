@@ -16,7 +16,6 @@ mix
   .copy('resources/domain/cms/images', 'public/assets/cms/images')
 
   .js('resources/domain/shop/js/app.js', 'public/assets/shop/js')
-  .js('resources/domain/shop/js/modules/stores/app.js', 'public/assets/shop/js/stores.js')
   .js('resources/domain/shop/js/modules/filter/app.js', 'public/assets/shop/js/filter.js')
   .js('resources/domain/shop/js/modules/product/app.js', 'public/assets/shop/js/product.js')
   .js('resources/domain/shop/js/modules/basket/app.js', 'public/assets/shop/js/basket.js')

@@ -13,8 +13,7 @@
 
 .form-label {
   color: $color-gray;
-  font-family: $font-display;
-  text-transform: uppercase;
+  font-family: $font-default;
   font-size: 14px;
   font-weight: 900;
   line-height: 1.2;
@@ -71,26 +70,18 @@
 
   &::-webkit-input-placeholder {
     color: $color-gray;
-    text-transform: uppercase;
-    font-weight: 700;
   }
 
   &::-moz-placeholder {
     color: $color-gray;
-    text-transform: uppercase;
-    font-weight: 700;
   }
 
   &:-moz-placeholder {
     color: $color-gray;
-    text-transform: uppercase;
-    font-weight: 700;
   }
 
   &:-ms-input-placeholder {
     color: $color-gray;
-    text-transform: uppercase;
-    font-weight: 700;
   }
 }
 
@@ -138,10 +129,8 @@ select {
 .form-button {
   margin-top: 3rem;
   color: $color-white;
-  font-family: $font-display;
-  text-transform: uppercase;
+  font-family: $font-default;
   text-align: center;
-  font-weight: 900;
   font-size: 18px;
   background: $color-primary;
   box-sizing: border-box;

@@ -1,35 +1,33 @@
-let menuIcon = document.querySelector('.js-menu')
-let menu = document.querySelector('.menu')
-let searchIcon = document.querySelector('.js-search')
-let search = document.querySelector('.search')
+let hamburger = document.querySelector('.hamburger')
+let dropdown = document.querySelector('.header .dropdown')
 let loader = document.querySelector('.loader')
 let body = document.querySelector('body')
+let searchInput = document.querySelector('.search__input')
 
-menuIcon.addEventListener('click', () => {
-  search.classList.remove('search--active')
-
-  if (menu.classList.contains('menu--active')) {
-    menu.classList.remove('menu--active')
+hamburger.addEventListener('click', () => {
+  if (dropdown.classList.contains('dropdown--active')) {
+    dropdown.classList.remove('dropdown--active')
     loader.classList.remove('loader--active')
     body.classList.remove('fixed')
   } else {
-    menu.classList.add('menu--active')
+    dropdown.classList.add('dropdown--active')
     loader.classList.add('loader--active')
     body.classList.add('fixed')
   }
 })
 
-searchIcon.addEventListener('click', () => {
-  menu.classList.remove('menu--active')
-  search.classList.add('search--active')
-  loader.classList.add('loader--active')
-  body.classList.add('fixed')
-
-})
-
 loader.addEventListener('click', () => {
-  search.classList.remove('search--active')
-  menu.classList.remove('menu--active')
+  dropdown.classList.remove('dropdown--active')
   loader.classList.remove('loader--active')
   body.classList.remove('fixed')
+})
+
+searchInput.addEventListener('focusin', () => {
+  loader.classList.add('loader--active')
+  body.classList.add('fixed')
+})
+
+searchInput.addEventListener('focusout', () => {
+  loader.classList.add('loader--active')
+  body.classList.add('fixed')
 })

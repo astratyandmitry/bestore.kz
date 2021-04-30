@@ -1,14 +1,14 @@
 a {
   text-decoration: none !important;
-  border-bottom: 1px solid rgba(0, 0, 0, .12);
-  color: $color-dark;
+  border-bottom: 1px solid rgba(101, 0, 145, .50);
+  color: $color-purple;
   outline: 0;
   @include transition();
 
   &:hover,
   &:focus {
     border-bottom-color: transparent;;
-    color: $color-secondary;
+    color: $color-pink;
   }
 }
 
@@ -17,9 +17,8 @@ u {
 }
 
 .link-w-icon {
-  font-family: $font-display;
+  font-family: $font-default;
   font-weight: 500;
-  color: $color-secondary;
   font-size: 14px;
   border-bottom: none;
 
