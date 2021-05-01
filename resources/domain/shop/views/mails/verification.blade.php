@@ -2,17 +2,17 @@
 @php /** @var \Domain\Shop\Models\User $user */ @endphp
 
 @component('mail::message')
-  # {{ $verification->type->name }}
+# {{ $verification->type->name }}
 
-  Ваш код для выполнения действия на сайте {{ env('APP_NAME') }}:
+Ваш код для выполнения действия на сайте {{ env('APP_NAME') }}:
 
-  ### **{{ $verification->code }}**
+### **{{ $verification->code }}**
 
-  @component('mail::button', ['url' => $verification->url()])
-    Активировать код
-  @endcomponent
+@component('mail::button', ['url' => $verification->url()])
+  Активировать код
+@endcomponent
 
-  @slot('subcopy')
-    Данный код будет действителен до {{ $verification->expired_at->format('d.m.Y H:i') }}
-  @endslot
+@slot('subcopy')
+  Данный код будет действителен до {{ $verification->expired_at->format('d.m.Y H:i') }}
+@endslot
 @endcomponent

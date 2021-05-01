@@ -30,11 +30,12 @@
     display: flex;
     align-items: center;
     font-family: $font-default;
-    font-weight: 900;
+    font-weight: 600;
     color: $color-gray;
     cursor: pointer;
     padding: 1rem;
     @include transition();
+    @include radius();
 
     @include mobile() {
       font-size: 14px;
@@ -86,7 +87,7 @@
     }
 
     .filter__button {
-      padding: 1rem;
+      padding: 1.5rem;
       width: auto;
       display: inline-flex;
       align-items: center;
@@ -126,19 +127,23 @@
     }
 
     &:not(.filter--static):hover .filter__button {
-      background: whitesmoke;
+      background: #fafafa;
+      color: $color-black;
       cursor: pointer;
     }
 
     .filter__dropdown {
-      box-shadow: 0 16px 16px rgba(0, 0, 0, .08), 0 32px 32px rgba(0, 0, 0, .12);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .08), 0 16px 32px rgba(0, 0, 0, .16);
       position: absolute;
       z-index: 80;
       display: none;
-      background: whitesmoke;
-      min-width: 320px;
+      background: $color-white;
+      min-width: 240px;
       max-height: 440px;
       overflow-x: scroll;
+      margin-top: -4px;
+      margin-left: -4px;
+      @include radius();
 
       @include mobile() {
         min-width: 100vw;
@@ -182,21 +187,24 @@
       .filter-price-range__value {
         display: flex;
         align-items: center;
+          background: #f0f0f0;
+        @include radius();
 
         .filter-price-range__input {
           border: none;
           padding: 1rem;
           width: 80px;
           font-weight: 500;
+          background: transparent;
+          @include radius();
         }
 
         .filter-price-range__currency {
           padding: 1rem;
-          background: #eaeaea;
           line-height: 1;
-          color: $color-gray-dark;
-          font-weight: 900;
+          font-weight: 500;
           font-family: $font-default;
+          @include radius();
         }
       }
     }
@@ -213,6 +221,7 @@
         align-items: center;
         justify-content: space-between;
         font-weight: 500;
+        @include transition();
 
         .filter-menu__label {
           flex-grow: 1;
@@ -221,6 +230,7 @@
           border-bottom: none;
           color: $color-dark;
           cursor: pointer;
+          @include transition();
 
           @include mobile() {
             font-size: 13px;
@@ -241,7 +251,11 @@
         }
 
         &:hover {
-          background: #eaeaea;
+          background: #fafafa;
+
+          .filter-menu__label {
+            color: $color-secondary;
+          }
         }
       }
     }

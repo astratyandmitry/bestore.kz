@@ -50,7 +50,7 @@ class OrdersController extends Controller
     public function show(int $id, OrdersRepository $repository): View
     {
         $order = $repository->findById($id);
-        $order->load(['items', 'items.product', 'items.packing', 'items.taste']);
+        $order->load(['items', 'items.product', 'items.product.brand']);
 
         $this->layout
             ->addBreadcrumb('Личный кабинет', route('shop::account.redirect'))

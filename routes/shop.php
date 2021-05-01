@@ -8,7 +8,7 @@ Route::get('/page/{page}', 'PageController')->name('page');
 Route::get('/search', 'SearchController')->name('search');
 Route::get('/catalog', 'CategoriesController')->name('categories');
 Route::get('/catalog/product/{hru}', 'ProductController')->name('product');
-Route::get('/catalog/{parentHru}/{childHru?}', 'CatalogController')->name('catalog');
+//Route::get('/catalog/{parentHru}/{childHru?}', 'CatalogController')->name('catalog');
 Route::get('/catalog/{parentHru}', 'CatalogController')->name('catalog');
 
 Route::get('/order-{uuid}', 'OrderDetailController')->name('order');

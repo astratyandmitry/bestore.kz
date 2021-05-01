@@ -15,8 +15,8 @@
       display: block;
       border-bottom: none;
       font-family: $font-default;
-      font-weight: 900;
       @include transition();
+      @include radius();
 
       @include mobile() {
         font-size: 14px;
@@ -26,8 +26,8 @@
 
     &:hover {
       .page-link {
-        background: whitesmoke;
-        color: $color-black;
+        background: #fafafa;
+        color: $color-secondary;
       }
     }
 
@@ -35,7 +35,7 @@
       .page-link {
         background: $color-primary;
         color: $color-white;
-        font-weight: 500;
+        font-weight: 700;
 
         &:hover {
           box-shadow: none;

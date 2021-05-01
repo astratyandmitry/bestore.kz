@@ -28,11 +28,10 @@
                     <div class="product__content">
                       <div class="product__name">
                         {{ $item->product->name }}
-                        {{ $item->packing->name }}
                       </div>
 
                       <div class="product__detail">
-                        {{ $item->taste->name }}
+                        {{ $item->product->brand->name }}
                       </div>
                     </div>
                   </a>

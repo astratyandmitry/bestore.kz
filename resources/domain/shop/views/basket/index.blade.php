@@ -8,9 +8,7 @@
     <div class="container">
       @if (count($baskets))
         <div class="page__grid">
-          <basket :data='@json($baskets)'
-                  :delivery-price="{{ $layout->getCity()->delivery_price }}">
-
+          <basket :data='@json($baskets)' :delivery-price="{{ config('shop.delivery_price') }}">
             <template v-slot>
               @include('shop::layouts.partials.empty', [
                   'title' => 'Товары не найдены',

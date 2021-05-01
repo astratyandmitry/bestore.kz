@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
                 continue;
             }
 
-            factory(Review::class, 50)->create([
+            factory(Review::class, rand(1, 10))->create([
                 'product_id' => $product->id,
             ]);
         }

@@ -2,9 +2,9 @@
   .products__list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 1rem;
-    grid-row-gap: 1rem;
-    margin-top: 1rem;
+    grid-column-gap: 1.5rem;
+    grid-row-gap: 1.5rem;
+    margin-top: 1.5rem;
 
     @include tablet() {
       grid-template-columns: repeat(3, 1fr);
@@ -21,42 +21,49 @@
       flex-direction: column;
       display: flex;
       border-bottom: none;
+      @include boxShadow();
+      @include radius();
 
       &:hover {
-        box-shadow: 0 4px 16px rgba(0, 0, 0, .08);
+        box-shadow: 0 16px 32px rgba(0, 0, 0, .04), 0 32px 64px rgba(0, 0, 0, .08);
         color: $color-black;
-
-        .product__image {
-          transform: scale(1.125, 1.125);
-
-          @include mobile() {
-            transform: none;
-          }
-        }
       }
 
       .product__media {
-        padding: 1.5rem;
-        height: 160px;
+        margin: 1.5rem;
+        height: 200px;
         text-align: center;
         position: relative;
+        border: 1px solid #f0f0f0;
+        @include radius();
 
         @include mobile() {
           padding: 1px;
-          height: 120px;
+          height: 160px;
         }
 
         .product__badge {
-          left: -.250rem;
-          top: .5rem;
-          background: $color-primary;
-          font-family: $font-default;
-          font-size: 12px;
-          display: inline-block;
+          left: .5rem;
+          bottom: .5rem;
           position: absolute;
-          padding: 4px;
-          color: $color-white;
+          display: flex;
           z-index: 50;
+
+          .product__badge__item {
+            margin-right: 4px;
+            background: $color-secondary;
+            font-family: $font-default;
+            font-size: 12px;
+            display: inline-block;
+            padding: 4px 8px;
+            font-weight: 500;
+            color: $color-white;
+            @include radius(6px);
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
         }
 
         .product__image {
@@ -71,7 +78,7 @@
       }
 
       .product__content {
-        padding: 1.5rem;
+        padding: 0 1.5rem 1.5rem 1.5rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -84,11 +91,11 @@
         .product__name {
           font-family: $font-default;
           line-height: 1;
-          font-weight: 700;
-          font-size: 20px;
+          font-weight: 500;
+          color: $color-dark;
 
           @include mobile() {
-            font-size: 16px;
+            font-size: 14px;
           }
         }
 
@@ -96,36 +103,54 @@
           font-size: 14px;
           color: $color-gray;
           margin-top: .250rem;
-          font-weight: 500;
 
           @include mobile() {
             font-size: 12px;
           }
         }
 
+        .product__rating {
+          margin-top: .750rem;
+          display: flex;
+          align-items: center;
+
+          .product__rating__icon {
+            height: 16px;
+            width: 16px;
+            color: $color-gray-light;
+
+            &.product__rating__icon--fill {
+              color: $color-primary;
+            }
+          }
+        }
+
         .product__info {
-          margin-top: 2rem;
+          display: flex;
+          margin-bottom: 1rem;
+          align-items: center;
 
           @include mobile() {
             margin-top: 1rem;
           }
 
           .product__price {
-            color: $color-primary;
+            color: $color-secondary;
             font-family: $font-default;
             line-height: 1;
-            font-weight: 900;
-            font-size: 28px;
+            font-weight: 600;
+            font-size: 18px;
 
             @include mobile() {
-              font-size: 20px;
+              font-size: 16px;
             }
           }
 
           .product__sale {
-            font-size: 12px;
-            font-weight: 500;
-            color: $color-gray-dark;
+            font-size: 14px;
+            margin-left: .5rem;
+            color: $color-gray-light;
+            text-decoration: line-through;
 
             @include mobile() {
               margin-top: .250rem;

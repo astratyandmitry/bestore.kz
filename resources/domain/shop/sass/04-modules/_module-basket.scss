@@ -1,6 +1,6 @@
 .basket {
   .checkout {
-    width: 320px;
+    width: 360px;
     margin-left: 3rem;
 
     .heading {
@@ -13,7 +13,13 @@
 
     form {
       background: $color-white;
-      padding: 1.5rem;
+      padding: 3rem;
+      @include radius();
+      @include boxShadow();
+
+      @include mobile() {
+          padding: 1.5rem;
+      }
     }
 
     @include mobile_tablet-portrait() {

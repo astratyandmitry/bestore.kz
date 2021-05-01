@@ -1,6 +1,9 @@
 .items-table {
   background: $color-white;
+  overflow: hidden;
   flex-grow: 1;
+  @include boxShadow();
+  @include radius();
 
   @include mobile() {
     display: block;
@@ -9,7 +12,7 @@
   .items-table__icon {
     width: 24px;
     height: 24px;
-    color: $color-gray;
+    color: $color-gray-light;
     @include transition();
 
     @include mobile() {
@@ -64,9 +67,11 @@
     width: 100%;
 
     th {
-      background: #f0f0f0;
-      color: $color-gray-dark;
+      background: #fafafa;
+      color: $color-gray-light;
       font-family: $font-default;
+      font-weight: 500;
+      font-size: 14px;
     }
 
     @include mobile() {
@@ -79,8 +84,8 @@
 
     tr {
       @include mobile() {
-        background: #f0f0f0;
-        border-bottom: 1px solid #e0e0e0;
+        background: #fafafa;
+        border-bottom: 1px solid #f0f0f0;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -91,12 +96,14 @@
       }
 
       th {
-        border-bottom-color: #e0e0e0;
+        background: #fafafa;
+        border-bottom-color: #f0f0f0;
         font-weight: 500;
         padding: 1rem 1.5rem;
+        font-size: 14px;
 
         span {
-          color: $color-gray-dark;
+          color: $color-gray-light;
         }
       }
     }
@@ -131,51 +138,57 @@
     .count__button {
       background: $color-white;
       font-family: $font-default;
-      font-size: 20px;
-      border: 2px solid $color-dark;
+      font-size: 18px;
+      font-weight: 700;
+      border: 1.5px solid #e0e0e0;
       display: inline-block;
-      padding: 6px 12px;
+      padding: .5rem .750rem;
       line-height: 1;
+      color: $color-secondary;
+
       text-align: center;
       @include nonSelect();
       @include transition();
+      @include radius();
 
       &:hover {
         cursor: pointer;
-        background: $color-dark;
+        background: $color-secondary;
+        border-color: $color-secondary;
         color: $color-white;
       }
 
       &:disabled {
         background: whitesmoke;
         border-color: whitesmoke;
-        color: $color-gray-dark;
+        color: $color-gray-light;
         cursor: not-allowed;
       }
     }
 
     .count__value {
       font-family: $font-default;
-      font-size: 20px;
-      border: 2px solid $color-dark;
+      font-size: 18px;
+      border: 1.5px solid #e0e0e0;
       display: inline-block;
-      padding: 6px 12px;
+      padding: .5rem;
       line-height: 1;
       width: 48px;
       text-align: center;
+      color: $color-gray-dark;
+      @include radius();
       @include nonSelect();
     }
 
     .count__label {
       font-size: 14px;
-      color: $color-gray-dark;
+      color: $color-secondary;
       margin-top: .5rem;
     }
   }
 
   .price {
     text-align: right;
-    margin-top: 1rem;
 
     @include mobile() {
       text-align: left;
@@ -188,7 +201,7 @@
 
     .price__prev {
       font-size: 14px;
-      color: $color-gray-dark;
+      color: $color-gray-light;
       margin-top: .5rem;
       text-decoration: line-through;
 
@@ -213,34 +226,30 @@
       width: 80px;
       height: 80px;
       line-height: 80px;
+      padding: 1px;
       text-align: center;
       margin-right: 1.5rem;
+      border: 1px solid #f0f0f0;
+      @include radius();
 
       .product__image {
-        display: inline-block;
-        max-width: 100%;
-        max-height: 100%;
+        display: block;
+        max-width: 80px;
+        max-height: 80px;
       }
     }
 
     .product__content {
       .product__name {
         font-family: $font-default;
-        font-weight: 900;
-        font-size: 20px;
+        font-weight: 500;
         line-height: 1;
-
-        @include mobile() {
-          font-weight: 700;
-          font-size: 18px;
-        }
       }
 
       .product__detail {
-        font-weight: 500;
         color: $color-gray;
         font-size: 14px;
-        margin-top: .5rem;
+        margin-top: 4px;
       }
     }
   }

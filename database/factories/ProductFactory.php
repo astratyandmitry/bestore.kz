@@ -9,6 +9,19 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(Product::class, function (Faker $faker) {
+    $badges = ['Майские скидки', '-10%', '-20%', 'Новинка', 'Акция'];
+    $badgesArray = [];
+    $countBadges = rand(0, 3);
+
+    if ($countBadges > 0) {
+        for ($i = 0; $i < $countBadges; $i++) {
+            $randomBadge = $badges[array_rand($badges)];
+            if (! in_array($randomBadge, $badgesArray)) {
+                $badgesArray[] = $randomBadge;
+            }
+        }
+    }
+
     return [
         'category_id' => Category::query()->inRandomOrder()->value('id'),
         'brand_id' => Brand::query()->inRandomOrder()->value('id'),
@@ -20,5 +33,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'quantity' => rand(10, 100),
         'about' => '<p>'.implode('</p></p>', $faker->paragraphs()).'</p>',
         'active' => true,
+        'badges' => count($badgesArray) ? implode(',', $badgesArray) : null,
     ];
 });

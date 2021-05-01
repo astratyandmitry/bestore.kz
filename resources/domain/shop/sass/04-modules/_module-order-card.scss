@@ -5,6 +5,8 @@
     background: $color-white;
     padding: 3rem;
     margin-top: 3rem;
+    @include radius();
+    @include boxShadow();
 
     @include mobile() {
       padding: 2rem;

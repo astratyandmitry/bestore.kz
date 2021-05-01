@@ -108,6 +108,7 @@
       margin-left: 26px;
       margin-top: .5rem;
       z-index: 100;
+      overflow: hidden;
       @include transition();
       @include radius();
 
@@ -125,33 +126,28 @@
       .menu {
         list-style: none;
         margin: 0;
-        padding: 1.5rem;
+        padding: 0;
 
         @include mobile() {
           padding: 1rem;
         }
 
         .menu__item {
-          margin-bottom: .750rem;
-
-          @include mobile() {
-            margin-bottom: .5rem;
-          }
-
-          &:last-child {
-            margin-bottom: 0;
-          }
-
           .menu__link {
             font-weight: 500;
+            display: block;
             border-bottom: none;
             color: $color-gray-dark;
+            padding: 1rem;
 
             @include mobile() {
+              padding: .750rem;
               font-size: 14px;
             }
 
+
             &:hover {
+              background: #fafafa;
               color: $color-secondary;
             }
           }

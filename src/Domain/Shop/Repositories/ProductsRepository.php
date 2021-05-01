@@ -14,6 +14,15 @@ use Illuminate\Database\Eloquent\Collection;
 class ProductsRepository
 {
     /**
+     * @param integer $id
+     * @return \Domain\Shop\Models\Product
+     */
+    public function findById(int $id): Product
+    {
+        return Product::query()->where('id', $id)->firstOrFail();
+    }
+
+    /**
      * @param string $hru
      * @return \Domain\Shop\Models\Product
      */

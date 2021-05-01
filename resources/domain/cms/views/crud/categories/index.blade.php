@@ -9,9 +9,9 @@
       <table>
         <thead>
         <tr>
-          @if ($sortable)
+{{--          @if ($sortable)--}}
             <th nowrap width="12"></th>
-          @endif
+{{--          @endif--}}
           <th nowrap width="64"></th>
           <th nowrap width="88">
             @lang('cms.field.id')
@@ -19,16 +19,16 @@
           <th nowrap>
             @lang('cms.field.info')
           </th>
-          <th nowrap width="320">
-            @lang('cms.field.parent_id')
-          </th>
+{{--          <th nowrap width="320">--}}
+{{--            @lang('cms.field.parent_id')--}}
+{{--          </th>--}}
           <th nowrap width="54"></th>
           <th nowrap width="80"></th>
         </tr>
         <tr class="row--filter form">
-          @if ($sortable)
+{{--          @if ($sortable)--}}
             <th class="field"></th>
-          @endif
+{{--          @endif--}}
           <th class="field">
             <div class="holder">&nbsp</div>
           </th>
@@ -44,13 +44,13 @@
                'attribute' => 'info',
            ])
           </th>
-          <th class="field">
-            @include('cms::layouts.includes.form.filter.dropdown', [
-               'placeholder' => __('cms.all'),
-               'attribute' => 'parent_id',
-               'options' => $data['parents'],
-           ])
-          </th>
+{{--          <th class="field">--}}
+{{--            @include('cms::layouts.includes.form.filter.dropdown', [--}}
+{{--               'placeholder' => __('cms.all'),--}}
+{{--               'attribute' => 'parent_id',--}}
+{{--               'options' => $data['parents'],--}}
+{{--           ])--}}
+{{--          </th>--}}
           <th class="field">
             <div class="holder">&nbsp</div>
           </th>
@@ -61,15 +61,16 @@
           </th>
         </tr>
         </thead>
-        <tbody @if ($sortable) class="js-sortable" data-model="{{ $globals['model'] }}" @endif>
+{{--        <tbody @if ($sortable) class="js-sortable" data-model="{{ $globals['model'] }}" @endif>--}}
+        <tbody class="js-sortable" data-model="{{ $globals['model'] }}">
         @if (count($models))
           @foreach($models as $model)
             <tr data-id="{{ $model->id }}">
-              @if ($sortable)
+{{--              @if ($sortable)--}}
                 <td nowrap class="is-icon text--center has--icon">
                   <i class="fas fa-bars js-sortable-handle"></i>
                 </td>
-              @endif
+{{--              @endif--}}
               <td nowrap class="cell--image text--center">
                 @if ($model->image)
                   <img src="{{ $model->image }}">
@@ -91,19 +92,19 @@
                   {{ $model->hru }}
                 </div>
               </td>
-              <td nowrap>
-                @if ($model->parent)
-                  <div class="text--label">
-                    <a href="?role_id={{ $model->role_id }}">
-                      {{ $model->parent->name }}
-                    </a>
-                  </div>
-                @else
-                  <div class="text--detail">
-                    @lang('cms.null')
-                  </div>
-                @endif
-              </td>
+{{--              <td nowrap>--}}
+{{--                @if ($model->parent)--}}
+{{--                  <div class="text--label">--}}
+{{--                    <a href="?role_id={{ $model->role_id }}">--}}
+{{--                      {{ $model->parent->name }}--}}
+{{--                    </a>--}}
+{{--                  </div>--}}
+{{--                @else--}}
+{{--                  <div class="text--detail">--}}
+{{--                    @lang('cms.null')--}}
+{{--                  </div>--}}
+{{--                @endif--}}
+{{--              </td>--}}
               <td>
                 @include('cms::layouts.includes.index.switch')
               </td>

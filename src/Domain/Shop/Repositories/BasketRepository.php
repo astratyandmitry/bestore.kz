@@ -3,10 +3,8 @@
 namespace Domain\Shop\Repositories;
 
 use Domain\Shop\Models\Basket;
-use Domain\Shop\Models\ProductStock;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @version 1.0.1
@@ -40,18 +38,6 @@ class BasketRepository
     }
 
     /**
-     * @return array
-     */
-    public function existsStockKeys(): array
-    {
-        return Basket::query()
-            ->where($this->owner_column, $this->owner_value)
-            ->where('count', '>', 0)
-            ->select(DB::raw("concat(product_id, '.', packing_id, '.', taste_id) as k, count"))
-            ->pluck('count', 'k')->toArray();
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function all(): Collection
@@ -59,6 +45,7 @@ class BasketRepository
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
             ->where('count', '>', 0)
+            ->with('product', 'product.brand')
             ->get();
     }
 
@@ -71,6 +58,17 @@ class BasketRepository
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
             ->where('id', $id)
+            ->firstOrFail();
+    }
+    /**
+     * @param int $productId
+     * @return \Domain\Shop\Models\Basket
+     */
+    public function findByProductId(int $productId): Basket
+    {
+        return Basket::query()
+            ->where($this->owner_column, $this->owner_value)
+            ->where('product_id', $productId)
             ->firstOrFail();
     }
 

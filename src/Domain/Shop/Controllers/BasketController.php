@@ -43,7 +43,8 @@ class BasketController extends Controller
         ProductsRepository $productsRepository,
         BasketRepository $basketRepository
     ): JsonResponse {
-        list ($basket) = $this->prepareUpdate($request, $productsRepository, $basketRepository);
+        /** @var \Domain\Shop\Models\Basket $basket */
+        [$basket] = $this->prepareUpdate($request, $productsRepository, $basketRepository);
 
         if ($basket->count > 1) {
             $basket->count--;
@@ -67,9 +68,11 @@ class BasketController extends Controller
         ProductsRepository $productsRepository,
         BasketRepository $basketRepository
     ): JsonResponse {
-        list ($basket, $stock) = $this->prepareUpdate($request, $productsRepository, $basketRepository);
+        /** @var \Domain\Shop\Models\Basket $basket */
+        /** @var \Domain\Shop\Models\Product $product */
+        [$basket, $product] = $this->prepareUpdate($request, $productsRepository, $basketRepository);
 
-        if ($basket->count < $stock->quantity) {
+        if ($basket->count < $product->quantity) {
             $basket->count++;
 
             $basketRepository->updateCount($basket->id, $basket->count);
@@ -91,12 +94,14 @@ class BasketController extends Controller
         ProductsRepository $productsRepository,
         BasketRepository $basketRepository
     ): JsonResponse {
-        list ($basket, $stock) = $this->prepareUpdate($request, $productsRepository, $basketRepository);
+        /** @var \Domain\Shop\Models\Basket $basket */
+        /** @var \Domain\Shop\Models\Product $product */
+        [$basket, $product] = $this->prepareUpdate($request, $productsRepository, $basketRepository);
 
         $count = (int) $request->get('quantity', 1);
 
-        if ($count > $stock->quantity) {
-            $count = $stock->quantity;
+        if ($count > $product->quantity) {
+            $count = $product->quantity;
         }
 
         $basket->count = $count;
@@ -119,15 +124,10 @@ class BasketController extends Controller
         ProductsRepository $productsRepository,
         BasketRepository $basketRepository
     ): array {
-        $stock = $productsRepository->findStock(
-            $request->product_id,
-            $request->packing_id,
-            $request->taste_id
-        );
+        $product = $productsRepository->findById($request->product_id);
+        $basket = $basketRepository->findByProductId($request->product_id);
 
-        $basket = $basketRepository->findByStock($stock);
-
-        return [$basket, $stock];
+        return [$basket, $product];
     }
 
     /**

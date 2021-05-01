@@ -57,8 +57,8 @@
             </h1>
           </div>
 
-          @if (count($stocks))
-            <product-config :product-id="{{ $product->id }}" :stocks='@json($stocks)'/>
+          @if ($product->quantity)
+            asfasf
           @else
             <div class="empty">
               <div class="empty__title">

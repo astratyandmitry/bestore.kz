@@ -1,3 +1,5 @@
+@php /** @var \Domain\Shop\Common\Layout $layout */ @endphp
+
 <header class="header">
   <div class="container">
     <div class="header__content">
@@ -13,13 +15,13 @@
 
           <div class="dropdown">
             <ul class="menu">
-              @for($i = 1; $i <= 10; $i++)
+              @foreach($layout->getCategories() as $_category)
                 <li class="menu__item">
-                  <a href="#" class="menu__link">
-                    Название категории {{ $i }}
+                  <a href="{{ $_category->url() }}" class="menu__link" title="{{ $_category->title }}">
+                    {{ $_category->name }}
                   </a>
                 </li>
-              @endfor
+              @endforeach
             </ul>
           </div>
         </div>

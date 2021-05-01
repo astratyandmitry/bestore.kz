@@ -13,7 +13,7 @@ $factory->define(Review::class, function (Faker $faker) {
     return [
         'user_id' => User::query()->inRandomOrder()->value('id'),
         'message' => $faker->sentence(20),
-        'rating' => rand(1, 5),
+        'rating' => rand(3, 5),
         'active' => true,
     ];
 });

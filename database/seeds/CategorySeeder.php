@@ -11,27 +11,27 @@ class CategorySeeder extends Seeder
     protected $data = [
         [
             'parent_id' => null,
-            'hru' => 'parent-single',
-            'name' => 'Основная',
+            'hru' => 'first',
+            'name' => 'Основная категория',
             'title' => 'Основная категория',
         ],
         [
             'parent_id' => null,
-            'hru' => 'parent-child',
-            'name' => 'С дочерними',
-            'title' => 'Категория с дочерними',
+            'hru' => 'second',
+            'name' => 'Второстепенная',
+            'title' => 'Дополнительная категория',
         ],
         [
-            'parent_id' => 2,
-            'hru' => 'child-1',
-            'name' => 'Дочерняя один',
-            'title' => 'Дочерняя один категория',
+            'parent_id' => null,
+            'hru' => 'third',
+            'name' => 'Еще третья категория',
+            'title' => 'И еще третья категория',
         ],
         [
-            'parent_id' => 2,
-            'hru' => 'child-2',
-            'name' => 'Вторая дочерняя',
-            'title' => 'Вторая дочерняя категория',
+            'parent_id' => null,
+            'hru' => 'fourth',
+            'name' => 'Четвертая по счету',
+            'title' => 'И еще четвертая категория',
         ],
     ];
 

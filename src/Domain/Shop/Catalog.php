@@ -152,33 +152,33 @@ class Catalog
         }
 
         // todo: check
-        if ($this->category) {
-            $this->categories = optional($this->category->parent)->children ?? $this->category->children;
-        } else {
-            $this->categories = (new CategoriesRepository)->children();
-        }
-
-        if ($this->request->category) {
-            $this->categoriesQuery = explode(',', $this->request->category);
-        }
-
-        $resetCategoriesQuery = false;
-
-        if (! count($this->categoriesQuery)) {
-            if (optional($this->category)->parent) {
-                $this->categoriesQuery[] = $this->category->id;
-            } else {
-                $this->categoriesQuery = $this->categories->pluck('id')->toArray();
-
-                $resetCategoriesQuery = true;
-            }
-        }
-
-        $this->request->merge(['category' => implode(',', $this->categoriesQuery)]);
-
-        if ($resetCategoriesQuery === true) {
-            $this->categoriesQuery = [];
-        }
+        //if ($this->category) {
+        //    $this->categories = optional($this->category->parent)->children ?? $this->category->children;
+        //} else {
+        //    $this->categories = (new CategoriesRepository)->children();
+        //}
+        //
+        //if ($this->request->category) {
+        //    $this->categoriesQuery = explode(',', $this->request->category);
+        //}
+        //
+        //$resetCategoriesQuery = false;
+        //
+        //if (! count($this->categoriesQuery)) {
+        //    if (optional($this->category)->parent) {
+        //        $this->categoriesQuery[] = $this->category->id;
+        //    } else {
+        //        $this->categoriesQuery = $this->categories->pluck('id')->toArray();
+        //
+        //        $resetCategoriesQuery = true;
+        //    }
+        //}
+        //
+        //$this->request->merge(['category' => implode(',', $this->categoriesQuery)]);
+        //
+        //if ($resetCategoriesQuery === true) {
+        //    $this->categoriesQuery = [];
+        //}
     }
 
     /**
