@@ -114,11 +114,7 @@
   }
 
   .banners-split {
-    margin-top: 3rem;
-
-    @include mobile() {
-      margin-top: 1.5rem;
-    }
+    margin-top: 1.5rem;
 
     .banners-split__grid {
       display: grid;
