@@ -31,6 +31,7 @@ class UsersRepository
         return User::query()->create([
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'activated_at' => app()->environment('production') ? null : now(),
         ]);
     }
 

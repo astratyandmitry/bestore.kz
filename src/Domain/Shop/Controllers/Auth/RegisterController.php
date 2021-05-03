@@ -44,7 +44,7 @@ class RegisterController extends Controller
         $user = $usersRepository->register($request);
 
         $user->sendVerification(
-            $verificationRepository->generate($user, VerificationType::ACTIVATION)
+            $verificationRepository->generate($user, VERIFICATION_ACTIVATION)
         );
 
         return $this->redirect('auth.login')

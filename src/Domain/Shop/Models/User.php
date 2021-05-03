@@ -64,6 +64,8 @@ class User extends Model implements
      */
     public function sendVerification(Verification $verification): void
     {
-        Mail::to($this->email)->send(new VerificationMail($verification));
+        if (app()->environment('production')) {
+            Mail::to($this->email)->send(new VerificationMail($verification));
+        }
     }
 }
