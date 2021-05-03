@@ -18,6 +18,7 @@ class CreateBannersTable extends Migration
             $table->string('position_key', 40)->index();
             $table->string('title', 200);
             $table->string('image', 500);
+            $table->string('url', 500);
             $table->integer('sort')->default(0)->index();
             $table->boolean('active')->default(false)->index();
             $table->timestamps();

@@ -32,7 +32,8 @@ class HomeController extends Controller
         return $this->view('home.index', [
             'popularProducts' => $productsRepository->popular(),
             'latestProducts' => $productsRepository->latest(),
-            'banners' => $bannersRepository->all(),
+            'mainBanners' => $bannersRepository->main(),
+            'splitBanners' => $bannersRepository->productsSplit(),
             'categories' => $categoriesRepository->parents(),
         ]);
     }

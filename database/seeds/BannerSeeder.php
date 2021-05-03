@@ -12,22 +12,27 @@ class BannerSeeder extends Seeder
         [
             'position_key' => BANNER_POS_HOME_MAIN,
             'title' => 'Первый баннер',
+            'url' => 'http://geneticshop.kz',
         ],
         [
             'position_key' => BANNER_POS_HOME_MAIN,
             'title' => 'Второй баннер',
+            'url' => 'http://geneticshop.kz',
         ],
         [
             'position_key' => BANNER_POS_HOME_MAIN,
             'title' => 'Третий баннер',
+            'url' => 'http://geneticshop.kz',
         ],
         [
             'position_key' => BANNER_POS_PRODUCTS_SPLIT,
             'title' => 'Разделяющий первый',
+            'url' => 'http://geneticshop.kz',
         ],
         [
             'position_key' => BANNER_POS_PRODUCTS_SPLIT,
             'title' => 'Разделяющий второй',
+            'url' => 'http://geneticshop.kz',
         ],
     ];
 

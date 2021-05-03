@@ -15,6 +15,12 @@
         'required' => true,
         'autofocus' => true,
     ])
+
+    @include('cms::layouts.includes.form.field.input', [
+        'label' => __('cms.field.url'),
+        'attribute' => 'url',
+        'required' => true,
+    ])
   </div>
 
   <div class="section">

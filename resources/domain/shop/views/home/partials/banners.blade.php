@@ -1,28 +1,22 @@
-@php /** @var \Domain\Shop\Models\Banner[]|\Illuminate\Database\Eloquent\Collection $banners */ @endphp
+@php /** @var \Domain\Shop\Models\Banner[]|\Illuminate\Database\Eloquent\Collection $mainBanners */ @endphp
 
-@if ($banners->isNotEmpty())
-  <div class="slider">
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        @foreach($banners as $banner)
-          <div class="swiper-slide slide">
-            <div class="slide__image" style="background-image: url({{ $banner->image }})"></div>
-            <div class="slide__shadow"></div>
-            <div class="container">
-              <div class="slide__body">
-                <div class="slide__title">
-                  {{ $banner->title }}
-                </div>
-              </div>
-            </div>
-          </div>
-        @endforeach
+@if ($mainBanners->isNotEmpty())
+  <div class="container">
+    <div class="slider">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          @foreach($mainBanners as $mainBanner)
+            <a href="{{ $mainBanner->url }}" target="_blank" class="swiper-slide slide">
+              <img src="{{ $mainBanner->image }}" alt="{{ $mainBanner->title }}" class="slide__image">
+            </a>
+          @endforeach
+        </div>
+
+        <div class="swiper-pagination"></div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
-
-      <div class="swiper-pagination"></div>
-
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
     </div>
   </div>
 

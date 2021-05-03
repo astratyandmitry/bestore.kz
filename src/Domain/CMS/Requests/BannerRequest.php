@@ -13,6 +13,7 @@ class BannerRequest extends Request
             ->addRules([
                 'position_key' => 'required|exists:banner_positions,key',
                 'title' => 'required|max:500',
+                'url' => 'required|url',
                 'image' => 'required',
                 'active' => 'boolean',
             ]);

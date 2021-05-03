@@ -45,7 +45,7 @@ class ProductsRepository
      */
     public function popular(): Collection
     {
-        return Product::query()->orderByDesc('count_views')->limit(4)->get();
+        return Product::query()->orderByDesc('count_views')->limit(12)->get();
     }
 
     /**
@@ -53,6 +53,6 @@ class ProductsRepository
      */
     public function latest(): Collection
     {
-        return Product::query()->orderByDesc('created_at')->limit(4)->get();
+        return Product::query()->orderByDesc('created_at')->limit(12)->get();
     }
 }
