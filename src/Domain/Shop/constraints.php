@@ -28,3 +28,4 @@ define('PAGE_ACCOUNT_ORDERS_HISTORY', 'account.orders.history');
 define('PAGE_ACCOUNT_ORDER', 'account.order');
 define('PAGE_ACCOUNT_SETTINGS_PERSONAL', 'account.settings.personal');
 define('PAGE_ACCOUNT_SETTINGS_SECURITY', 'account.settings.security');
+define('PAGE_PRODUCT_REVIEW', 'product.review');

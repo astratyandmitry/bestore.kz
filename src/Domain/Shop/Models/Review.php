@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property integer $product_id
  * @property integer $user_id
  * @property integer $rating
+ * @property string $username
  * @property string $message
  *
  * @property \Domain\Shop\Models\Product $product
@@ -41,9 +42,11 @@ class Review extends Model
         parent::boot();
 
         static::created(function (Review $review): void {
-            $review->product->update([
-                'rating' => number_format((float)$review->product->reviews->avg('rating'), 1, '.', ''),
-            ]);
+            $review->product->recalculateRating();
+        });
+
+        static::updated(function (Review $review): void {
+            $review->product->recalculateRating();
         });
     }
 

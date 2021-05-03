@@ -15,6 +15,7 @@ class ProductSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         Product::query()->truncate();
+        Review::query()->truncate();
 
         factory(Product::class, 50)->create();
 

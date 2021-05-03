@@ -20,6 +20,8 @@ class LogoutController extends Controller
     {
         Auth::guard(SHOP_GUARD)->logout();
 
+        session()->forget('auth.redirect');
+
         return $this->redirect('home');
     }
 }

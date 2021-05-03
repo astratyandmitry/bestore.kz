@@ -31,7 +31,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'price' => $price = round(rand(5000, 50000), 2),
         'price_sale' => rand(1, 2) === 2 ? null : $price - rand(1000, 5000),
         'quantity' => rand(10, 100),
-        'about' => '<p>'.implode('</p></p>', $faker->paragraphs()).'</p>',
+        'about' => '<p>'.implode('</p></p>', $faker->paragraphs(2)).'</p>',
         'active' => true,
         'badges' => count($badgesArray) ? implode(',', $badgesArray) : null,
     ];

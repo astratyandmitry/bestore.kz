@@ -10,6 +10,8 @@
       @if ($layout->withTitle)
         @include('shop::layouts.partials.heading.title')
       @endif
+
+      @yield('subtitle')
     </div>
   </div>
 @endif

@@ -6,7 +6,7 @@
   @include radius();
 
   @include mobile() {
-    display: block;
+    display: table;
   }
 
   .items-table__icon {

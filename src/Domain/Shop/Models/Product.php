@@ -79,7 +79,7 @@ class Product extends Model implements HasUrl
      */
     public function reviews(): HasMany
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Review::class)->where('active', true)->latest();
     }
 
     /**
@@ -207,5 +207,15 @@ class Product extends Model implements HasUrl
     public function price(): int
     {
         return $this->price_sale ?? $this->price;
+    }
+
+    /**
+     *
+     */
+    public function recalculateRating(): void
+    {
+        $this->update([
+            'rating' => number_format((float) $this->reviews->avg('rating'), 1, '.', ''),
+        ]);
     }
 }

@@ -30,9 +30,11 @@
                         {{ $item->product->name }}
                       </div>
 
-                      <div class="product__detail">
-                        {{ $item->product->brand->name }}
-                      </div>
+                      @if ($item->product->brand)
+                        <div class="product__detail">
+                          {{ $item->product->brand->name }}
+                        </div>
+                      @endif
                     </div>
                   </a>
                 </td>

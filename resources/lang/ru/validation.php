@@ -147,6 +147,9 @@ return [
         'url' => 'URL',
         'upload_banner_id' => 'баннер',
         'upload_avatar_id' => 'аватар',
+        'username' => 'имя',
+        'rating' => 'оценка',
+        'message' => 'сообщение',
     ],
 
 ];

@@ -60,6 +60,7 @@ class BasketRepository
             ->where('id', $id)
             ->firstOrFail();
     }
+
     /**
      * @param int $productId
      * @return \Domain\Shop\Models\Basket
@@ -70,6 +71,19 @@ class BasketRepository
             ->where($this->owner_column, $this->owner_value)
             ->where('product_id', $productId)
             ->firstOrFail();
+    }
+
+    /**
+     * @param int $productId
+     * @return \Domain\Shop\Models\Basket
+     */
+    public function create(int $productId): Basket
+    {
+        return Basket::query()->create([
+            $this->owner_column => $this->owner_value,
+            'product_id' => $productId,
+            'count' => 1,
+        ]);
     }
 
     /**

@@ -11,7 +11,7 @@
             {{ item.product.name }}
           </div>
 
-          <div class="product__detail">
+          <div class="product__detail" v-if="item.product.brand">
             {{ item.product.brand.name }}
           </div>
         </div>

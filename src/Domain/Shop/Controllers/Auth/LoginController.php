@@ -48,7 +48,13 @@ class LoginController extends Controller
                 if (Auth::guard(SHOP_GUARD)->attempt($request->validated())) {
                     $basketRepository->migrateFromGuest($user->id);
 
-                    return $this->redirect('account.redirect');
+                    $redirect = session()->has('auth.redirect')
+                        ? redirect()->to(session()->get('auth.redirect'))
+                        : $this->redirect('account.redirect');
+
+                    session()->forget('auth.redirect');
+
+                    return $redirect;
                 }
             }
         }

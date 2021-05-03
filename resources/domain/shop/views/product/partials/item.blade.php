@@ -1,6 +1,6 @@
 @php /** @var \Domain\Shop\Models\Product $product */ @endphp
 
-<a href="{{ $product->url() }}" class="product">
+<a href="{{ $product->url() }}" class="product-item">
   <div class="product__media">
     @if ($product->badges !== null && $badges = explode(',', $product->badges))
       <div class="product__badge">
@@ -30,7 +30,7 @@
 
     <div class="product__main">
       <div class="product__name">
-        {{ $product->brand->name }}
+        {{ $product->brand ? $product->brand->name : $product->category->name }}
       </div>
 
       <div class="product__detail">

@@ -96,17 +96,23 @@ class BasketController extends Controller
     ): JsonResponse {
         /** @var \Domain\Shop\Models\Basket $basket */
         /** @var \Domain\Shop\Models\Product $product */
-        [$basket, $product] = $this->prepareUpdate($request, $productsRepository, $basketRepository);
+        try {
+            [$basket, $product] = $this->prepareUpdate($request, $productsRepository, $basketRepository);
 
-        $count = (int) $request->get('quantity', 1);
+            $count = (int) $request->get('quantity', 1);
 
-        if ($count > $product->quantity) {
-            $count = $product->quantity;
+            if ($count > $product->quantity) {
+                $count = $product->quantity;
+            }
+
+            $basket->count = $count;
+
+            $basketRepository->updateCount($basket->id, $basket->count);
+        } catch (\Exception $e) {
+            $product = $productsRepository->findById($request->product_id);
+            
+            $basket = $basketRepository->create($request->product_id);
         }
-
-        $basket->count = $count;
-
-        $basketRepository->updateCount($basket->id, $basket->count);
 
         return response()->json([
             'count' => $basket->count,

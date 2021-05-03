@@ -16,7 +16,9 @@ class RedirectIfUnauthenticated
     public function handle(Request $request, Closure $next)
     {
         if (Auth::guard(SHOP_GUARD)->guest()) {
-            return redirect()->route('shop::login');
+            session()->put('auth.redirect', $request->getRequestUri());
+
+            return redirect()->route('shop::auth.login');
         }
 
         return $next($request);

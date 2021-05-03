@@ -74,6 +74,11 @@ class PageSystemSeeder extends Seeder
             'title' => 'Настройки безопасности',
             'hru' => 'account.settings.security',
         ],
+        [
+            'name' => 'Отзыв о товаре',
+            'title' => 'Оставить отзыв о товаре',
+            'hru' => 'product.review',
+        ],
     ];
 
     /**

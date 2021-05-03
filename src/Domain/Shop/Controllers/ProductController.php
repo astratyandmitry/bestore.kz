@@ -2,9 +2,8 @@
 
 namespace Domain\Shop\Controllers;
 
-use Domain\Shop\Repositories\ProductsRepository;
-use Domain\Shop\Stock;
 use Illuminate\View\View;
+use Domain\Shop\Repositories\ProductsRepository;
 
 /**
  * @version 1.0.1
@@ -26,7 +25,6 @@ class ProductController extends Controller
         $this->layout
             ->setTitle($product->name)
             ->setMeta($product)
-            ->hideTitle()
             ->addCatalogBreadcrumb();
 
         if ($product->category->parent) {
