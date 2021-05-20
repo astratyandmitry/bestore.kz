@@ -5,7 +5,7 @@
     <div class="header__content">
       <div class="header__main">
         <div class="logotype">
-          <a href="{{ route('shop::home') }}" class="logotype__link">URASHOP</a>
+          <a href="{{ route('shop::home') }}" class="logotype__link">BESTORE</a>
         </div>
 
         <div class="nav">

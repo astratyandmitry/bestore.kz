@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $position_key
  * @property string $title
  * @property string $image
+ * @property string $image_mobile
  * @property string $url
  *
  * @property \Domain\Shop\Models\BannerPosition $position

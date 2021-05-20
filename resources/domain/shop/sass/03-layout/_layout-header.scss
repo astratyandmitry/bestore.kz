@@ -79,6 +79,8 @@
       .hamburger__icon {
         color: rgba(255, 255, 255, .80);
         margin-bottom: -2px;
+        height: 32px;
+        width: 32px;
         @include transition();
 
         @include mobile() {

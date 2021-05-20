@@ -30,5 +30,12 @@
         'path' => 'banners',
         'required' => true,
     ])
+
+    @include('cms::layouts.includes.form.field.file-image', [
+        'label' => __('cms.field.image_mobile'),
+        'attribute' => 'image_mobile',
+        'path' => 'banners',
+        'required' => true,
+    ])
   </div>
 </section>

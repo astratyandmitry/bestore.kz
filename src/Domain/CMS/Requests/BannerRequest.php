@@ -15,6 +15,7 @@ class BannerRequest extends Request
                 'title' => 'required|max:500',
                 'url' => 'required|url',
                 'image' => 'required',
+                'image_mobile' => 'required',
                 'active' => 'boolean',
             ]);
     }

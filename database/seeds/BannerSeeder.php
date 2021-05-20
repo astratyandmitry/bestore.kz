@@ -45,6 +45,7 @@ class BannerSeeder extends Seeder
 
         foreach($this->data as $index => $data) {
             $data['image'] = "/images/banners/{$index}.jpeg";
+            $data['image_mobile'] = "/images/banners/{$index}.jpeg";
             $data['active'] = true;
             $data['sort'] = $index;
 

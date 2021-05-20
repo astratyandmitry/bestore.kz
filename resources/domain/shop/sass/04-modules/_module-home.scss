@@ -109,6 +109,18 @@
     .slide {
       .slide__image {
         @include radius();
+
+        &.slide__image--mobile {
+          display: none;
+        }
+
+        @include mobile() {
+          display: none;
+
+          &.slide__image--mobile {
+            display: block;
+          }
+        }
       }
     }
   }

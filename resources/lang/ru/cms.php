@@ -91,6 +91,7 @@ return [
         'hru' => 'ЧПУ',
         'gallery' => 'Галерея',
         'recommendation' => 'Рекомендации',
+        'image_mobile' => 'Изображение для телефона',
         'composition' => 'Состав',
         'description' => 'Описание',
         'meta_description' => 'Meta описание',
