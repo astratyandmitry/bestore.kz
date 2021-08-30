@@ -22,6 +22,25 @@
                 'required' => true,
             ])
 
+            @include('shop::layouts.includes.form.field.dropdown', [
+            'attribute' => 'city_id',
+            'placeholder' => 'Город',
+            'required' => true,
+            'options' => Domain\Shop\Models\City::query()->oldest('name')->pluck('name', 'id')->toArray(),
+        ])
+
+            @include('shop::layouts.includes.form.field.input', [
+                'attribute' => 'name',
+                'placeholder' => 'ФИО',
+                'required' => true,
+            ])
+
+            @include('shop::layouts.includes.form.field.input', [
+                'attribute' => 'phone',
+                'placeholder' => 'Номер телефона',
+                'required' => true,
+            ])
+
             @include('shop::layouts.includes.form.field.input', [
                 'attribute' => 'email',
                 'placeholder' => 'E-mail',
@@ -42,3 +61,12 @@
     </div>
   </div>
 @endsection
+
+@push('scripts')
+  <script src="https://unpkg.com/imask"></script>
+  <script>
+    IMask(document.getElementById('phone'), {
+      mask: '+{7}(000)0000000'
+    })
+  </script>
+@endpush

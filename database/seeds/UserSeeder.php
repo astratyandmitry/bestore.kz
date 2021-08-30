@@ -11,6 +11,9 @@ class UserSeeder extends Seeder
     protected $data = [
         [
             'email' => 'user@mail.ru',
+            'city_id' => 1,
+            'name' => 'Иван Иванов',
+            'phone' => '+7(777)7777777',
         ],
     ];
 

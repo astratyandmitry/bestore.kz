@@ -10,6 +10,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @property string $uuid
  * @property string $status_key
+ * @property integer $city_id
  * @property integer|null $user_id
  * @property string $client_name
  * @property string $client_phone
@@ -29,6 +30,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
+        'city_id',
         'client_name',
         'client_phone',
         'client_email',
@@ -40,6 +42,7 @@ class Order extends Model
      * @var array
      */
     protected $casts = [
+        'city_id' => 'integer',
         'user_id' => 'integer',
         'delivery_price' => 'integer',
     ];
@@ -98,20 +101,20 @@ class Order extends Model
             return $builder->where('city_id', request('city_id'));
         });
 
-        $builder->when(request('status_id'), function (Builder $builder): Builder {
-            return $builder->where('status_id', request('status_id'));
+        $builder->when(request('status_key'), function (Builder $builder): Builder {
+            return $builder->where('status_key', request('status_key'));
         });
 
         return parent::scopeFilter($builder);
     }
 
     /**
-     * @param int $status_id
+     * @param int $status_key
      * @return void
      */
-    public function changeStatus(int $status_id): void
+    public function changeStatus(int $status_key): void
     {
-        $this->status_id = $status_id;
+        $this->status_key = $status_key;
         $this->save();
     }
 
@@ -120,7 +123,7 @@ class Order extends Model
      */
     public function current(): bool
     {
-        return $this->status_id === ORDER_STATUS_CREATED;
+        return $this->status_key === ORDER_STATUS_CREATED;
     }
 
     /**

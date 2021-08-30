@@ -30,11 +30,11 @@
 
     <div class="product__main">
       <div class="product__name">
-        {{ $product->brand ? $product->brand->name : $product->category->name }}
+        {{ $product->name }}
       </div>
 
       <div class="product__detail">
-        {{ $product->name }}
+        {{ $product->brand ? $product->brand->name : $product->category->name }}
       </div>
 
       <div class="product__rating">

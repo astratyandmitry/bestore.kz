@@ -35,6 +35,14 @@
             </tr>
             <tr>
               <td class="cell--key">
+                @lang('cms.field.city_id')
+              </td>
+              <td>
+                {{ $model->city->name }}
+              </td>
+            </tr>
+            <tr>
+              <td class="cell--key">
                 @lang('cms.field.address')
               </td>
               <td>

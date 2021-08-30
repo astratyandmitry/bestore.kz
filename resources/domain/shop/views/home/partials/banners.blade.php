@@ -8,7 +8,7 @@
           @foreach($mainBanners as $mainBanner)
             <a href="{{ $mainBanner->url }}" target="_blank" class="swiper-slide slide">
               <img src="{{ $mainBanner->image }}" alt="{{ $mainBanner->title }}" class="slide__image">
-              <img src="{{ $mainBanner->image_mobile }}" alt="{{ $mainBanner->title }}" class="slide__image slide__image--mobile">
+{{--              <img src="{{ $mainBanner->image_mobile }}" alt="{{ $mainBanner->title }}" class="slide__image slide__image--mobile">--}}
             </a>
           @endforeach
         </div>

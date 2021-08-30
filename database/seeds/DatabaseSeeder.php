@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(BrandSeeder::class);
         $this->call(BannerSeeder::class);
+        $this->call(CitySeeder::class);
         $this->call(UserSeeder::class);
 
         // Manager

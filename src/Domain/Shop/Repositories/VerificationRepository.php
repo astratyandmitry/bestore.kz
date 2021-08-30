@@ -15,27 +15,27 @@ class VerificationRepository
 {
     /**
      * @param \Domain\Shop\Models\User $user
-     * @param int $typeId
+     * @param string $typeKey
      * @return \Domain\Shop\Models\Verification
      */
-    public function generate(User $user, int $typeId): Verification
+    public function generate(User $user, string $typeKey): Verification
     {
         return Verification::query()->create([
             'user_id' => $user->id,
-            'type_id' => $typeId,
+            'type_key' => $typeKey,
         ]);
     }
 
     /**
      * @param \Domain\Shop\Models\User $user
-     * @param int $typeId
+     * @param string $typeKey
      * @return void
      */
-    public function deletePrevious(User $user, int $typeId): void
+    public function deletePrevious(User $user, string $typeKey): void
     {
         Verification::query()->where([
             'user_id' => $user->id,
-            'type_id' => $typeId,
+            'type_key' => $typeKey,
         ])->delete();
     }
 
@@ -58,7 +58,7 @@ class VerificationRepository
     public function findPasswordRecoveryByCode(string $code): ?Verification
     {
         return Verification::query()
-            ->where('type_id', VerificationType::PASSWORD_RECOVERY)
+            ->where('type_key', VERIFICATION_PASSWORD_RECOVERY)
             ->where('code', $code)
             ->where('expired_at', '>=', now())
             ->first();

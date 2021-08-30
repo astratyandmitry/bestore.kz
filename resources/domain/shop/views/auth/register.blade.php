@@ -11,6 +11,25 @@
         <form method="post" class="auth__content">
           @csrf
 
+          @include('shop::layouts.includes.form.field.dropdown', [
+              'attribute' => 'city_id',
+              'placeholder' => 'Город',
+              'required' => true,
+              'options' => Domain\Shop\Models\City::query()->oldest('name')->pluck('name', 'id')->toArray(),
+          ])
+
+          @include('shop::layouts.includes.form.field.input', [
+              'attribute' => 'name',
+              'placeholder' => 'ФИО',
+              'required' => true,
+          ])
+
+          @include('shop::layouts.includes.form.field.input', [
+              'attribute' => 'phone',
+              'placeholder' => 'Номер телефона',
+              'required' => true,
+          ])
+
           @include('shop::layouts.includes.form.field.input', [
               'attribute' => 'email',
               'placeholder' => 'E-mail',
@@ -33,14 +52,24 @@
           <button type="submit" class="form-button form-button--full">
             Зарегистрироваться
           </button>
-        </form>
-      </div>
 
-      <div class="auth__action">
-        <a href="{{ route('shop::auth.login') }}">
-          У меня уже есть аккаунт
-        </a>
+          <div class="auth__action">
+            <a href="{{ route('shop::auth.login') }}">
+              Войти в аккаунт
+            </a>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 @endsection
+
+
+@push('scripts')
+  <script src="https://unpkg.com/imask"></script>
+  <script>
+    IMask(document.getElementById('phone'), {
+      mask: '+{7}(000)0000000'
+    })
+  </script>
+@endpush

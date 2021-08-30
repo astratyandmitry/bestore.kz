@@ -23,7 +23,7 @@ $factory->define(Product::class, function (Faker $faker) {
     }
 
     return [
-        'category_id' => Category::query()->inRandomOrder()->value('id'),
+        'category_id' => Category::query()->inRandomOrder()->whereNotNull('parent_id')->value('id'),
         'brand_id' => Brand::query()->inRandomOrder()->value('id'),
         'name' => Str::title($title = $faker->words(3, true)),
         'hru' => Str::slug($title),

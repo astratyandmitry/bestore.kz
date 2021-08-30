@@ -1,3 +1,116 @@
+.top-bar {
+  background: darken($color-primary, 5%);
+  padding: 1rem 0;
+
+  .top-bar__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include mobile() {
+      display: block;
+    }
+  }
+
+  .location {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+
+    @include mobile() {
+      justify-content: space-between;
+    }
+
+    .city {
+      .city__name {
+        font-weight: 500;
+        color: $color-white;
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .city__icon {
+        height: 16px;
+        width: 16px;
+        margin-left: 4px;
+        opacity: .8;
+      }
+
+      .city-dropdown {
+        display: none;
+        visibility: hidden;
+        position: absolute;
+        background: $color-white;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, .08), 0 16px 32px rgba(0, 0, 0, .16);
+        margin: 0;
+        list-style: none;
+        padding: 0;
+        z-index: 100;
+        overflow: hidden;
+        @include transition();
+        @include radius();
+
+        .city-dropdown__link {
+          display: block;
+          padding: .5rem .750rem;
+          font-size: 12px;
+        }
+
+      }
+
+      &:hover {
+        .city-dropdown {
+          visibility: visible;
+          display: block;
+        }
+      }
+    }
+
+
+    .phone {
+      margin-left: 2rem;
+
+      a {
+        color: $color-white;
+        opacity: .8;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .menu {
+    @include mobile() {
+      display: none;
+    }
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .menu__item {
+      display: inline-block;
+      margin-right: 1rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      .menu__link {
+        color: $color-white;
+        opacity: .50;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
 .header {
   background: $color-primary;
   padding: 1rem 0;
@@ -121,7 +234,8 @@
       }
 
       &.dropdown--active {
-        display: block;
+        display: grid;
+        grid-template-columns: auto auto;
         visibility: visible;
       }
 
@@ -129,6 +243,15 @@
         list-style: none;
         margin: 0;
         padding: 0;
+
+        &.menu--child {
+          border-left: 1px solid #f0f0f0;
+          display: none;
+        }
+
+        &.menu--active {
+          display: block !important;
+        }
 
         @include mobile() {
           padding: 1rem;

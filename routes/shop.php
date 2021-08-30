@@ -8,7 +8,7 @@ Route::get('/page/{page}', 'PageController')->name('page');
 Route::get('/search', 'SearchController')->name('search');
 Route::get('/catalog', 'CategoriesController')->name('categories');
 Route::get('/catalog/product/{hru}', 'ProductController')->name('product');
-Route::get('/catalog/{parentHru}', 'CatalogController')->name('catalog');
+Route::get('/catalog/{parentHru}/{childHru?}', 'CatalogController')->name('catalog');
 
 Route::get('/order-{uuid}', 'OrderDetailController')->name('order');
 Route::get('/basket', 'BasketController@index')->name('basket');
@@ -22,6 +22,8 @@ Route::middleware('shop.signed')->group(function (): void {
     Route::get('/catalog/product/{hru}/review', 'ProductReviewController@form')->name('product.review');
     Route::post('/catalog/product/{hru}/review', 'ProductReviewController@process');
 });
+
+Route::get('/change-city/{city}', 'AppController@changeCity')->name('app.change-city');
 
 Route::prefix('account')->as('account.')->namespace('Account')->middleware('shop.signed')->group(function (): void {
     Route::redirect('/', '/account/orders/current')->name('redirect');

@@ -2,6 +2,7 @@
 
 namespace Domain\Shop\Repositories;
 
+use Domain\Shop\Models\Category;
 use Domain\Shop\Models\Product;
 use Domain\Shop\Requests\CatalogRequest;
 use Illuminate\Database\Eloquent\Collection;
@@ -15,6 +16,7 @@ class ProductsRepository
 {
     /**
      * @param integer $id
+     *
      * @return \Domain\Shop\Models\Product
      */
     public function findById(int $id): Product
@@ -24,6 +26,7 @@ class ProductsRepository
 
     /**
      * @param string $hru
+     *
      * @return \Domain\Shop\Models\Product
      */
     public function findByHru(string $hru): Product
@@ -33,7 +36,8 @@ class ProductsRepository
 
     /**
      * @param \Domain\Shop\Requests\CatalogRequest $request
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     *
+     * @return mixed
      */
     public function catalog(CatalogRequest $request)
     {

@@ -2,9 +2,12 @@
 
 namespace Domain\Shop\Common;
 
+use Domain\Shop\Models\City;
 use Domain\Shop\Models\Model;
 use Domain\Shop\Models\Category;
+use Domain\Shop\Models\Page;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Session;
 
 /**
  * @version 1.0.1
@@ -49,6 +52,11 @@ class Layout
     public $breadcrumbs = [];
 
     /**
+     * @var \Domain\Shop\Models\City|null
+     */
+    protected $city;
+
+    /**
      * @return void
      */
     public function __construct()
@@ -62,10 +70,13 @@ class Layout
     private function setupData(): void
     {
         $this->data['categories'] = Category::query()->whereNull('parent_id')->with('children')->get();
+        $this->data['pages'] = Page::query()->where('nav', true)->get();
+        $this->data['cities'] = City::query()->get();
     }
 
     /**
      * @param string|null $title
+     *
      * @return \Domain\Shop\Common\Layout
      */
     public function setTitle(?string $title = null): Layout
@@ -77,6 +88,7 @@ class Layout
 
     /**
      * @param \Domain\Shop\Models\Model $model
+     *
      * @return \Domain\Shop\Common\Layout
      */
     public function setMeta(Model $model): Layout
@@ -97,6 +109,23 @@ class Layout
     {
         return $this->data['categories'];
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|\Domain\Shop\Models\Category[]
+     */
+    public function getPages(): Collection
+    {
+        return $this->data['pages'];
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|\Domain\Shop\Models\Category[]
+     */
+    public function getCities(): Collection
+    {
+        return $this->data['cities'];
+    }
+
 
     /**
      * @return \Domain\Shop\Common\Layout
@@ -121,6 +150,7 @@ class Layout
     /**
      * @param string $breadcrumb
      * @param string $url
+     *
      * @return \Domain\Shop\Common\Layout
      */
     public function addBreadcrumb(string $breadcrumb, string $url = '#'): Layout
@@ -142,6 +172,7 @@ class Layout
 
     /**
      * @param array $breadcrumbs
+     *
      * @return \Domain\Shop\Common\Layout
      */
     public function setBreadcrumbs(array $breadcrumbs): Layout
@@ -157,5 +188,17 @@ class Layout
     public function hasBreadcrumbs(): bool
     {
         return count($this->breadcrumbs) > 0;
+    }
+
+    /**
+     * @return \Domain\Shop\Models\City|null
+     */
+    public function getCity(): ?City
+    {
+        if (!$this->city) {
+            $this->city = $this->getCities()->where('id', Session::get(SHOP_SESSION_CITY))->first();
+        }
+
+        return $this->city;
     }
 }

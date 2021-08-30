@@ -2,12 +2,11 @@
 
 <section class="block">
   <div class="section">
-{{--    @include('cms::layouts.includes.form.field.dropdown', [--}}
-{{--          'label' => __('cms.field.parent_id'),--}}
-{{--          'attribute' => 'parent_id',--}}
-{{--          'required' => true,--}}
-{{--          'options' => $data['parents'],--}}
-{{--    ])--}}
+    @include('cms::layouts.includes.form.field.dropdown', [
+          'label' => __('cms.field.parent_id'),
+          'attribute' => 'parent_id',
+          'options' => $data['parents'],
+    ])
 
     @include('cms::layouts.includes.form.field.input', [
           'label' => __('cms.field.name'),

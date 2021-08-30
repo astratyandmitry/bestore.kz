@@ -16,6 +16,11 @@
               </a>
             </li>
             <li class="menu__item">
+              <a href="{{ route('shop::page', 'franchise') }}" class="menu__link">
+                Франшиза
+              </a>
+            </li>
+            <li class="menu__item">
               <a href="{{ route('shop::page', 'contacts') }}" class="menu__link">
                 Контакты
               </a>
@@ -31,7 +36,7 @@
 
       <div class="section">
         <div class="section__title">
-          О нас
+          Клиентам
         </div>
 
         <div class="section__body">
@@ -52,7 +57,7 @@
 
       <div class="section">
         <div class="section__title">
-          О нас
+          Пользователям
         </div>
 
         <div class="section__body">
@@ -82,7 +87,7 @@
               Адрес
             </div>
             <div class="contact__value">
-              {{ config('shop.contact.address') }}
+              {{ $layout->getCity()->address }}
             </div>
           </div>
 
@@ -91,8 +96,8 @@
               Телефон
             </div>
             <div class="contact__value">
-              <a href="tel:8{{ str_replace(['+7', '(', ')'], '', config('shop.contact.phone')) }}">
-                {{ config('shop.contact.phone') }}
+              <a href="tel:{{ clean_phone($layout->getCity()->phone) }}">
+                {{ $layout->getCity()->phone }}
               </a>
             </div>
           </div>

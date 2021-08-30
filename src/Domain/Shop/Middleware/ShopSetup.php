@@ -14,11 +14,17 @@ class ShopSetup
     /**
      * @param \Illuminate\Http\Request $request
      * @param \Closure $next
+     *
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard(SHOP_GUARD)->guest() && ! Session::has(SHOP_SESSION_GUEST)) {
+        /** @var \Domain\Shop\Models\City $city */
+        if (!Session::has(SHOP_SESSION_CITY) && $city = City::query()->first()) {
+            Session::put(SHOP_SESSION_CITY, $city->id);
+        }
+
+        if (Auth::guard(SHOP_GUARD)->guest() && !Session::has(SHOP_SESSION_GUEST)) {
             Session::put(SHOP_SESSION_GUEST, Uuid::uuid1()->toString());
         }
 

@@ -48,6 +48,11 @@
             @lang('cms.model.brands')
           </a>
         </li>
+        <li {{ isActive($model == 'cities') }}>
+          <a href="{{ route('cms::cities.index') }}">
+            @lang('cms.model.cities')
+          </a>
+        </li>
       </ul>
       @break
       @case('system')

@@ -5,7 +5,7 @@ namespace Domain\Shop\Controllers\Account;
 use Domain\Shop\Controllers\Controller;
 use Domain\Shop\Models\Page;
 use Domain\Shop\Repositories\UsersRepository;
-use Domain\Shop\Requests\Account\ReviewRequest;
+use Domain\Shop\Requests\Account\PersonalSettingsRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -30,11 +30,12 @@ class PersonalSettingsController extends Controller
     }
 
     /**
-     * @param \Domain\Shop\Requests\Account\ReviewRequest $request
+     * @param \Domain\Shop\Requests\Account\PersonalSettingsRequest $request
      * @param \Domain\Shop\Repositories\UsersRepository $repository
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function process(ReviewRequest $request, UsersRepository $repository): RedirectResponse
+    public function process(PersonalSettingsRequest $request, UsersRepository $repository): RedirectResponse
     {
         /** @var \Domain\Shop\Models\User $user */
         $user = auth('shop')->user();

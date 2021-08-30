@@ -18,7 +18,10 @@ class PersonalSettingsRequest extends Request
     {
         return [
             'current_password' => 'required|current_password',
-            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore(auth('shop')->id())],
+            'city_id' => ['required', 'exists:cities,id'],
+            'name' => ['required', 'max:80'],
+            'phone' => ['required', 'regex:/^(\+\d{1})\((\d{3})\)(\d{7})$/i', Rule::unique('users', 'phone')->ignore(auth('shop')->id())],
+            'email' => ['required', 'max:100', 'email', Rule::unique('users', 'email')->ignore(auth('shop')->id())],
         ];
     }
 }

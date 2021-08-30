@@ -4,7 +4,7 @@
   <div class="heading @if (request()->routeIs('shop::order')) heading--center @endif">
     <div class="container">
       @if ($layout->withBreadcrumbs)
-{{--        @include('shop::layouts.partials.heading.breadcrumbs')--}}
+        @include('shop::layouts.partials.heading.breadcrumbs')
       @endif
 
       @if ($layout->withTitle)

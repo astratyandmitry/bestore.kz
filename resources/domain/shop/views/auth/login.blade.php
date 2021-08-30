@@ -40,13 +40,13 @@
           <button type="submit" class="form-button form-button--full">
             Войти
           </button>
-        </form>
-      </div>
 
-      <div class="auth__action">
-        <a href="{{ route('shop::auth.register') }}">
-          У меня еще нет аккаунта
-        </a>
+          <div class="auth__action">
+            <a href="{{ route('shop::auth.register') }}">
+              Зарегистрироваться
+            </a>
+          </div>
+        </form>
       </div>
     </div>
   </div>

@@ -2,15 +2,20 @@
 
 namespace Domain\Shop\Models;
 
+use Illuminate\Support\Facades\Mail;
 use Domain\Shop\Mails\VerificationMail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * @property integer $city_id
+ * @property string $phone
  * @property string $email
+ * @property string $name
  * @property string $password
  * @property \Carbon\Carbon|null $activated_at
  *
+ * @property \Domain\Shop\Models\City $city
  * @property \Domain\Shop\Models\Basket[] $baskets
  * @property \Domain\Shop\Models\Order[] $orders
  */
@@ -67,5 +72,13 @@ class User extends Model implements
         if (app()->environment('production')) {
             Mail::to($this->email)->send(new VerificationMail($verification));
         }
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 }

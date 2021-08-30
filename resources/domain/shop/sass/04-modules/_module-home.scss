@@ -21,7 +21,10 @@
 
     .swiper-container {
       width: 100%;
-      height: 100%;
+      height: 240px;
+      overflow: hidden;
+      position: relative;;
+      @include radius();
     }
 
     .swiper-button-prev,
@@ -95,6 +98,8 @@
     }
 
     .swiper-pagination {
+      bottom: 0;
+      display: none;
       border-bottom: 1rem;
     }
 
@@ -108,18 +113,21 @@
 
     .slide {
       .slide__image {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
         @include radius();
 
         &.slide__image--mobile {
           display: none;
+
+          @include mobile() {
+            display: block;
+          }
         }
 
         @include mobile() {
           display: none;
-
-          &.slide__image--mobile {
-            display: block;
-          }
         }
       }
     }

@@ -29,6 +29,9 @@ class UsersRepository
     public function register(RegisterRequest $request): ?User
     {
         return User::query()->create([
+            'city_id' => $request->city_id,
+            'name' => $request->name,
+            'phone' => $request->phone,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'activated_at' => app()->environment('production') ? null : now(),

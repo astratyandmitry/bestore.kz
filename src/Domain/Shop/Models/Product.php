@@ -100,10 +100,10 @@ class Product extends Model implements HasUrl
         return 'hru';
     }
 
-    /**B
-     *
+    /**
      * @param \Illuminate\Database\Eloquent\Builder $builder
      * @param \Domain\Shop\Requests\CatalogRequest|null $request
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function scopeCatalog(Builder $builder, ?CatalogRequest $request = null): Builder
@@ -126,8 +126,16 @@ class Product extends Model implements HasUrl
             return $builder;
         });
 
-        $builder->when($request->category_id, function (Builder $builder) use ($request): Builder {
-            return $builder->where('category_id', explode(',', $request->category_id));
+//        $builder->where($category, function ($builder) use ($category) {
+//            if ($category->parent) {
+//                return $builder->whereIn('category_id', $category->parent->children->pluck('id')->toArray());
+//            } else {
+//                return $builder->where('category_id', $category->id);
+//            }
+//        });
+
+        $builder->when($request->category, function (Builder $builder) use ($request): Builder {
+            return $builder->whereIn('category_id', explode(',', $request->category));
         });
 
         $builder->when($request->brand, function (Builder $builder) use ($request): Builder {
@@ -135,11 +143,11 @@ class Product extends Model implements HasUrl
         });
 
         $builder->when($request->price_from, function (Builder $builder) use ($request): Builder {
-            return $builder->where('price', '>=', (int) $request->price_from);
+            return $builder->where('price', '>=', (int)$request->price_from);
         });
 
         $builder->when($request->price_to, function (Builder $builder) use ($request): Builder {
-            return $builder->where('price', '<=', (int) $request->price_to);
+            return $builder->where('price', '<=', (int)$request->price_to);
         });
 
         $builder->when($request->discount, function (Builder $builder): Builder {
@@ -147,7 +155,7 @@ class Product extends Model implements HasUrl
         });
 
         $builder->when($request->query('term'), function (Builder $builder): Builder {
-            return $builder->where('name', 'LIKE', '%'.request()->get('term').'%');
+            return $builder->where('name', 'LIKE', '%' . request()->get('term') . '%');
         });
 
         return $builder;
@@ -156,14 +164,15 @@ class Product extends Model implements HasUrl
     /**
      * @param \Illuminate\Database\Eloquent\Builder $builder
      * @param bool $applyOrder
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function scopeFilter(Builder $builder, bool $applyOrder = true): Builder
     {
         $builder->when(request('info'), function (Builder $builder): Builder {
             return $builder
-                ->where('name', 'LIKE', '%'.request()->get('info').'%')
-                ->orWhere('hru', 'LIKE', '%'.request()->get('info').'%');
+                ->where('name', 'LIKE', '%' . request()->get('info') . '%')
+                ->orWhere('hru', 'LIKE', '%' . request()->get('info') . '%');
         });
 
         $builder->when(request('category_id'), function (Builder $builder): Builder {
@@ -215,7 +224,7 @@ class Product extends Model implements HasUrl
     public function recalculateRating(): void
     {
         $this->update([
-            'rating' => number_format((float) $this->reviews->avg('rating'), 1, '.', ''),
+            'rating' => number_format((float)$this->reviews->avg('rating'), 1, '.', ''),
         ]);
     }
 }

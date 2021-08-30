@@ -7,7 +7,7 @@
         <section class="content">
           <div class="brand">
             <div class="logotype">
-              URA<span>Shop</span>
+              BESTORE
             </div>
           </div>
 

@@ -37,6 +37,7 @@ Route::middleware('cms.signed')->group(function (): void {
         'products' => 'ProductsController',
         'pages' => 'PagesController',
         'categories' => 'CategoriesController',
+        'cities' => 'CitiesController',
         'brands' => 'BrandsController',
         'managers' => 'ManagersController',
         'banners' => 'BannersController',

@@ -4,6 +4,7 @@
  * Format price for humans
  *
  * @param int $price
+ *
  * @return string
  */
 function price(int $price): string
@@ -15,6 +16,7 @@ function price(int $price): string
  * Format phone for humans
  *
  * @param string $phone
+ *
  * @return string
  */
 function phone(string $phone): string
@@ -23,5 +25,15 @@ function phone(string $phone): string
     $start = str_replace('(', ' (', $start);
     $start = str_replace(')', ') ', $start);
 
-    return $start.substr($phone, 7, 3).'-'.substr($phone, 10, 2).'-'.substr($phone, 12, 2);
+    return $start . substr($phone, 7, 3) . '-' . substr($phone, 10, 2) . '-' . substr($phone, 12, 2);
+}
+
+/**
+ * @param string $phone
+ *
+ * @return string
+ */
+function clean_phone(string $phone): string
+{
+    return '8' . str_replace(['+7', '(', ')', ' ', '-'], '', $phone);
 }

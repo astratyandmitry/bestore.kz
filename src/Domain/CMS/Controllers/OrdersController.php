@@ -2,6 +2,7 @@
 
 namespace Domain\CMS\Controllers;
 
+use Domain\Shop\Models\City;
 use Illuminate\View\View;
 use Domain\Shop\Models\Order;
 use Domain\Shop\Models\OrderStatus;
@@ -35,6 +36,7 @@ class OrdersController extends Controller
      */
     public function __construct()
     {
+        $this->with('cities', City::query()->oldest('name')->pluck('name', 'id')->toArray());
         $this->with('statuses', OrderStatus::query()->oldest()->pluck('name', 'id')->toArray());
     }
 

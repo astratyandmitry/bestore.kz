@@ -24,11 +24,13 @@
 
   .section {
     .section__title {
+      font-size: 18px;
       font-weight: 600;
       color: $color-white;
       margin-bottom: 1.5rem;
 
       @include mobile() {
+        font-size: 16px;
         margin-bottom: .750rem;
       }
     }
@@ -74,6 +76,7 @@
         margin-bottom: .750rem;
 
         @include mobile() {
+          font-size: 14px;
           margin-bottom: .5rem;
         }
 
@@ -82,7 +85,6 @@
         }
 
         .menu__link {
-          font-size: 14px;
           color: rgba(255, 255, 255, .80);
           border-bottom: none;
 

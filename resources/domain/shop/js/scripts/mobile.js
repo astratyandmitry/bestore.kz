@@ -31,3 +31,20 @@ searchInput.addEventListener('focusout', () => {
   loader.classList.add('loader--active')
   body.classList.add('fixed')
 })
+
+let mainMenuItem = document.querySelectorAll('.menu--main .menu__item')
+let activeChildMenu = null
+
+for (let i = 0; i < mainMenuItem.length; i++) {
+  let childMenu = document.getElementById(`child-menu-${mainMenuItem[i].dataset.for}`)
+
+  mainMenuItem[i].addEventListener('mouseover', function () {
+    if (activeChildMenu) {
+      activeChildMenu.classList.remove('menu--active')
+    }
+
+    activeChildMenu = childMenu
+
+    childMenu.classList.add('menu--active')
+  })
+}
