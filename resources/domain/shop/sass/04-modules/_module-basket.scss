@@ -3,6 +3,12 @@
     width: 360px;
     margin-left: 3rem;
 
+    @include mobile-tablet() {
+      width: 100%;
+      margin-top: 2rem;
+      margin-left: 0;
+    }
+
     .heading {
       display: none;
 
@@ -18,7 +24,7 @@
       @include boxShadow();
 
       @include mobile() {
-          padding: 1.5rem;
+        padding: 1.5rem;
       }
     }
 

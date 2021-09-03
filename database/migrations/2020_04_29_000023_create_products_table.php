@@ -23,9 +23,6 @@ class CreateProductsTable extends Migration
             $table->double('rating', 10, 2)->default(0.0);
             $table->text('about')->nullable();
             $table->string('badges', 1000)->nullable();
-            $table->unsignedInteger('quantity')->default(0)->index();
-            $table->unsignedInteger('price')->index();
-            $table->unsignedInteger('price_sale')->index()->nullable();
             $table->string('meta_description', 1000)->nullable();
             $table->string('meta_keywords', 1000)->nullable();
             $table->unsignedInteger('count_views')->default(0);

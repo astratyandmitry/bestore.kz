@@ -8,6 +8,8 @@ use Domain\Shop\Requests\CatalogRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 /**
  * @property integer $category_id
@@ -20,7 +22,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $about
  * @property string|null $badges
  * @property double $rating
- * @property integer $quantity
  * @property integer $price
  * @property integer|null $price_sale
  * @property string|null $meta_description
@@ -31,6 +32,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Domain\Shop\Models\Category $category
  * @property \Domain\Shop\Models\Brand $brand
  * @property \Domain\Shop\Models\Review[]|\Illuminate\Database\Eloquent\Collection $reviews
+ * @property \Domain\Shop\Models\ProductPacking[]|\Illuminate\Database\Eloquent\Collection $packing
+ * @property \Domain\Shop\Models\ProductTaste[]|\Illuminate\Database\Eloquent\Collection $tastes
+ * @property \Domain\Shop\Models\ProductRemain[]|\Illuminate\Database\Eloquent\Collection $remains
+ * @property \Domain\Shop\Models\ProductStock[]|\Illuminate\Database\Eloquent\Collection $stocks
  *
  * @method static Builder filter(?CatalogRequest $request = null)
  */
@@ -41,7 +46,7 @@ class Product extends Model implements HasUrl
     /**
      * @var array
      */
-    protected $guarded = [];
+    protected $guarded = ['packing', 'tastes', 'remains'];
 
     /**
      * @var array
@@ -87,10 +92,45 @@ class Product extends Model implements HasUrl
      */
     public function related(): HasMany
     {
-        return $this->hasMany(Product::class, 'category_id', 'category_id')
-            ->where('id', '!=', $this->id)
-            ->limit(4);
+        return $this->hasMany(Catalog::class, 'category_id', 'category_id')->where('id', '!=', $this->id)->limit(4);
     }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function packing(): HasMany
+    {
+        return $this->hasMany(ProductPacking::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tastes(): HasMany
+    {
+        return $this->hasMany(ProductTaste::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function remains(): HasMany
+    {
+        return $this->hasMany(ProductRemain::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function stocks(): HasMany
+    {
+        return $this->hasMany(ProductStock::class)
+            ->where('city_id', Session::get('shop.city_id'))
+            ->where('quantity', '>', 0)
+            ->orderByRaw(DB::raw('price_sale desc'));
+    }
+
 
     /**
      * @return string
@@ -126,13 +166,6 @@ class Product extends Model implements HasUrl
             return $builder;
         });
 
-//        $builder->where($category, function ($builder) use ($category) {
-//            if ($category->parent) {
-//                return $builder->whereIn('category_id', $category->parent->children->pluck('id')->toArray());
-//            } else {
-//                return $builder->where('category_id', $category->id);
-//            }
-//        });
 
         $builder->when($request->category, function (Builder $builder) use ($request): Builder {
             return $builder->whereIn('category_id', explode(',', $request->category));

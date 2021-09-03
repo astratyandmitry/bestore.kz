@@ -2,6 +2,7 @@
 
 namespace Domain\Shop\Controllers;
 
+use Domain\Shop\Repositories\CatalogRepository;
 use Illuminate\View\View;
 use Domain\Shop\Repositories\BannersRepository;
 use Domain\Shop\Repositories\ProductsRepository;
@@ -15,13 +16,14 @@ use Domain\Shop\Repositories\CategoriesRepository;
 class HomeController extends Controller
 {
     /**
-     * @param \Domain\Shop\Repositories\ProductsRepository $productsRepository
+     * @param \Domain\Shop\Repositories\CatalogRepository $catalogRepository
      * @param \Domain\Shop\Repositories\CategoriesRepository $categoriesRepository
      * @param \Domain\Shop\Repositories\BannersRepository $bannersRepository
+     *
      * @return \Illuminate\View\View
      */
     public function __invoke(
-        ProductsRepository $productsRepository,
+        CatalogRepository $catalogRepository,
         CategoriesRepository $categoriesRepository,
         BannersRepository $bannersRepository
     ): View {
@@ -30,8 +32,8 @@ class HomeController extends Controller
         $this->layout->setTitle()->hideTitle()->hideBreadcrumbs();
 
         return $this->view('home.index', [
-            'popularProducts' => $productsRepository->popular(),
-            'latestProducts' => $productsRepository->latest(),
+            'popularProducts' => $catalogRepository->popular(),
+            'latestProducts' => $catalogRepository->latest(),
             'mainBanners' => $bannersRepository->main(),
             'splitBanners' => $bannersRepository->productsSplit(),
             'categories' => $categoriesRepository->parents(),

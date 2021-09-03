@@ -15,8 +15,11 @@ class CreateOrderItemsTable extends Migration
     {
         Schema::create('order_items', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders');
-            $table->foreignId('product_id')->constrained('products');
+            $table->unsignedInteger('order_id')->index();
+            $table->unsignedInteger('taste_id')->index();
+            $table->unsignedInteger('packing_id')->index();
+            $table->unsignedInteger('product_id')->index();
+            $table->unsignedInteger('city_id')->index();
             $table->unsignedInteger('price');
             $table->unsignedInteger('count');
             $table->unsignedInteger('total');

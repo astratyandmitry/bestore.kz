@@ -1,18 +1,18 @@
 <template>
   <tr>
     <td>
-      <a :href="item.product.url" target="_blank" class="product">
+      <a :href="item.stock.product.url" target="_blank" class="product">
         <div class="product__media">
-          <img :src="item.product.image" :alt="item.product.name" class="product__image">
+          <img :src="item.stock.product.image" :alt="item.stock.product.name" class="product__image">
         </div>
 
         <div class="product__content">
           <div class="product__name">
-            {{ item.product.name }}
+            {{ item.stock.product.name }} {{ item.stock.packing.name }}
           </div>
 
-          <div class="product__detail" v-if="item.product.brand">
-            {{ item.product.brand.name }}
+          <div class="product__detail">
+            {{ item.stock.taste.name }}
           </div>
         </div>
       </a>
@@ -44,7 +44,7 @@
           {{ total | formatPrice }} ₸
         </div>
 
-        <div class="price__prev" v-if="item.product.price_sale">
+        <div class="price__prev" v-if="item.stock.price_sale">
           {{ totalPrev | formatPrice }} ₸
         </div>
       </div>
@@ -79,19 +79,19 @@ export default {
   },
   computed: {
     price () {
-      return this.item.product.price_sale ? this.item.product.price_sale : this.item.product.price
+      return this.item.stock.price_sale ? this.item.stock.price_sale : this.item.stock.price
     },
     total () {
       return this.price * this.count
     },
     totalPrev () {
-      return this.item.product.price * this.count
+      return this.item.stock.price * this.count
     },
     reachMin () {
       return this.count === 1
     },
     reachMax () {
-      return this.count === this.item.product.quantity
+      return this.count === this.item.stock.quantity
     }
   },
   methods: {
@@ -113,7 +113,9 @@ export default {
       window.eventBus.$emit('basket.loading')
 
       const data = {
-        product_id: this.item.product.id,
+        product_id: this.item.stock.product.id,
+        packing_id: this.item.stock.packing.id,
+        taste_id: this.item.stock.taste.id,
       }
 
       axios.post(endpoint, data)

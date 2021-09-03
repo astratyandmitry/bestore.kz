@@ -17,8 +17,9 @@
   color: $color-gray;
   font-family: $font-default;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 500;
   line-height: 1.2;
+  text-transform: uppercase;
   display: block;
   margin-bottom: 8px;
 
@@ -105,15 +106,16 @@ select {
   }
 
   &::after {
-    top: calc(50% - 4px);
+    top: calc(50% + 8px);
     right: 12px;
     content: "";
     width: 16px;
     height: 8px;
-    background: $color-gray-light;
+    background: #f0f0f0;
     position: absolute;
     display: block;
     clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    @include transition();
 
     @include mobile() {
       right: 16px;
@@ -121,6 +123,9 @@ select {
   }
 
   &:hover {
+    select {
+      border-color: $color-primary !important;
+    }
 
     &::after {
       background: $color-primary;

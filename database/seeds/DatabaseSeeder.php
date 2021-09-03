@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ManagerRoleSeeder::class);
         $this->call(ManagerSeeder::class);
 
+        $this->call(ProductSeeder::class);
+
         Schema::enableForeignKeyConstraints();
     }
 }

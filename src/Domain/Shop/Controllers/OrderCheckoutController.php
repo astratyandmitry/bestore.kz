@@ -20,14 +20,16 @@ class OrderCheckoutController extends Controller
      * @param \Domain\Shop\Requests\OrderRequest $request
      * @param \Domain\Shop\Repositories\OrdersRepository $ordersRepository
      * @param \Domain\Shop\Repositories\BasketRepository $basketRepository
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function __invoke(
         OrderRequest $request,
         OrdersRepository $ordersRepository,
         BasketRepository $basketRepository
-    ): RedirectResponse {
-        $order = $ordersRepository->create($request, app('basket'));
+    ): RedirectResponse
+    {
+        $order = $ordersRepository->create($request, $this->layout->getCity(), app('basket'));
 
         $basketRepository->clear();
 

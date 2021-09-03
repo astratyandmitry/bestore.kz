@@ -150,7 +150,6 @@
 
     .price__prev {
       font-family: $font-default;
-      font-size: 18px;
       margin-left: .5rem;
       color: $color-gray-light;
       line-height: 1;
@@ -161,8 +160,8 @@
 
     .price__current {
       font-family: $font-default;
-      font-size: 24px;
-      font-weight: 500;
+      font-size: 32px;
+      font-weight: 600;
       color: $color-secondary;
       line-height: 1;
       white-space: nowrap;
@@ -473,6 +472,171 @@
           }
         }
       }
+    }
+  }
+
+
+
+  /////////
+
+
+  .basket {
+    .basket__count {
+      border: 1px solid #f0f0f0;
+      padding: .250rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-column-gap: 8px;
+      margin-bottom: 1rem;
+      @include radius();
+
+      .basket__count__value,
+      .basket__count__button {
+        background: $color-white;
+        padding: .5rem;
+        font-weight: 600;
+        font-size: 18px;
+        text-transform: uppercase;
+        text-align: center;
+        @include radius();
+        @include nonSelect();
+
+        @include mobile() {
+          font-size: 16px;
+
+        }
+      }
+
+      .basket__count__button {
+        @include transition();
+
+        &:hover {
+          background: $color-dark;
+          color: $color-white;
+          cursor: pointer;
+        }
+
+        &.basket__count__button--disabled {
+          background: #e5e5e5;
+          cursor: not-allowed;
+          color: $color-gray-dark;
+        }
+      }
+    }
+
+    .basket__button {
+      border: none;
+      background: $color-secondary;
+      color: $color-white;
+      padding: 1rem;
+      font-weight: 600;
+      font-size: 18px;
+      text-transform: uppercase;
+      text-align: center;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      @include mobile() {
+        padding: 1.250rem;
+      }
+
+      .basket__button__content {
+        display: flex;
+        align-items: center;
+
+        .basket__button__icon {
+          width: 24px;
+          height: 24px;
+          margin-right: 6px;
+
+          @include mobile() {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+
+      &:hover {
+        background: $color-dark;
+      }
+
+      &.basket__button--active {
+        background: #7fc527;
+
+        &:hover {
+          background: #6ca721;
+        }
+      }
+    }
+  }
+
+
+
+  .price {
+    .price__prev {
+      font-weight: 400;
+      font-size: 20px;
+      text-transform: uppercase;
+      line-height: 1;
+      text-decoration: line-through;
+      display: inline-block;
+      white-space: nowrap;
+
+      @include mobile-tablet() {
+        font-size: 20px;
+      }
+    }
+
+    .price__value {
+      font-weight: 600;
+      font-size: 48px;
+      text-transform: uppercase;
+      color: $color-primary;
+      line-height: 1;
+      white-space: nowrap;
+
+      @include mobile-tablet() {
+        font-size: 40px;
+      }
+    }
+
+    .price__notice {
+      margin-top: 1rem;
+      color: $color-gray;
+      font-weight: 500;
+      line-height: 1.2;
+
+      @include mobile() {
+        font-size: 12px;
+      }
+
+      @include tablet() {
+        font-size: 14px;
+      }
+    }
+  }
+
+
+  .stock {
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 1rem;
+
+    @include mobile() {
+      grid-template-columns: 1fr;
+      grid-row-gap: .250rem;
+    }
+
+    select {
+      //background: $color-white;
+      //border: none;
+      //padding: 1.5rem;
+      //font-weight: 900;
+      //font-size: 18px;
+      //text-transform: uppercase;
+      //text-align: center;
     }
   }
 }

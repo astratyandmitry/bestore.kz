@@ -39,30 +39,6 @@
   </div>
 
   <div class="section">
-    <div class="form-grid form-grid--3">
-      @include('cms::layouts.includes.form.field.input', [
-          'label' => __('cms.field.price'),
-          'attribute' => 'price',
-          'required' => true,
-          'type' => 'number',
-      ])
-
-      @include('cms::layouts.includes.form.field.input', [
-          'label' => __('cms.field.price_sale'),
-          'attribute' => 'price_sale',
-          'type' => 'number',
-      ])
-
-      @include('cms::layouts.includes.form.field.input', [
-          'label' => __('cms.field.quantity'),
-          'attribute' => 'quantity',
-          'required' => true,
-          'type' => 'number',
-      ])
-    </div>
-  </div>
-
-  <div class="section">
     @include('cms::layouts.includes.form.field.file-image', [
         'path' => 'products',
         'required' => true,
@@ -76,5 +52,17 @@
     ])
   </div>
 </section>
+
+<product-config
+  :dictionary-packing="{{ json_encode(($data['config']['packing'])) }}"
+  :dictionary-taste="{{ json_encode(($data['config']['tastes'])) }}"
+  :dictionary-city="{{ json_encode(($data['config']['cities'])) }}"
+
+  @if(isset($model) && isset($config))
+  :packing="{{ json_encode($config['packing']) }}"
+  :tastes="{{ json_encode($config['tastes']) }}"
+  :remains="{{ json_encode($config['remains']) }}"
+  @endif
+></product-config>
 
 @include('cms::layouts.includes.form.meta')

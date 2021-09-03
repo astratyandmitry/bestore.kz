@@ -23,84 +23,84 @@
 </template>
 
 <script>
-export default {
-  name: 'CmsUploaderGallery',
-  props: {
-    modelAttribute: {
-      type: String,
-      default: '',
+  export default {
+    name: 'CmsUploaderGallery',
+    props: {
+      modelAttribute: {
+        type: String,
+        default: '',
+      },
+      uploadFolder: {
+        type: String,
+        required: true,
+      },
+      uploadedFiles: {
+        type: Array,
+        required: [],
+      },
     },
-    uploadFolder: {
-      type: String,
-      required: true,
-    },
-    uploadedFiles: {
-      type: Array,
-      required: [],
-    },
-  },
-  data () {
-    return {
-      loadingCount: 0,
-      files: [],
-    }
-  },
-  mounted () {
-    this.files = this.uploadedFiles
-  },
-  computed: {
-    loading () {
-      return this.loadingCount > 0
-    },
-  },
-  methods: {
-    browseFiles () {
-      if (!this.loading) {
-        this.$refs.uploader.click()
+    data () {
+      return {
+        loadingCount: 0,
+        files: [],
       }
     },
-    decreaseLoading () {
-      this.loadingCount--
+    mounted () {
+      this.files = this.uploadedFiles
     },
-    removeFile (path) {
-      if (!this.loading) {
-        this.loadingCount = 1
-
-        window.axios.delete('/cms/uploads', {
-          params: { path: path }
-        }).then(() => {
-          let tempFiles = this.files
-          tempFiles.splice(tempFiles.indexOf(path), 1)
-
-          this.files = tempFiles
-          this.decreaseLoading()
-        }).catch(() => {
-          this.decreaseLoading()
-        })
-      }
+    computed: {
+      loading () {
+        return this.loadingCount > 0
+      },
     },
-    uploadFile (e) {
-      if (!this.loading && e.target.files.length) {
-        for (let i = 0; i < e.target.files.length; i++) {
-          let formData = new FormData()
-          formData.append('upload', e.target.files[i])
-          formData.append('folder', this.uploadFolder)
+    methods: {
+      browseFiles () {
+        if (!this.loading) {
+          this.$refs.uploader.click()
+        }
+      },
+      decreaseLoading () {
+        this.loadingCount--
+      },
+      removeFile (path) {
+        if (!this.loading) {
+          this.loadingCount = 1
 
-          this.loadingCount++
+          window.axios.delete('/cms/uploads', {
+            params: { path: path }
+          }).then(() => {
+            let tempFiles = this.files
+            tempFiles.splice(tempFiles.indexOf(path), 1)
 
-          window.axios.post('/cms/uploads', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-          }).then(({ data }) => {
-            this.files.push(data.url)
+            this.files = tempFiles
             this.decreaseLoading()
           }).catch(() => {
             this.decreaseLoading()
           })
         }
+      },
+      uploadFile (e) {
+        if (!this.loading && e.target.files.length) {
+          for (let i = 0; i < e.target.files.length; i++) {
+            let formData = new FormData()
+            formData.append('upload', e.target.files[i])
+            formData.append('folder', this.uploadFolder)
 
-        this.$refs.uploader.value = ''
-      }
+            this.loadingCount++
+
+            window.axios.post('/cms/uploads', formData, {
+              headers: { 'Content-Type': 'multipart/form-data' }
+            }).then(({ data }) => {
+              this.files.push(data.url)
+              this.decreaseLoading()
+            }).catch(() => {
+              this.decreaseLoading()
+            })
+          }
+
+          this.$refs.uploader.value = ''
+        }
+      },
     },
-  },
-}
+  }
 </script>

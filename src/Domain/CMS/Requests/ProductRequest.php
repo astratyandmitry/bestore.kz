@@ -20,12 +20,12 @@ class ProductRequest extends Request
                 'hru' => 'required|max:80|alpha_dash',
                 'name' => 'required|max:120',
                 'image' => 'required',
-                'price' => 'required|integer|min:1',
-                'price_sale' => 'nullable|integer',
-                'quantity' => 'required|integer|min:0',
                 'about' => 'required',
                 'badges' => 'nullable',
                 'active' => 'boolean',
+                'packing' => 'nullable',
+                'tastes' => 'nullable',
+                'remains' => 'nullable',
             ]);
     }
 }

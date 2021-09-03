@@ -36,6 +36,7 @@ class OrdersRepository
 
     /**
      * @param int $id
+     *
      * @return \Domain\Shop\Models\Order
      */
     public function findById(int $id): Order
@@ -46,6 +47,7 @@ class OrdersRepository
     /**
      * @param int $id
      * @param string|null $uuid
+     *
      * @return \Domain\Shop\Models\Order|null
      */
     public function findByUuidAndId(int $id, ?string $uuid = null): ?Order
@@ -58,18 +60,22 @@ class OrdersRepository
 
     /**
      * @param \Domain\Shop\Requests\OrderRequest $request
+     * @param \Domain\Shop\Models\City $city
      * @param \Domain\Shop\Basket $basket
+     *
      * @return \Domain\Shop\Models\Order
      */
-    public function create(OrderRequest $request, Basket $basket): Order
+    public function create(OrderRequest $request, City $city, Basket $basket): Order
     {
         $order = new Order;
+        $order->city_id = $request->name;
         $order->client_name = $request->name;
         $order->client_phone = $request->phone;
         $order->client_email = $request->email;
         $order->delivery_address = $request->address;
         $order->comment = $request->comment;
         $order->delivery_price = 1000;
+        $order->city_id = $city->id;
         $order->total = $basket->total();
         $order->status_key = ORDER_STATUS_CREATED;
 
@@ -89,15 +95,19 @@ class OrdersRepository
     /**
      * @param \Domain\Shop\Models\Order $order
      * @param \Domain\Shop\Models\Basket $basket
+     *
      * @return \Domain\Shop\Models\OrderItem
      */
     public function addItem(Order $order, BasketModel $basket): OrderItem
     {
         return $order->items()->create([
             'product_id' => $basket->product_id,
+            'packing_id' => $basket->packing_id,
+            'taste_id' => $basket->taste_id,
+            'city_id' => $basket->city_id,
             'count' => $basket->count,
-            'price' => $basket->product->price(),
-            'total' => $basket->count * $basket->product->price(),
+            'price' => $basket->stock->price(),
+            'total' => $basket->count * $basket->stock->price(),
         ]);
     }
 

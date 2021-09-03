@@ -87,12 +87,6 @@
                       {{ $model->badge->name }}
                     </div>
                   @endif
-
-                  @if (!$model->price_sale)
-                      {{ number_format($model->price) }} ₸
-                  @else
-                    <strike>{{ number_format($model->price) }} ₸</strike> {{ number_format($model->price_sale) }} ₸
-                    @endif &middot; {{ $model->quantity }} шт.
                 </div>
               </td>
               <td>

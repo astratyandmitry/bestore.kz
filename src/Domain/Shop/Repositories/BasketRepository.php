@@ -3,8 +3,10 @@
 namespace Domain\Shop\Repositories;
 
 use Domain\Shop\Models\Basket;
-use Illuminate\Support\Facades\DB;
+use Domain\Shop\Models\ProductStock;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 /**
  * @version 1.0.1
@@ -38,14 +40,30 @@ class BasketRepository
     }
 
     /**
+     * @return array
+     */
+    public function existsStockKeys(): array
+    {
+        return Basket::query()
+            ->where($this->owner_column, $this->owner_value)
+            ->where('city_id', Session::get('shop.city_id'))
+            ->where('count', '>', 0)
+            ->whereHas('stock')
+            ->select(DB::raw("concat(product_id, '.', packing_id, '.', taste_id) as k, count"))
+            ->pluck('count', 'k')->toArray();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function all(): Collection
     {
         return Basket::query()
+            ->with(['stock', 'stock.product', 'stock.taste', 'stock.packing'])
             ->where($this->owner_column, $this->owner_value)
+            ->where('city_id', Session::get('shop.city_id'))
             ->where('count', '>', 0)
-            ->with('product', 'product.brand')
+            ->whereHas('stock')
             ->get();
     }
 
@@ -57,33 +75,9 @@ class BasketRepository
     {
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
+            ->where('city_id', Session::get('shop.city_id'))
             ->where('id', $id)
             ->firstOrFail();
-    }
-
-    /**
-     * @param int $productId
-     * @return \Domain\Shop\Models\Basket
-     */
-    public function findByProductId(int $productId): Basket
-    {
-        return Basket::query()
-            ->where($this->owner_column, $this->owner_value)
-            ->where('product_id', $productId)
-            ->firstOrFail();
-    }
-
-    /**
-     * @param int $productId
-     * @return \Domain\Shop\Models\Basket
-     */
-    public function create(int $productId): Basket
-    {
-        return Basket::query()->create([
-            $this->owner_column => $this->owner_value,
-            'product_id' => $productId,
-            'count' => 1,
-        ]);
     }
 
     /**
@@ -94,8 +88,24 @@ class BasketRepository
     {
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
+            ->where('city_id', Session::get('shop.city_id'))
             ->where('id', $id)
             ->delete();
+    }
+
+    /**
+     * @param \Domain\Shop\Models\ProductStock $stock
+     * @return \Domain\Shop\Models\Basket
+     */
+    public function findByStock(ProductStock $stock): Basket
+    {
+        return Basket::query()->firstOrCreate([
+            $this->owner_column => $this->owner_value,
+            'city_id' => Session::get('shop.city_id'),
+            'product_id' => $stock->product_id,
+            'packing_id' => $stock->packing_id,
+            'taste_id' => $stock->taste_id,
+        ]);
     }
 
     /**
@@ -107,6 +117,7 @@ class BasketRepository
     {
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
+            ->where('city_id', Session::get('shop.city_id'))
             ->where('id', $id)
             ->update(['count' => $count]);
     }
@@ -118,6 +129,7 @@ class BasketRepository
     {
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
+            ->where('city_id', Session::get('shop.city_id'))
             ->delete();
     }
 
@@ -129,6 +141,7 @@ class BasketRepository
     {
         return Basket::query()
             ->where($this->owner_column, $this->owner_value)
+            ->where('city_id', Session::get('shop.city_id'))
             ->update([
                 'session_key' => null,
                 'user_id' => $user_id,

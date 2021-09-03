@@ -37,6 +37,7 @@ class ProductController extends Controller
 
         return $this->view('product.show', [
             'product' => $product,
+            'stocks' => app('stock')->load($product),
         ]);
     }
 }

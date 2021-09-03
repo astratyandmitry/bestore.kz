@@ -53,6 +53,19 @@
             @lang('cms.model.cities')
           </a>
         </li>
+        <li class="is-divider">
+          <span>&middot;</span>
+        </li>
+        <li {{ isActive($model == 'packing') }}>
+          <a href="{{ route('cms::packing.index') }}">
+            @lang('cms.model.packing')
+          </a>
+        </li>
+        <li {{ isActive($model == 'tastes') }}>
+          <a href="{{ route('cms::tastes.index') }}">
+            @lang('cms.model.tastes')
+          </a>
+        </li>
       </ul>
       @break
       @case('system')

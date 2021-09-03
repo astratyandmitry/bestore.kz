@@ -2,7 +2,12 @@
 
 namespace Domain\CMS\Controllers;
 
+use Domain\CMS\Actions\SyncProductConfig;
+use Domain\Shop\Models\City;
+use Domain\Shop\Models\Packing;
+use Domain\Shop\Models\Taste;
 use Illuminate\View\View;
+use Domain\Shop\Models\Badge;
 use Domain\Shop\Models\Brand;
 use Domain\Shop\Models\Product;
 use Domain\Shop\Models\Category;
@@ -33,6 +38,11 @@ class ProductsController extends Controller
     {
         $this->with('categories', Category::groupedOptions());
         $this->with('brands', Brand::query()->pluck('name', 'id')->toArray());
+        $this->with('config', [
+            'packing' => Packing::query()->oldest('name')->get(['name', 'id'])->toArray(),
+            'tastes' => Taste::query()->oldest('name')->get(['name', 'id'])->toArray(),
+            'cities' => City::query()->oldest('name')->get(['name', 'id'])->toArray(),
+        ]);
     }
 
     /**
@@ -78,6 +88,8 @@ class ProductsController extends Controller
         /** @var \Domain\Shop\Models\Product $model */
         $model = Product::query()->create($request->validated());
 
+        (new SyncProductConfig($model, $request))->execute();
+
         return $this->redirectSuccess('show', ['product' => $model->id]);
     }
 
@@ -91,10 +103,49 @@ class ProductsController extends Controller
         /** @var \Domain\Shop\Models\Product $model */
         $model = Product::query()->findOrFail($id);
 
+        $model->load([
+            'packing',
+            'tastes',
+            'remains',
+            'remains.city',
+            'remains.taste',
+            'remains.packing',
+        ]);
+
+        $remains = $model->remains->toArray();
+        $nestedRemains = [];
+
+        foreach ($remains as $remain) {
+            $nestedRemains[$remain['city_id']][$remain['packing_id']][$remain['taste_id']] = true;
+        }
+
+        /** @var \Domain\Shop\Models\City $city */
+        foreach (City::query()->get() as $city) {
+            foreach ($model->packing as $packing) {
+                foreach ($model->tastes as $taste) {
+                    if (! isset($nestedRemains[$city->id][$packing->packing_id][$taste->taste_id])) {
+                        $remains[] = [
+                            'city_id' => $city->id,
+                            'packing_id' => $packing->packing_id,
+                            'taste_id' => $taste->taste_id,
+                            'quantity' => 0,
+                            'city' => $city->toArray(),
+                            'packing' => $packing->packing->toArray(),
+                            'taste' => $taste->taste->toArray(),
+                        ];
+                    }
+                }
+            }
+        }
 
         return $this->view([
             'action' => $this->route('update', $model->id),
             'model' => $model,
+            'config' => [
+                'packing' => $model->packing->toArray(),
+                'tastes' => $model->tastes->toArray(),
+                'remains' => $remains,
+            ],
         ]);
     }
 
@@ -108,6 +159,8 @@ class ProductsController extends Controller
         /** @var \Domain\Shop\Models\Product $model */
         $model = Product::query()->findOrFail($id);
         $model->update($request->validated());
+
+        (new SyncProductConfig($model, $request))->execute();
 
         return $this->redirectSuccess('show', ['product' => $model->id]);
     }

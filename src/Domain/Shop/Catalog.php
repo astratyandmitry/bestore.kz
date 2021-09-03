@@ -3,11 +3,11 @@
 namespace Domain\Shop;
 
 use Domain\Shop\Models\Category;
-use Domain\Shop\Repositories\CategoriesRepository;
-use Illuminate\Support\Facades\DB;
-use Domain\Shop\Requests\CatalogRequest;
 use Domain\Shop\Repositories\BrandsRepository;
-use Domain\Shop\Repositories\ProductsRepository;
+use Domain\Shop\Repositories\CatalogRepository;
+use Domain\Shop\Repositories\CategoriesRepository;
+use Domain\Shop\Requests\CatalogRequest;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @version 1.0.1
@@ -121,7 +121,7 @@ class Catalog
      */
     protected function setupProducts(): void
     {
-        $this->products = (new ProductsRepository)->catalog($this->request);
+        $this->products = (new CatalogRepository)->find($this->request);
         $this->total = $this->products->total();
     }
 
@@ -151,14 +151,12 @@ class Catalog
             $this->request->merge(['category_id' => $this->category->id]);
         }
 
-        // todo: check
         if ($this->category) {
             $this->categories = optional($this->category->parent)->children ?? $this->category->children;
         } else {
-            $this->categories = (new CategoriesRepository)->children();
+            $this->categories = (new CategoriesRepository())->children();
         }
 
-        //
         if ($this->request->category) {
             $this->categoriesQuery = explode(',', $this->request->category);
         }
@@ -187,7 +185,7 @@ class Catalog
      */
     protected function setupPrice(): void
     {
-        $stats = DB::table('products')->selectRaw('min(price) as min, max(price) as max')->first();
+        $stats = DB::table('product_packing')->selectRaw('min(price) as min, max(price) as max')->first();
 
         $this->priceMin = $stats->min;
         $this->priceMax = $stats->max;
