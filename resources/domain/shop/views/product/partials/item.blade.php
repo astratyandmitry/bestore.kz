@@ -33,9 +33,11 @@
         {{ $product->name }}
       </div>
 
-      <div class="product__detail">
-        {{ $product->brand ? $product->brand->name : $product->category->name }}
-      </div>
+      @if ($product->brand || $product->category)
+        <div class="product__detail">
+          {{ $product->brand ? $product->brand->name : $product->category->name }}
+        </div>
+      @endif
 
       <div class="product__rating">
         @for($i = 1; $i <= 5; $i++)
