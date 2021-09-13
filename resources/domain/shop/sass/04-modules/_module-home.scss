@@ -152,8 +152,20 @@
       @include radius();
       @include transition();
 
-      img {
+      .banners-split__image {
         width: 100%;
+
+        &.banners-split__image--mobile {
+          display: none;
+
+          @include mobile() {
+            display: block;
+          }
+        }
+
+        @include mobile() {
+          display: none;
+        }
       }
 
       &:hover {
