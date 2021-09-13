@@ -25,6 +25,31 @@
 
             <img src="{{ $product->image }}" alt="{{ $product->name }}" class="media__image">
           </div>
+
+          <div class="info">
+            {!! $product->about !!}
+          </div>
+
+          @if ($product->brand)
+            <div class="brand">
+              @if ($product->brand->logotype)
+                <div class="brand__media">
+                  <img src="{{ $product->brand->logotype }}" alt="{{ $product->brand->name }}"
+                       class="brand__image">
+                </div>
+              @endif
+
+              <div class="brand__info">
+                <div class="brand__name">
+                  {{ $product->brand->name }}
+                </div>
+
+                <div class="brand__detail">
+                  Официальные поставки от бренда
+                </div>
+              </div>
+            </div>
+          @endif
         </div>
 
         <div class="product__right">
