@@ -27,7 +27,7 @@ class CatalogRepository
      */
     public function popular(): Collection
     {
-        return Catalog::catalog()->orderByDesc('count_views')->limit(8)->get();
+        return Catalog::catalog()->orderByDesc('count_views')->limit(4)->get();
     }
 
     /**
@@ -35,6 +35,6 @@ class CatalogRepository
      */
     public function latest(): Collection
     {
-        return Catalog::catalog()->orderByDesc('created_at')->limit(8)->get();
+        return Catalog::catalog()->orderByDesc('created_at')->limit(4)->get();
     }
 }
