@@ -1,3 +1,20 @@
+.product-info {
+  &.product-info--desktop {
+    @include mobile {
+      display: none;
+    }
+  }
+
+  &.product-info--mobile {
+    display: none;
+
+    @include mobile() {
+      display: block;
+      padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+  }
+}
+
 .product-detail {
   margin-top: -2rem;
   font-size: 14px;
@@ -62,7 +79,6 @@
 
     @include mobile() {
       grid-template-columns: 1fr;
-      grid-row-gap: 2rem;
     }
 
     .product__left .product__heading {
@@ -481,10 +497,6 @@
     display: flex;
     align-items: center;
 
-    @include mobile() {
-      display: none;
-    }
-
     .brand__media {
       margin-right: 2rem;
 
@@ -622,8 +634,6 @@
     }
   }
 
-
-
   .price {
     .price__prev {
       font-weight: 400;
@@ -677,7 +687,7 @@
 
     @include mobile() {
       grid-template-columns: 1fr;
-      grid-row-gap: .250rem;
+      grid-row-gap: .5rem;
     }
 
     select {

@@ -19,10 +19,15 @@
 
     .category__image {
       width: 100%;
+      @include transition();
     }
 
     &:hover {
       @include boxShadow();
+
+      .category__image {
+        -webkit-filter: brightness(70%);
+      }
     }
   }
 }

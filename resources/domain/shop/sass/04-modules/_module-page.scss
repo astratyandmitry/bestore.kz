@@ -55,6 +55,28 @@
           margin-bottom: 0;
         }
 
+        .page-nav__label {
+          padding: .750rem;
+          border-bottom: none;
+          font-size: 14px;
+          display: block;
+          color: $color-gray-dark;
+          font-weight: 500;
+          white-space: nowrap;
+          text-transform: uppercase;
+          @include radius();
+
+          background: #f0f0f0;
+          margin-bottom: 8px;
+          @include tablet() {
+            font-size: 13px;
+          }
+
+          @include mobile() {
+            font-size: 12px;
+          }
+        }
+
         .page-nav__link {
           padding: .750rem;
           border-bottom: none;

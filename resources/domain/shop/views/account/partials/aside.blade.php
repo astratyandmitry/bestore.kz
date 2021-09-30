@@ -12,6 +12,10 @@
 
 <div class="page-nav">
   <ul class="page-nav__list">
+    <li
+      class="page-nav__item">
+      <span class="page-nav__label">{{ auth()->user()->name }}</span>
+    </li>
     @foreach($menu as $route => $label)
       @if ($label === null)
         <li class="page-nav__divider"></li>
