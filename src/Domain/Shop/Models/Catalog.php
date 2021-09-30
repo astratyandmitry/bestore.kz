@@ -88,8 +88,8 @@ class Catalog extends Model implements HasUrl
             return $builder;
         });
 
-        $builder->when($request->category, function (Builder $builder) use ($request): Builder {
-            return $builder->whereIn('category_id', explode(',', $request->category));
+        $builder->when($request->category_id, function (Builder $builder) use ($request): Builder {
+            return $builder->whereIn('category_id', explode(',', $request->category_id));
         });
 
         $builder->when($request->brand, function (Builder $builder) use ($request): Builder {
@@ -111,6 +111,8 @@ class Catalog extends Model implements HasUrl
         $builder->when($request->query('term'), function (Builder $builder): Builder {
             return $builder->where('name', 'LIKE', '%' . request('term') . '%');
         });
+
+//        $builder->dd();
 
         return $builder;
     }
