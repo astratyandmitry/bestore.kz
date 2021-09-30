@@ -39,7 +39,7 @@ class Stock
                     'id' => $item['taste']['id'],
                     'name' => $item['taste']['name'],
                     'quantity' => $item['quantity'],
-                    'basket' => isset($existsStockKeys[$stockKey]) ? $existsStockKeys[$stockKey] : 0,
+                    'basket' => $existsStockKeys[$stockKey] ?? 0,
                 ];
             }
 
