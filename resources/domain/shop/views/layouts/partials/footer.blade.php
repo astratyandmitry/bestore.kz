@@ -117,7 +117,7 @@
     </div>
 
     <div class="copyright">
-      © {{ env('APP_NAME') }} {{ date('Y') }} интернет-магазин всего
+      © {{ env('APP_NAME') }} {{ date('Y') }} интернет-магазин спортивного питания
     </div>
   </div>
 </footer>
