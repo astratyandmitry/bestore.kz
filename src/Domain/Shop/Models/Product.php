@@ -248,7 +248,7 @@ class Product extends Model implements HasUrl
      */
     public function price(): int
     {
-        return $this->price_sale ?? $this->price;
+        return (int)($this->price_sale ?: $this->price);
     }
 
     /**

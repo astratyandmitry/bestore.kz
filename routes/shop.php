@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController')->name('home');
 Route::get('/page/{page}', 'PageController')->name('page');
 
+Route::get('/mail', function() {
+    return new \Domain\Shop\Mails\OrderMail(\Domain\Shop\Models\Order::first());
+});
+
 Route::get('/search', 'SearchController')->name('search');
 Route::get('/catalog', 'CategoriesController')->name('categories');
 Route::get('/catalog/product/{hru}', 'ProductController')->name('product');

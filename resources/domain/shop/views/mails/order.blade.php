@@ -6,12 +6,12 @@
 Данное письмо является подтверждением вашего заказа оформленного на сайте {{ env('APP_NAME') }}
 
 @component('mail::table')
-  | Товар                       |  Кол-во                             | Сумма                               |
-  |:--------------------------- | -----------------------------------:| -----------------------------------:|
-  @foreach($order->items as $item)
-    | {{ $item->title()}}      | {{ $item->count }} шт.     | {{ price($item->total) }} ₸   |
-  @endforeach
-  |  | Итого | **{{ price($order->total) }} ₸** |
+| Товар                       |  Кол-во                             | Сумма                               |
+|:--------------------------- | -----------------------------------:| -----------------------------------:|
+@foreach($order->items as $item)
+| {{ $item->title()}}      | {{ $item->count }} шт.     | {{ price($item->total) }} ₸   |
+@endforeach
+|  | Итого | **{{ price($order->total) }} ₸** |
 @endcomponent
 
 @component('mail::button', ['url' => $order->detailUrl()])

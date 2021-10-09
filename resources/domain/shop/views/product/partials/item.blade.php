@@ -16,17 +16,19 @@
   </div>
 
   <div class="product__content">
-    <div class="product__info">
-      <div class="product__price">
-        {{ price($product->price_sale ? (int)$product->price_sale : (int)$product->price) }} ₸
-      </div>
-
-      @if ($product->price_sale)
-        <div class="product__sale">
-          {{ price($product->price) }} ₸
+    @if ($product instanceof \Domain\Shop\Models\Catalog)
+      <div class="product__info">
+        <div class="product__price">
+          {{ price($product->price_sale ? (int)$product->price_sale : (int)$product->price) }} ₸
         </div>
-      @endif
-    </div>
+
+        @if ($product->price_sale)
+          <div class="product__sale">
+            {{ price($product->price) }} ₸
+          </div>
+        @endif
+      </div>
+    @endif
 
     <div class="product__main">
       <div class="product__name">

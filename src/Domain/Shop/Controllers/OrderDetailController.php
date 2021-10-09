@@ -15,14 +15,14 @@ use Illuminate\View\View;
 class OrderDetailController extends Controller
 {
     /**
-     * @param string $id
+     * @param string $uuid
      * @param \Illuminate\Http\Request $request
      * @param \Domain\Shop\Repositories\OrdersRepository $repository
      * @return \Illuminate\View\View
      */
-    public function __invoke(string $id, Request $request, OrdersRepository $repository): View
+    public function __invoke(string $uuid, Request $request, OrdersRepository $repository): View
     {
-        $order = $repository->findByUuidAndId($id, $request->get('uuid'));
+        $order = $repository->findByUuidAndId((int)$request->get('id'), $uuid);
 
         abort_if($order === null, redirect()->route('shop::home'));
 
