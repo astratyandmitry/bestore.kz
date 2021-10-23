@@ -7,7 +7,10 @@ use Illuminate\Validation\Rule;
 
 /**
  * @property string $current_password
+ * @property integer $city_id
  * @property string $email
+ * @property string $name
+ * @property string $phone
  */
 class PersonalSettingsRequest extends Request
 {

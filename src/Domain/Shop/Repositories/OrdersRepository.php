@@ -23,7 +23,10 @@ class OrdersRepository
      */
     public function current()
     {
-        return Order::query()->where('status_key', ORDER_STATUS_CREATED)->paginate(12);
+        return Order::query()
+            ->where('status_key', ORDER_STATUS_CREATED)
+            ->where('user_id', auth(SHOP_GUARD)->id())
+            ->paginate(12);
     }
 
     /**
@@ -31,7 +34,10 @@ class OrdersRepository
      */
     public function history()
     {
-        return Order::query()->where('status_key', '!=', ORDER_STATUS_CREATED)->paginate(12);
+        return Order::query()
+            ->where('status_key', '!=', ORDER_STATUS_CREATED)
+            ->where('user_id', auth(SHOP_GUARD)->id())
+            ->paginate(12);
     }
 
     /**

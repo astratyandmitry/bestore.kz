@@ -52,6 +52,8 @@ class OrdersController extends Controller
         $order = $repository->findById($id);
         $order->load(['items', 'items.product', 'items.product.brand']);
 
+        abort_unless($order->user_id === auth(SHOP_GUARD)->id(), 404);
+
         $this->layout
             ->addBreadcrumb('Личный кабинет', route('shop::account.redirect'))
             ->addBreadcrumb('Заказы', route('shop::account.orders.'.($order->current() ? 'current' : 'history')));

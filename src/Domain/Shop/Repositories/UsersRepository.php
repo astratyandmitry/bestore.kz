@@ -59,6 +59,9 @@ class UsersRepository
     {
         return $user->update([
             'email' => $request->email,
+            'phone' => $request->phone,
+            'name' => $request->name,
+            'city_id' => $request->city_id,
         ]);
     }
 }

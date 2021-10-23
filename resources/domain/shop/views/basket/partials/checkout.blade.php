@@ -11,14 +11,14 @@
     @csrf
 
     @include('shop::layouts.includes.form.field.input', [
-        'value' => optional($order_prev)->client_name,
+        'value' => optional($order_prev)->client_name ?? optional(auth(SHOP_GUARD)->user())->name,
         'attribute' => 'name',
         'placeholder' => 'ФИО',
         'required' => true,
     ])
 
     @include('shop::layouts.includes.form.field.input', [
-        'value' => optional($order_prev)->client_phone,
+        'value' => optional($order_prev)->client_phone ?? optional(auth(SHOP_GUARD)->user())->phone,
         'attribute' => 'phone',
         'placeholder' => 'Телефон',
         'required' => true,
