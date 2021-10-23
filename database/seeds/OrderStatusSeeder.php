@@ -10,15 +10,15 @@ class OrderStatusSeeder extends Seeder
      */
     protected $data = [
         [
-            'key' => 'created',
+            'key' => ORDER_STATUS_CREATED,
             'name' => 'Создан',
         ],
         [
-            'key' => 'completed',
+            'key' => ORDER_STATUS_COMPLETED,
             'name' => 'Выполнен',
         ],
         [
-            'key' => 'canceled',
+            'key' => ORDER_STATUS_CANCELED,
             'name' => 'Отменен',
         ],
     ];

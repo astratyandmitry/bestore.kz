@@ -71,7 +71,7 @@ class OrdersController extends Controller
     public function complete(int $id): RedirectResponse
     {
         /** @var \Domain\Shop\Models\Order $model */
-        $model = Order::query()->where(['id' => $id, 'status_id' => ORDER_STATUS_CREATED])->firstOrFail();
+        $model = Order::query()->where(['id' => $id, 'status_key' => ORDER_STATUS_CREATED])->firstOrFail();
         $model->changeStatus(ORDER_STATUS_COMPLETED);
 
         return $this->redirectSuccess('show', ['order' => $id]);
@@ -84,7 +84,7 @@ class OrdersController extends Controller
     public function cancel(int $id): RedirectResponse
     {
         /** @var \Domain\Shop\Models\Order $model */
-        $model = Order::query()->where(['id' => $id, 'status_id' => ORDER_STATUS_CREATED])->firstOrFail();
+        $model = Order::query()->where(['id' => $id, 'status_key' => ORDER_STATUS_CREATED])->firstOrFail();
         $model->changeStatus(ORDER_STATUS_CANCELED);
 
         return $this->redirectDanger('show', ['order' => $id]);

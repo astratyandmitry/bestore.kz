@@ -1,4 +1,4 @@
-\@php /** @var \Domain\Shop\Models\Order $model */ @endphp
+@php /** @var \Domain\Shop\Models\Order $model */ @endphp
 
 @extends('cms::layouts.master', $globals)
 
@@ -121,7 +121,7 @@
 
     <div class="page-grid__right">
       <div class="block aside">
-        @if ($model->editable())
+        @if ($model->status_key === ORDER_STATUS_CREATED)
           <ul class="navigation">
             <li>
               <form method="post" action="{{ route("cms::orders.complete", $model->id) }}">

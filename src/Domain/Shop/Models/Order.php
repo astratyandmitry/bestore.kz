@@ -76,6 +76,14 @@ class Order extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function items(): HasMany
@@ -109,10 +117,10 @@ class Order extends Model
     }
 
     /**
-     * @param int $status_key
+     * @param string $status_key
      * @return void
      */
-    public function changeStatus(int $status_key): void
+    public function changeStatus(string $status_key): void
     {
         $this->status_key = $status_key;
         $this->save();
