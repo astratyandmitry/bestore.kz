@@ -85,12 +85,12 @@ class Verification extends Model
      */
     public function redirect(): RedirectResponse
     {
-        switch ($this->type_id) {
-            case VerificationType::ACTIVATION:
+        switch ($this->type_key) {
+            case VERIFICATION_ACTIVATION:
                 return redirect()->route('shop::auth.login')
                     ->with('message', 'Ваш код подтверждения успешно использован');
                 break;
-            case VerificationType::PASSWORD_RECOVERY:
+            case VERIFICATION_PASSWORD_RECOVERY:
                 return redirect()->route('shop::auth.password.reset', [
                     'email' => $this->user->email,
                     'code' => $this->code,
@@ -106,8 +106,8 @@ class Verification extends Model
      */
     public function handle(): void
     {
-        switch ($this->type_id) {
-            case VerificationType::ACTIVATION:
+        switch ($this->type_key) {
+            case VERIFICATION_ACTIVATION:
                 $this->user->update(['activated_at' => now()]);
                 break;
         }
@@ -120,8 +120,8 @@ class Verification extends Model
      */
     public function custom(): bool
     {
-        return in_array($this->type_id, [
-            VerificationType::PASSWORD_RECOVERY,
+        return in_array($this->type_key, [
+            VERIFICATION_PASSWORD_RECOVERY,
         ]);
     }
 }
