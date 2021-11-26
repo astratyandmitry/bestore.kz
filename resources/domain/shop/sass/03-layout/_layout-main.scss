@@ -80,7 +80,7 @@ main {
   .empty__title {
     font-family: $font-default;
     font-size: 24px;
-    margin-bottom:.5rem;
+    margin-bottom: .5rem;
     color: $color-dark;
 
     @include mobile() {
@@ -103,7 +103,7 @@ main {
       font-size: 20px;
 
       @include mobile() {
-          font-size: 16px;
+        font-size: 16px;
       }
     }
 
@@ -111,7 +111,7 @@ main {
       font-size: 14px;
 
       @include mobile() {
-          font-size: 12px;
+        font-size: 12px;
       }
     }
   }
@@ -202,5 +202,30 @@ main {
         color: $color-secondary;
       }
     }
+  }
+}
+
+.call-button {
+  width: 64px;
+  height: 64px;
+  display: block;
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  background: $color-primary;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, .24);
+  border-bottom: none;
+  @include radius(50%);
+  @include transition();
+
+  &:hover {
+    background: $color-secondary;
+  }
+
+  .call-button__icon {
+    margin-top: 16px;
+    margin-left: 16px;
+    line-height: 64px;
+    color: $color-white;
   }
 }

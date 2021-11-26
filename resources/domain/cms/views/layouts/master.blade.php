@@ -54,6 +54,8 @@
   @include('cms::layouts.partials.footer')
 </div>
 
+
+
 <script src="{{ mix('/assets/cms/js/app.js') }}"></script>
 @if (isset($form_page) && $form_page === true)
   <script src="{{ mix('/assets/cms/js/libs/onleave.js') }}"></script>
